@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPOCHURIAN — Taste History</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Top Reading Progress Indicator -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Editorial Header Navigation -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="#" class="logo">EPOCHURIAN</a>
+            <nav class="nav-links">
+                <a href="#overview">Overview</a>
+                <a href="#feasts">Feasts</a>
+                <a href="#chef">The Chef</a>
+                <a href="#contact" class="nav-cta">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section (Landing Photo: 84.Party...) -->
+    <section class="hero" id="hero">
+        <div class="hero-bg" style="background-image: url('84.Party ©Matthew Johnson Photographer.jpg');"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-brand-box reveal">
+                <h1 class="hero-logo">EPOCHURIAN</h1>
+                <span class="tagline">Taste History</span>
+            </div>
+            <p class="hero-subtitle reveal">Transport your dining table across centuries. Handcrafted historical feasts in your own home.</p>
+            <div class="hero-actions reveal">
+                <a href="#contact" class="btn btn-primary">Get in Touch</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll to Explore</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- General Section: What We Do, Process & Experience -->
+    <section id="overview" class="overview-section">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <span class="section-subtitle">What We Do</span>
+                <h2>Historical Private Dining Reimagined</h2>
+            </div>
+            <div class="overview-grid">
+                <div class="overview-main reveal">
+                    <p class="lead">EPOCHURIAN provides deeply researched historical private dining in the comfort of your own home, tailored to any time and place in history.</p>
+                    <p>The food is phenomenal—lovingly crafted to balance rigorous historical authenticity with modern culinary excellence. But a feast is more than just exceptional dishes: you and your guests receive a full living-history experience.</p>
+                    <p>Throughout the evening, we talk you through the journey, sharing the fascinating stories, secret ingredients, cultural context, and culinary techniques behind every course.</p>
+                </div>
+                <div class="overview-features">
+                    <div class="feature-card reveal">
+                        <h3>01 / Any Era in History</h3>
+                        <p>Choose any epoch, civilization, or family heritage—from ancient Mediterranean trade routes to imperial court banquets—or let us curate one of our celebrated favorite menus.</p>
+                    </div>
+                    <div class="feature-card reveal">
+                        <h3>02 / Phenomenal Cuisine</h3>
+                        <p>Every dish is meticulously researched and expertly prepared using authentic historical methods, rare heirloom produce, and exquisite flavor balance.</p>
+                    </div>
+                    <div class="feature-card reveal">
+                        <h3>03 / Immersive Narrative</h3>
+                        <p>We present each course with rich storytelling, bringing the history of your dining table to life for you and your guests.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BBC Scrollytelling Section: The Feasts (4 Meals) -->
+    <section id="feasts" class="scrollytelling-section">
+        <div class="scrollytelling-sticky">
+            <!-- Pinned Background Photo Stack -->
+            <div class="scrolly-bg active" style="background-image: url('79.Party ©Matthew Johnson Photographer.jpg');" data-index="0"></div>
+            <div class="scrolly-bg" style="background-image: url('PXL_20261005_165303553.RAW-01.MP.COVER.jpg');" data-index="1"></div>
+            <div class="scrolly-bg" style="background-image: url('22.Party ©Matthew Johnson Photographer.jpg');" data-index="2"></div>
+            <div class="scrolly-bg" style="background-image: url('russia.jpg');" data-index="3"></div>
+            
+            <div class="scrolly-overlay"></div>
+            
+            <!-- Floating Scrollytelling Cards -->
+            <div class="scrolly-content-container">
+                <div class="scrolly-card active" data-index="0">
+                    <span class="chapter-badge">12th Century Holy Land</span>
+                    <h2>The Court of Saladin</h2>
+                    <p class="scrolly-lead">Spit-roasted lamb, Levantine spices, and magnificent medieval banquets under starry skies.</p>
+                    <p>A magnificent medieval feast featuring spit-roasted spiced lamb, aromatic rice, infused rosewater conserves, and authentic historical tableware brought into your home.</p>
+                </div>
+
+                <div class="scrolly-card" data-index="1">
+                    <span class="chapter-badge">15th Century China</span>
+                    <h2>The Ming Dynasty Imperial Banquet</h2>
+                    <p class="scrolly-lead">Delicate porcelain, slow-cooked royal delicacies, and ancient culinary harmony.</p>
+                    <p>An exquisite exploration of the Forbidden City's culinary court—featuring roasted meats, imperial broths, steamed seasonal dainties, and rare teas.</p>
+                </div>
+
+                <div class="scrolly-card" data-index="2">
+                    <span class="chapter-badge">Age of Discovery</span>
+                    <h2>Old World to New World</h2>
+                    <p class="scrolly-lead">A culinary voyage tracing forgotten trade routes across the Atlantic Ocean.</p>
+                    <p>From Mediterranean grains and game to rich cocoa, exotic botanicals, and an extraordinary historic tobacco dessert exploring the flavors that transformed human history.</p>
+                </div>
+
+                <div class="scrolly-card" data-index="3">
+                    <span class="chapter-badge">19th Century Russia</span>
+                    <h2>The Aristocratic Dacha</h2>
+                    <p class="scrolly-lead">Imperial comforts, samovar traditions, and opulent grand estate dining.</p>
+                    <p>Recreating the refined elegance of a 19th-century estate banquet, transported directly to your dining table with imperial candlelit silver and historic comfort foods.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Chef (About Josh) - Split Scroll Text & Pinned Photo Transition -->
+    <section id="chef" class="story-chapter chef-split-section">
+        <div class="container chapter-grid">
+            <!-- Left Side: Scrolling Text Column -->
+            <div class="chapter-text reveal">
+                <span class="section-subtitle">The Founder & Chef</span>
+                <h2>A Culinary Voyage Through Time</h2>
+                
+                <div class="chef-text-block chef-text-block-1">
+                    <p class="lead">I'm Josh, chef and founder of Epochurian. Food has been my obsession for as long as I can remember, and I've always remembered life's best moments by the meals we shared.</p>
+                    <p>Raised on a vibrant melting pot of cuisines—Cantonese, Shanghainese, Egyptian, Russian, Dutch, and British—I began cooking at 10 and never looked back. By my early 20s, I was catering parties for the pure joy of it, always looking for an excuse to test new ideas and cook more interesting food.</p>
+                </div>
+
+                <div class="chef-text-block chef-text-block-2">
+                    <p class="lead">Epochurian was born from that same spirit of discovery. I wanted private dining to feel like an unforgettable adventure—where every course brings a sense of joy, surprise, and unexpected flavor.</p>
+                    <p>Tapping into centuries of global history allows us to craft bespoke banquets filled with warmth, story, and culinary excellence, cooked with uncompromising care for you and your guests.</p>
+                    <div class="venue-note">
+                        <strong>Private Venue Option:</strong> We are also able to provide a private garden venue in N10 for a limited number of bookings.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Pinned/Sticky Photo Container -->
+            <div class="chapter-media reveal">
+                <div class="chef-sticky-photo-container">
+                    <div class="media-frame chef-transition-frame scroll-zoom">
+                        <img src="54.Party ©Matthew Johnson Photographer.jpg" alt="Josh - Founder of Epochurian" class="chef-img chef-img-base active" loading="lazy">
+                        <img src="74.Party ©Matthew Johnson Photographer.jpg" alt="Josh at work - Private Chef" class="chef-img chef-img-transition" loading="lazy">
+                        <figcaption>Josh, Private Chef & Founder</figcaption>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-box reveal">
+                <span class="section-subtitle">Begin Your Journey</span>
+                <h2>Get in Touch</h2>
+                <p>We are happy to take you to any time and place in history of your choosing, or offer one of our favourites.</p>
+                <div class="contact-methods">
+                    <a href="https://wa.me/" class="btn btn-primary" target="_blank" rel="noopener">WhatsApp Josh Directly</a>
+                    <a href="mailto:info@epochurian.co.uk" class="btn btn-secondary">Email Us</a>
+                </div>
+                <p class="location-sub">Private garden venue available in N10 for a limited number of bookings.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">EPOCHURIAN</div>
+            <p>&copy; 2026 EPOCHURIAN. All rights reserved. Photography © Matthew Johnson.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
