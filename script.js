@@ -63,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const sectionHeight = rect.height - windowHeight;
             
             if (rect.top <= 0 && rect.bottom >= windowHeight) {
-                // Currently pinned inside the scrollytelling viewport
                 const scrollProgress = Math.max(0, Math.min(1, -rect.top / sectionHeight));
                 let targetStage = Math.floor(scrollProgress * totalScrollyStages);
                 if (targetStage >= totalScrollyStages) targetStage = totalScrollyStages - 1;
@@ -73,13 +72,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     updateScrollyStage(targetStage);
                 }
             } else if (rect.top > 0) {
-                // Above scrollytelling section
                 if (currentStageIndex !== 0) {
                     currentStageIndex = 0;
                     updateScrollyStage(0);
                 }
             } else if (rect.bottom < windowHeight) {
-                // Below scrollytelling section
                 const lastStage = totalScrollyStages - 1;
                 if (currentStageIndex !== lastStage) {
                     currentStageIndex = lastStage;
@@ -89,19 +86,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // E. Chef Split Section Pinned Photo Transition
-        const chefBlock2 = document.querySelector('.chef-text-block-2');
+        const chefSection = document.querySelector('.chef-split-section');
         const transitionImg = document.querySelector('.chef-img-transition');
         const baseImg = document.querySelector('.chef-img-base');
         
-        if (chefBlock2 && transitionImg) {
-            const rect = chefBlock2.getBoundingClientRect();
-            // When paragraph 3 enters view (top of block 2 reaches 65% of viewport height), transition photo
-            if (rect.top < windowHeight * 0.65) {
+        if (chefSection && transitionImg && baseImg) {
+            const rect = chefSection.getBoundingClientRect();
+            // Trigger transition when the section has scrolled halfway up the viewport
+            // This logic assumes the section is tall enough to scroll through
+            if (rect.top < -200) { 
                 transitionImg.classList.add('active');
-                if (baseImg) baseImg.classList.remove('active');
+                baseImg.classList.remove('active');
             } else {
                 transitionImg.classList.remove('active');
-                if (baseImg) baseImg.classList.add('active');
+                baseImg.classList.add('active');
             }
         }
 
