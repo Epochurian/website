@@ -119,46 +119,50 @@
         </div>
     </section>
 
-    <!-- The Chef (About Josh) - Split Scroll Text & Pinned Photo Transition -->
-    <section id="chef" class="story-chapter chef-scrolly-section">
-        <div class="container chef-sticky-wrapper">
-            <div class="chef-header-static">
-                <span class="section-subtitle">The Founder &amp; Chef</span>
-                <h2>A Culinary Voyage Through Time</h2>
-            </div>
-            <div class="chapter-grid">
-                <!-- Left Side: Internally Scrolling Text Container -->
-                <div class="chapter-text-scroll-container" id="chefTextScroll">
-                    <div class="chapter-text">
-                        <div class="chef-text-block">
-                            <p class="lead">I'm Josh, chef and founder of Epochurian. Food has been my obsession for as long as I can remember, and I've always remembered life's best moments by the meals we shared.</p>
-                            <p>Raised on a vibrant melting pot of cuisines—Cantonese, Shanghainese, Egyptian, Russian, Dutch, and British—I began cooking at 10 and never looked back.</p>
-                        </div>
+    <!-- The Chef (About Josh) - Split Scrollytelling: Sticky Heading + Scrolling Text Left, Sticky Crossfading Photos Right -->
+    <section id="chef" class="chef-scrolly-section">
+        <div class="chef-scrolly-inner">
 
-                        <div class="chef-text-block">
-                            <p>By my early 20s, I was catering parties for the pure joy of it, always looking for an excuse to test new ideas and cook more interesting food. Epochurian was born from that same spirit of discovery.</p>
-                            <p class="lead">I wanted private dining to feel like an unforgettable adventure—where every course brings a sense of joy, surprise, and unexpected flavor.</p>
-                        </div>
-
-                        <div class="chef-text-block">
-                            <p>Tapping into centuries of global history allows us to craft bespoke banquets filled with warmth, story, and culinary excellence, cooked with uncompromising care for you and your guests.</p>
-                            <div class="venue-note">
-                                <strong>Private Venue Option:</strong> We are also able to provide a private garden venue in N10 for a limited number of bookings.
-                            </div>
-                        </div>
-                    </div>
+            <!-- LEFT COLUMN -->
+            <div class="chef-scrolly-left">
+                <!-- Sticky heading block pinned at top of left column -->
+                <div class="chef-scrolly-heading">
+                    <span class="section-subtitle">The Founder &amp; Chef</span>
+                    <h2>A Culinary Voyage Through Time</h2>
                 </div>
 
-                <!-- Right Side: Pinned Photo Container -->
-                <div class="chapter-media">
-                    <div class="chef-sticky-photo-container">
-                        <div class="media-frame chef-transition-frame">
-                            <img src="54.Party ©Matthew Johnson Photographer.jpg" alt="Josh - Founder of Epochurian" class="chef-img chef-img-base active" loading="lazy">
-                            <img src="74.Party ©Matthew Johnson Photographer.jpg" alt="Josh at work - Private Chef" class="chef-img chef-img-transition" loading="lazy">
+                <!-- Scrolling text paragraphs -->
+                <div class="chef-scrolly-text">
+                    <div class="chef-para-block" data-photo="0">
+                        <p class="lead">I'm Josh, chef and founder of Epochurian. Food has been my obsession for as long as I can remember, and I've always remembered life's best moments by the meals we shared.</p>
+                        <p>Raised on a vibrant melting pot of cuisines—Cantonese, Shanghainese, Egyptian, Russian, Dutch, and British—I began cooking at 10 and never looked back. By my early 20s, I was catering parties for the pure joy of it, always looking for an excuse to test new ideas and cook more interesting food.</p>
+                    </div>
+
+                    <div class="chef-para-block" data-photo="1">
+                        <p class="lead">Epochurian was born from that same spirit of discovery. I wanted private dining to feel like an unforgettable adventure—where every course brings a sense of joy, surprise, and unexpected flavour.</p>
+                        <p>Tapping into centuries of global history allows us to craft bespoke banquets filled with warmth, story, and culinary excellence, cooked with uncompromising care for you and your guests.</p>
+                        <div class="venue-note">
+                            <strong>Private Venue Option:</strong> We are also able to provide a private garden venue in N10 for a limited number of bookings.
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- RIGHT COLUMN: Sticky photo stack -->
+            <div class="chef-scrolly-right">
+                <div class="chef-photo-stack">
+                    <img src="54.Party ©Matthew Johnson Photographer.jpg"
+                         alt="Josh — Founder of Epochurian"
+                         class="chef-photo chef-photo-0 is-active"
+                         loading="lazy">
+                    <img src="74.Party ©Matthew Johnson Photographer.jpg"
+                         alt="Josh at work — Private Chef"
+                         class="chef-photo chef-photo-1"
+                         loading="lazy">
+                    <figcaption class="chef-photo-caption">Josh, Private Chef &amp; Founder</figcaption>
+                </div>
+            </div>
+
         </div>
     </section>
 
