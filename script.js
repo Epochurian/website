@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const sectionHeight = rect.height - windowHeight;
             
             if (rect.top <= 0 && rect.bottom >= windowHeight) {
+                // Currently pinned inside the scrollytelling viewport
                 const scrollProgress = Math.max(0, Math.min(1, -rect.top / sectionHeight));
                 let targetStage = Math.floor(scrollProgress * totalScrollyStages);
                 if (targetStage >= totalScrollyStages) targetStage = totalScrollyStages - 1;
@@ -72,16 +73,35 @@ document.addEventListener('DOMContentLoaded', () => {
                     updateScrollyStage(targetStage);
                 }
             } else if (rect.top > 0) {
+                // Above scrollytelling section
                 if (currentStageIndex !== 0) {
                     currentStageIndex = 0;
                     updateScrollyStage(0);
                 }
             } else if (rect.bottom < windowHeight) {
+                // Below scrollytelling section
                 const lastStage = totalScrollyStages - 1;
                 if (currentStageIndex !== lastStage) {
                     currentStageIndex = lastStage;
                     updateScrollyStage(lastStage);
                 }
+            }
+        }
+
+        // E. Chef Split Section Pinned Photo Transition
+        const chefBlock2 = document.querySelector('.chef-text-block-2');
+        const transitionImg = document.querySelector('.chef-img-transition');
+        const baseImg = document.querySelector('.chef-img-base');
+        
+        if (chefBlock2 && transitionImg) {
+            const rect = chefBlock2.getBoundingClientRect();
+            // When paragraph 3 enters view (top of block 2 reaches 65% of viewport height), transition photo
+            if (rect.top < windowHeight * 0.65) {
+                transitionImg.classList.add('active');
+                if (baseImg) baseImg.classList.remove('active');
+            } else {
+                transitionImg.classList.remove('active');
+                if (baseImg) baseImg.classList.add('active');
             }
         }
 
@@ -132,46 +152,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // 5. Chef Section Internal Scroll & Image Transition with Wheel Interception
-    const chefSection = document.getElementById('chef');
-    const chefTextScroll = document.getElementById('chefTextScroll');
-    const baseImg = document.querySelector('.chef-img-base');
-    const transitionImg = document.querySelector('.chef-img-transition');
-
-    if (chefSection && chefTextScroll && baseImg && transitionImg) {
-        chefTextScroll.addEventListener('scroll', () => {
-            const scrollTop = chefTextScroll.scrollTop;
-            const scrollHeight = chefTextScroll.scrollHeight - chefTextScroll.clientHeight;
-            const scrollFraction = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
-
-            if (scrollFraction > 0.4) {
-                baseImg.classList.remove('active');
-                transitionImg.classList.add('active');
-            } else {
-                baseImg.classList.add('active');
-                transitionImg.classList.remove('active');
+    // 5. Scroll Zoom Effect on Media Images
+    const scrollZoomContainers = document.querySelectorAll('.scroll-zoom');
+    const zoomObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const img = entry.target.querySelector('img');
+            if (img) {
+                if (entry.isIntersecting) {
+                    img.style.transform = 'scale(1.05)';
+                } else {
+                    img.style.transform = 'scale(1)';
+                }
             }
         });
+    }, {
+        threshold: 0.3
+    });
 
-        // Intercept wheel events so the user naturally scrolls the internal box 
-        // until it hits the top/bottom, then allows the page to continue scrolling.
-        chefSection.addEventListener('wheel', (e) => {
-            const scrollTop = chefTextScroll.scrollTop;
-            const scrollHeight = chefTextScroll.scrollHeight - chefTextScroll.clientHeight;
-            
-            const isAtTop = scrollTop <= 0;
-            const isAtBottom = Math.abs(scrollHeight - scrollTop) <= 1;
-
-            if (e.deltaY > 0 && !isAtBottom) {
-                // Scrolling down and text hasn't reached the end yet
-                chefTextScroll.scrollTop += e.deltaY;
-                e.preventDefault();
-            } else if (e.deltaY < 0 && !isAtTop) {
-                // Scrolling up and text hasn't reached the top yet
-                chefTextScroll.scrollTop += e.deltaY;
-                e.preventDefault();
-            }
-            // Otherwise, let the page scroll normally when at the boundaries!
-        }, { passive: false });
-    }
+    scrollZoomContainers.forEach(container => zoomObserver.observe(container));
 });
