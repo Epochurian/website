@@ -28,23 +28,16 @@ body {
     flex: 1;
 }
 
-.chef-header-sticky {
-    position: sticky;
-    top: 100px;
-    background: #fff;
-    z-index: 10;
-    padding-bottom: 20px;
-}
-
 .chef-text-block {
-    margin-bottom: 100vh; /* Space blocks out so they trigger sequentially */
+    margin-bottom: 80vh; /* Space blocks out so they trigger sequentially */
 }
 
 .chapter-media {
     flex: 1;
     position: sticky;
     top: 100px; /* Adjust based on header height */
-    height: 80vh; /* Sticky area height */
+    height: calc(100vh - 140px); /* Sticky area height */
+    max-height: 700px;
 }
 
 .chef-sticky-photo-container {
