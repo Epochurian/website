@@ -132,28 +132,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // 5. Chef Section Image Transition Observer
-    const transitionTrigger = document.getElementById('trigger-transition');
+    // 5. Chef Section Internal Scroll & Image Transition
+    const chefTextScroll = document.getElementById('chefTextScroll');
     const baseImg = document.querySelector('.chef-img-base');
     const transitionImg = document.querySelector('.chef-img-transition');
 
-    if (transitionTrigger && baseImg && transitionImg) {
-        const chefObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Third block is visible, switch image
-                    baseImg.classList.remove('active');
-                    transitionImg.classList.add('active');
-                } else {
-                    // Third block is not visible, revert image
-                    baseImg.classList.add('active');
-                    transitionImg.classList.remove('active');
-                }
-            });
-        }, {
-            threshold: 0.5 // Trigger when 50% of the block is visible
-        });
+    if (chefTextScroll && baseImg && transitionImg) {
+        chefTextScroll.addEventListener('scroll', () => {
+            const scrollTop = chefTextScroll.scrollTop;
+            const scrollHeight = chefTextScroll.scrollHeight - chefTextScroll.clientHeight;
+            const scrollFraction = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
 
-        chefObserver.observe(transitionTrigger);
+            if (scrollFraction > 0.4) {
+                // Scrolled past the first two blocks, switch image
+                baseImg.classList.remove('active');
+                transitionImg.classList.add('active');
+            } else {
+                // Revert to initial image
+                baseImg.classList.add('active');
+                transitionImg.classList.remove('active');
+            }
+        });
     }
 });

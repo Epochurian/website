@@ -12,16 +12,49 @@ body {
 }
 
 /* Sticky Section Layout */
-.chef-split-section {
+.chef-scrolly-section {
     position: relative;
     padding: 100px 0;
-    min-height: 150vh; /* Ensure enough scroll space */
+    height: 220vh; /* Provides enough room to scroll inside the section */
+}
+
+.chef-sticky-wrapper {
+    position: sticky;
+    top: 100px;
+    height: calc(100vh - 140px);
+    display: flex;
+    flex-direction: column;
+}
+
+.chef-header-static {
+    margin-bottom: 20px;
+    flex-shrink: 0;
 }
 
 .chapter-grid {
     display: flex;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 40px;
+    flex: 1;
+    min-height: 0;
+}
+
+.chapter-text-scroll-container {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 15px;
+    /* Custom scrollbar styling for elegance */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.2) transparent;
+}
+
+.chapter-text-scroll-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chapter-text-scroll-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 3px;
 }
 
 .chapter-text {
@@ -29,15 +62,12 @@ body {
 }
 
 .chef-text-block {
-    margin-bottom: 80vh; /* Space blocks out so they trigger sequentially */
+    margin-bottom: 40px;
 }
 
 .chapter-media {
     flex: 1;
-    position: sticky;
-    top: 100px; /* Adjust based on header height */
-    height: calc(100vh - 140px); /* Sticky area height */
-    max-height: 700px;
+    height: 100%;
 }
 
 .chef-sticky-photo-container {
