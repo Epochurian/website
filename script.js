@@ -132,26 +132,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // 5. Chef Section Internal Scroll & Image Transition
+    // 5. Chef Section Internal Scroll & Image Transition with Wheel Interception
+    const chefSection = document.getElementById('chef');
     const chefTextScroll = document.getElementById('chefTextScroll');
     const baseImg = document.querySelector('.chef-img-base');
     const transitionImg = document.querySelector('.chef-img-transition');
 
-    if (chefTextScroll && baseImg && transitionImg) {
+    if (chefSection && chefTextScroll && baseImg && transitionImg) {
         chefTextScroll.addEventListener('scroll', () => {
             const scrollTop = chefTextScroll.scrollTop;
             const scrollHeight = chefTextScroll.scrollHeight - chefTextScroll.clientHeight;
             const scrollFraction = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
 
             if (scrollFraction > 0.4) {
-                // Scrolled past the first two blocks, switch image
                 baseImg.classList.remove('active');
                 transitionImg.classList.add('active');
             } else {
-                // Revert to initial image
                 baseImg.classList.add('active');
                 transitionImg.classList.remove('active');
             }
         });
+
+        // Intercept wheel events so the user naturally scrolls the internal box 
+        // until it hits the top/bottom, then allows the page to continue scrolling.
+        chefSection.addEventListener('wheel', (e) => {
+            const scrollTop = chefTextScroll.scrollTop;
+            const scrollHeight = chefTextScroll.scrollHeight - chefTextScroll.clientHeight;
+            
+            const isAtTop = scrollTop === 0;
+            const isAtBottom = Math.abs(scrollHeight - scrollTop) < 1;
+
+            if ((e.deltaY < 0 && !isAtTop) || (e.deltaY > 0 && !isAtBottom)) {
+                // Inside content can still scroll, prevent page scroll
+                chefTextScroll.scrollTop += e.deltaY;
+                e.preventDefault();
+            }
+        }, { passive: false });
     }
 });

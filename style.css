@@ -15,7 +15,7 @@ body {
 .chef-scrolly-section {
     position: relative;
     padding: 100px 0;
-    height: 220vh; /* Provides enough room to scroll inside the section */
+    height: 200vh; /* Controlled scroll distance for internal scrolling */
 }
 
 .chef-sticky-wrapper {
@@ -24,6 +24,7 @@ body {
     height: calc(100vh - 140px);
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .chef-header-static {
