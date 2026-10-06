@@ -89,20 +89,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // E. Chef Split Section Pinned Photo Transition
-        const chefBlock2 = document.querySelector('.chef-text-block-2');
-        const transitionImg = document.querySelector('.chef-img-transition');
-        const baseImg = document.querySelector('.chef-img-base');
-        
-        if (chefBlock2 && transitionImg) {
-            const rect = chefBlock2.getBoundingClientRect();
-            // When paragraph 3 enters view (top of block 2 reaches 65% of viewport height), transition photo
-            if (rect.top < windowHeight * 0.65) {
-                transitionImg.classList.add('active');
-                if (baseImg) baseImg.classList.remove('active');
-            } else {
-                transitionImg.classList.remove('active');
-                if (baseImg) baseImg.classList.add('active');
-            }
+        const chefParaBlocks = document.querySelectorAll('.chef-para-block');
+        const chefPhotos = document.querySelectorAll('.chef-photo');
+
+        if (chefParaBlocks.length > 0 && chefPhotos.length > 0) {
+            chefParaBlocks.forEach(block => {
+                const rect = block.getBoundingClientRect();
+                // If the block is in the middle/upper part of the viewport, activate its corresponding photo
+                if (rect.top < windowHeight * 0.6 && rect.bottom > windowHeight * 0.2) {
+                    const photoIndex = block.getAttribute('data-photo');
+                    chefPhotos.forEach((photo, index) => {
+                        if (index === parseInt(photoIndex, 10)) {
+                            photo.classList.add('is-active');
+                        } else {
+                            photo.classList.remove('is-active');
+                        }
+                    });
+                }
+            });
         }
 
         ticking = false;
