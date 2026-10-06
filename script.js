@@ -85,24 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // E. Chef Split Section Pinned Photo Transition
-        const chefSection = document.querySelector('.chef-split-section');
-        const transitionImg = document.querySelector('.chef-img-transition');
-        const baseImg = document.querySelector('.chef-img-base');
-        
-        if (chefSection && transitionImg && baseImg) {
-            const rect = chefSection.getBoundingClientRect();
-            // Trigger transition when the section has scrolled halfway up the viewport
-            // This logic assumes the section is tall enough to scroll through
-            if (rect.top < -200) { 
-                transitionImg.classList.add('active');
-                baseImg.classList.remove('active');
-            } else {
-                transitionImg.classList.remove('active');
-                baseImg.classList.add('active');
-            }
-        }
-
         ticking = false;
     };
 
@@ -150,22 +132,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // 5. Scroll Zoom Effect on Media Images
-    const scrollZoomContainers = document.querySelectorAll('.scroll-zoom');
-    const zoomObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const img = entry.target.querySelector('img');
-            if (img) {
-                if (entry.isIntersecting) {
-                    img.style.transform = 'scale(1.05)';
-                } else {
-                    img.style.transform = 'scale(1)';
-                }
-            }
-        });
-    }, {
-        threshold: 0.3
-    });
+    // 5. Chef Section Image Transition Observer
+    const transitionTrigger = document.getElementById('trigger-transition');
+    const baseImg = document.querySelector('.chef-img-base');
+    const transitionImg = document.querySelector('.chef-img-transition');
 
-    scrollZoomContainers.forEach(container => zoomObserver.observe(container));
+    if (transitionTrigger && baseImg && transitionImg) {
+        const chefObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Third block is visible, switch image
+                    baseImg.classList.remove('active');
+                    transitionImg.classList.add('active');
+                } else {
+                    // Third block is not visible, revert image
+                    baseImg.classList.add('active');
+                    transitionImg.classList.remove('active');
+                }
+            });
+        }, {
+            threshold: 0.5 // Trigger when 50% of the block is visible
+        });
+
+        chefObserver.observe(transitionTrigger);
+    }
 });
