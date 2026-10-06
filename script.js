@@ -93,18 +93,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const chefPhotos = document.querySelectorAll('.chef-photo');
 
         if (chefParaBlocks.length > 0 && chefPhotos.length > 0) {
+            let activePhotoIndex = 0;
             chefParaBlocks.forEach(block => {
                 const rect = block.getBoundingClientRect();
-                // If the block is in the middle/upper part of the viewport, activate its corresponding photo
-                if (rect.top < windowHeight * 0.6 && rect.bottom > windowHeight * 0.2) {
-                    const photoIndex = block.getAttribute('data-photo');
-                    chefPhotos.forEach((photo, index) => {
-                        if (index === parseInt(photoIndex, 10)) {
-                            photo.classList.add('is-active');
-                        } else {
-                            photo.classList.remove('is-active');
-                        }
-                    });
+                // Check if the block has scrolled past the upper half of the screen
+                if (rect.top <= windowHeight * 0.5) {
+                    activePhotoIndex = parseInt(block.getAttribute('data-photo'), 10);
+                }
+            });
+
+            chefPhotos.forEach((photo, index) => {
+                if (index === activePhotoIndex) {
+                    photo.classList.add('is-active');
+                } else {
+                    photo.classList.remove('is-active');
                 }
             });
         }
