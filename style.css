@@ -28,6 +28,14 @@ body {
     flex: 1;
 }
 
+.chef-header-sticky {
+    position: sticky;
+    top: 100px;
+    background: #fff;
+    z-index: 10;
+    padding-bottom: 20px;
+}
+
 .chef-text-block {
     margin-bottom: 100vh; /* Space blocks out so they trigger sequentially */
 }
