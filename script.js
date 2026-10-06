@@ -159,14 +159,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const scrollTop = chefTextScroll.scrollTop;
             const scrollHeight = chefTextScroll.scrollHeight - chefTextScroll.clientHeight;
             
-            const isAtTop = scrollTop === 0;
-            const isAtBottom = Math.abs(scrollHeight - scrollTop) < 1;
+            const isAtTop = scrollTop <= 0;
+            const isAtBottom = Math.abs(scrollHeight - scrollTop) <= 1;
 
-            if ((e.deltaY < 0 && !isAtTop) || (e.deltaY > 0 && !isAtBottom)) {
-                // Inside content can still scroll, prevent page scroll
+            if (e.deltaY > 0 && !isAtBottom) {
+                // Scrolling down and text hasn't reached the end yet
+                chefTextScroll.scrollTop += e.deltaY;
+                e.preventDefault();
+            } else if (e.deltaY < 0 && !isAtTop) {
+                // Scrolling up and text hasn't reached the top yet
                 chefTextScroll.scrollTop += e.deltaY;
                 e.preventDefault();
             }
+            // Otherwise, let the page scroll normally when at the boundaries!
         }, { passive: false });
     }
 });
