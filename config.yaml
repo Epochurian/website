@@ -1,0 +1,20 @@
+model_list:
+  - model_name: m1
+    litellm_params: {model: gemini/gemini-3.8-flash, api_key: os.environ/GEMINI_API_KEY, timeout: 30}
+  - model_name: m2
+    litellm_params: {model: gemini/gemini-3.5-flash, api_key: os.environ/GEMINI_API_KEY, timeout: 30}
+  - model_name: m3
+    litellm_params: {model: gemini/gemini-2.5-flash, api_key: os.environ/GEMINI_API_KEY, timeout: 30}
+  - model_name: m4
+    litellm_params: {model: gemini/gemini-flash-latest, api_key: os.environ/GEMINI_API_KEY, timeout: 30}
+  - model_name: m5
+    litellm_params: {model: gemini/gemini-3.5-flash-lite, api_key: os.environ/GEMINI_API_KEY, timeout: 30}
+  - model_name: m6
+    litellm_params: {model: gemini/gemini-2.5-flash-lite, api_key: os.environ/GEMINI_API_KEY, timeout: 30}
+
+litellm_settings:
+  num_retries: 0
+  fallbacks:
+    - m1: [m2, m3, m4, m5, m6]
+  allowed_fails: 1
+  cooldown_time: 120
