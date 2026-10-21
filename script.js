@@ -127,8 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
             heroBg.style.transform = `scale(${scale}) translateY(${translateY}px)`;
         }
 
-        // D. Sticky Scrollytelling Section Engine (Feasts)
-        if (scrollySection && totalScrollyStages > 0) {
+        // D. Sticky Scrollytelling Section Engine (Feasts on Desktop & Tablet)
+        if (scrollySection && totalScrollyStages > 0 && window.innerWidth > 768) {
             const rect = scrollySection.getBoundingClientRect();
             const sectionHeight = rect.height - windowHeight;
             
