@@ -2,19 +2,89 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. Smooth Scroll for Anchor Links
+    // 1. Mobile Menu Drawer Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileNavDrawer = document.getElementById('mobileNavDrawer');
+
+    const toggleMobileMenu = (open) => {
+        const isOpen = open !== undefined ? open : !mobileMenuBtn.classList.contains('is-active');
+        mobileMenuBtn.classList.toggle('is-active', isOpen);
+        mobileNavDrawer.classList.toggle('is-open', isOpen);
+        mobileMenuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+    };
+
+    if (mobileMenuBtn && mobileNavDrawer) {
+        mobileMenuBtn.addEventListener('click', () => toggleMobileMenu());
+    }
+
+    // 2. Smooth Scroll for Anchor Links & close mobile drawer if open
     const links = document.querySelectorAll('a[href^="#"]');
     links.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
             const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
+            if (targetId === '#') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                if (mobileNavDrawer && mobileNavDrawer.classList.contains('is-open')) {
+                    toggleMobileMenu(false);
+                }
+                return;
+            }
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
+                e.preventDefault();
                 targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (mobileNavDrawer && mobileNavDrawer.classList.contains('is-open')) {
+                    toggleMobileMenu(false);
+                }
             }
         });
     });
+
+    // 3. Track Active Section on Navigation (Desktop & Mobile)
+    const trackedSections = [
+        { id: 'overview', el: document.getElementById('overview') },
+        { id: 'feasts', el: document.getElementById('feasts') },
+        { id: 'chef', el: document.getElementById('chef') },
+        { id: 'contact', el: document.getElementById('contact') }
+    ].filter(s => s.el !== null);
+
+    const desktopNavLinks = document.querySelectorAll('.nav-links a');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+
+    const updateActiveNavSection = (scrollY, windowHeight) => {
+        let currentSectionId = '';
+        const threshold = windowHeight * 0.35;
+
+        // Check if user is scrolled right down to bottom
+        const isNearBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 100);
+
+        if (isNearBottom) {
+            currentSectionId = 'contact';
+        } else {
+            trackedSections.forEach(({ id, el }) => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top <= threshold && rect.bottom > threshold) {
+                    currentSectionId = id;
+                }
+            });
+        }
+
+        const updateLinksList = (linksList) => {
+            linksList.forEach(a => {
+                const href = a.getAttribute('href');
+                if (currentSectionId && href === `#${currentSectionId}`) {
+                    a.classList.add('active');
+                } else {
+                    a.classList.remove('active');
+                }
+            });
+        };
+
+        updateLinksList(desktopNavLinks);
+        updateLinksList(mobileNavLinks);
+    };
 
     // 2. DOM Elements
     const header = document.querySelector('.site-header');
@@ -111,8 +181,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        // F. Update active section in navigation bar & mobile drawer
+        updateActiveNavSection(scrollY, windowHeight);
+
         ticking = false;
     };
+
 
     // Helper: Update Active Stage for Pinned Photos & Floating Cards
     function updateScrollyStage(stageIndex) {
