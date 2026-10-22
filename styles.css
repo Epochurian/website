@@ -521,20 +521,11 @@ a {
     font-size: 1.15rem;
 }
 
-.overview-features-wrap {
-    width: 100%;
-}
-
-.overview-swipe-hint {
-    display: none;
-}
-
 .overview-features {
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
 }
-
 
 .feature-card {
     padding: 2.5rem;
@@ -873,15 +864,51 @@ a {
     opacity: 1;
 }
 
-.chef-photo-caption {
+.chef-photo-caption-bar {
     position: absolute;
     bottom: 2rem;
     right: 2rem;
-    font-family: 'Aotten', serif;
+    z-index: 5;
+}
+
+.chef-photo-caption {
+    font-family: var(--font-tagline);
     font-size: 1.05rem;
     color: var(--gold);
-    z-index: 5;
     text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    margin: 0;
+}
+
+.chef-chapter-label {
+    display: none;
+}
+
+.chef-chapter-divider {
+    display: none;
+}
+
+.chef-quote-box {
+    margin: 2.5rem 0;
+    padding: 1.8rem 2.2rem;
+    background: var(--bg-card);
+    border-left: 3px solid var(--gold);
+    border-top: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.chef-quote-box .lead {
+    margin-bottom: 0 !important;
+    color: var(--gold);
+    font-size: 1.35rem;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+.chef-highlight-text {
+    color: #ffffff;
+    font-weight: 700;
 }
 
 .media-frame figcaption {
@@ -1040,6 +1067,10 @@ footer p {
 
 /* Mobile Specific (<= 768px, phones) */
 @media (max-width: 768px) {
+    html {
+        scroll-snap-type: y proximity;
+    }
+
     /* Hide desktop nav links on phones; show hamburger */
     .nav-links {
         display: none;
@@ -1059,7 +1090,13 @@ footer p {
     }
 
     .site-header {
-        padding: 1.2rem 0;
+        padding: 1.1rem 0;
+        height: 3.8rem;
+        box-sizing: border-box;
+        background: rgba(10, 9, 8, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-color);
     }
 
     .site-header .logo {
@@ -1089,52 +1126,17 @@ footer p {
         line-height: 1.6;
     }
 
-    /* Mobile Overview: Non-snapped horizontal scroll carousel with indicator */
-    .overview-section {
-        padding: 5rem 0 4rem;
-    }
-
-    .overview-grid {
-        gap: 2.5rem;
-    }
-
-    .overview-features-wrap {
-        position: relative;
-        width: 100%;
-    }
-
-    .overview-swipe-hint {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 0.4rem;
-        margin-bottom: 0.8rem;
-        font-family: var(--font-sans);
-        font-size: 0.68rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: var(--gold);
-        opacity: 0.85;
-    }
-
-    .overview-swipe-hint .swipe-arrow {
-        animation: swipeHintPulse 1.8s infinite ease-in-out;
-        font-size: 0.85rem;
-    }
-
+    /* Overview Section: 3 cards in a non-snapped horizontal carousel */
     .overview-features {
         display: flex !important;
         flex-direction: row !important;
-        overflow-x: auto;
-        overflow-y: hidden;
+        overflow-x: auto !important;
+        scroll-snap-type: none !important;
         -webkit-overflow-scrolling: touch;
-        scroll-behavior: smooth;
         scrollbar-width: none;
-        gap: 1.2rem !important;
-        padding-bottom: 1rem;
-        margin: 0 -1.5rem;
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
+        gap: 1.5rem;
+        padding-bottom: 1.25rem;
+        margin-top: 1.5rem;
     }
 
     .overview-features::-webkit-scrollbar {
@@ -1142,22 +1144,13 @@ footer p {
     }
 
     .overview-features .feature-card {
-        flex: 0 0 78%;
+        flex: 0 0 80%;
         min-width: 260px;
-        max-width: 320px;
-        padding: 1.8rem 1.5rem;
-        margin: 0;
+        max-width: 340px;
+        margin-bottom: 0;
     }
 
-    .overview-features .feature-card h3 {
-        font-size: 1.15rem;
-    }
-
-    .overview-features .feature-card p {
-        font-size: 0.95rem;
-    }
-
-    /* Mobile Feasts: Stacked Split Carousel (Photo bleeds to top, Content box below) */
+    /* Mobile Feasts: Stacked Editorial Carousel (Header Aware Viewports) */
     .feasts-desktop-view {
         display: none !important;
     }
@@ -1168,6 +1161,7 @@ footer p {
         position: relative;
         scroll-snap-align: start;
         scroll-snap-stop: always;
+        scroll-margin-top: 3.8rem;
     }
 
     .feasts-mobile-carousel {
@@ -1178,37 +1172,37 @@ footer p {
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
         scroll-behavior: smooth;
-        scrollbar-width: none;
+        scrollbar-width: none; /* Hide scrollbar for clean luxury feel */
         width: 100%;
-        height: 100vh;
-        height: 100dvh;
+        height: calc(100dvh - 3.8rem);
+        min-height: calc(100dvh - 3.8rem);
+        margin-top: 3.8rem; /* Clear fixed header banner */
+        scroll-margin-top: 3.8rem;
     }
 
     .feasts-mobile-carousel::-webkit-scrollbar {
         display: none;
     }
 
-    /* Full-screen snap slide: bleed photo right to top */
+    /* Each feast slide: fits cleanly under fixed header, snaps in place horizontally */
     .feast-snap-slide {
         flex: 0 0 100%;
         width: 100vw;
-        height: 100vh;
-        height: 100dvh;
+        height: calc(100dvh - 3.8rem);
         scroll-snap-align: start;
         scroll-snap-stop: always;
+        position: relative;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
         background: var(--bg-card);
-        overflow: hidden;
         box-sizing: border-box;
-        padding-top: 0; /* Bleed photo to top with no brown background gap */
-        position: relative;
     }
 
-    /* Top Photo: bleeds right to top, ~38-40% height */
-    .feast-snap-image-box {
-        height: 38dvh;
-        min-height: 200px;
+    /* Top Photo: ~38% of available height, fully visible without being cut by header */
+    .feast-snap-media {
+        height: 38%;
+        min-height: 180px;
         width: 100%;
         position: relative;
         overflow: hidden;
@@ -1223,124 +1217,266 @@ footer p {
         object-fit: cover;
         object-position: center;
         display: block;
-        filter: brightness(0.92) contrast(1.04);
     }
 
-    /* Subtle swipe indicator badge overlaid on top image */
-    .feasts-swipe-hint {
+    /* Subtle gradient along the bottom of the photo into the content box */
+    .feast-snap-img-overlay {
         position: absolute;
-        bottom: 0.8rem;
-        right: 1rem;
-        z-index: 3;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        padding: 0.3rem 0.75rem;
-        background: rgba(14, 13, 12, 0.72);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border: 1px solid rgba(179, 147, 106, 0.35);
-        border-radius: 12px;
-        font-family: var(--font-sans);
-        font-size: 0.65rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--sandstone-light);
+        inset: 0;
+        background: linear-gradient(
+            to bottom,
+            rgba(10, 9, 8, 0.2) 0%,
+            transparent 45%,
+            rgba(24, 22, 20, 0.75) 100%
+        );
         pointer-events: none;
     }
 
-    .feasts-swipe-hint .swipe-arrow {
-        color: var(--gold);
-        font-size: 0.8rem;
-        animation: swipeHintPulse 1.8s infinite ease-in-out;
-    }
-
-    @keyframes swipeHintPulse {
-        0%, 100% { transform: translateX(0); opacity: 0.7; }
-        50% { transform: translateX(4px); opacity: 1; }
-    }
-
-    /* Bottom Content Box: solid clean background with ample space */
-    .feast-snap-content-box {
-        flex: 1;
-        padding: 1.2rem 1.4rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    /* Bottom Content Box: Setting badge, Title, Lead, Chef's Highlight, Body text */
+    .feast-snap-content {
+        flex: 1 1 auto;
+        min-height: 0;
+        padding: 1.15rem 1.4rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
         background: var(--bg-card);
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
+        box-sizing: border-box;
     }
 
-    /* Gold era badge placed on the card above the menu title */
-    .feast-snap-content-box .chapter-badge {
+    /* Era Setting Subheader inside the body: matches non-mobile desktop styling */
+    .feast-snap-content .chapter-badge {
         display: block;
         font-family: var(--font-tagline);
-        font-size: 1rem;
+        font-size: 1.1rem;
         color: var(--gold);
+        margin-bottom: 0.75rem;
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        margin-bottom: 0.45rem;
-        line-height: 1.2;
         text-align: left;
-        white-space: normal;
+        white-space: nowrap;
+        line-height: 1.2;
     }
 
-    /* Menu titles: always fully visible, never truncated */
-    .feast-snap-content-box h2 {
+    /* Feast title: Quinsi serif, uppercase, gold, forced to 1 single line */
+    .feast-snap-content h2 {
         font-family: var(--font-heading);
-        font-size: clamp(1.25rem, 5vw, 1.65rem);
+        font-weight: 400;
+        font-size: clamp(1.15rem, 4.4vw, 1.55rem);
         color: var(--sandstone-light);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-top: 0;
         margin-bottom: 0.6rem;
         line-height: 1.2;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        white-space: normal;
-        overflow: visible;
-        text-overflow: clip;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         text-align: left;
-        word-break: normal;
-        overflow-wrap: break-word;
     }
 
     /* Lead paragraph: Bodoni Moda, italic, sandstone */
-    .feast-snap-content-box .scrolly-lead {
+    .feast-snap-content .scrolly-lead {
         font-family: var(--font-body);
+        font-weight: 400;
         font-size: 0.95rem;
         line-height: 1.45;
         color: var(--sandstone);
-        margin-bottom: 0.55rem;
+        margin-bottom: 0.65rem;
         font-style: italic;
     }
 
-    /* Body description: Bodoni Moda, regular, text-muted */
-    .feast-snap-content-box p {
+    /* Chef's highlight line — sits after the body text with elegant top divider */
+    .feast-snap-content .chef-highlight {
         font-family: var(--font-body);
-        font-size: 0.88rem;
-        line-height: 1.65;
-        color: var(--text-muted);
-        margin-bottom: 0.55rem;
-    }
-
-    /* Chef's highlight: Bodoni Moda, italic, gold, top border separator */
-    .feast-snap-content-box .chef-highlight {
-        font-family: var(--font-body);
-        font-size: 0.88rem !important;
+        font-size: 0.9rem !important;
         color: var(--gold) !important;
-        margin-top: 0.65rem !important;
-        margin-bottom: 0 !important;
-        padding-top: 0.65rem !important;
-        border-top: 1px solid var(--border-color);
+        margin-top: 1rem !important;
+        margin-bottom: 0.5rem !important;
+        padding-top: 0.75rem !important;
+        border-top: 1px solid rgba(179, 147, 106, 0.25);
         font-style: italic;
         letter-spacing: 0.02em;
     }
 
+    /* Body paragraph: Bodoni Moda, regular, text-muted */
+    .feast-snap-content p {
+        font-family: var(--font-body);
+        font-weight: 400;
+        font-size: 0.88rem;
+        line-height: 1.65;
+        color: var(--text-muted);
+        margin-bottom: 0.65rem;
+    }
+
+    /* Mobile Chef Section: Sticky Media Frame + Text scrolls beneath/behind photo */
+    .chef-scrolly-section {
+        position: relative;
+        min-height: auto;
+        background: var(--bg-secondary);
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        padding-top: 0;
+        scroll-margin-top: 3.8rem;
+    }
+
+    .chef-scrolly-inner {
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 0 !important;
+        position: relative;
+    }
+
+    /* Pinned Sticky Media Frame at the bottom of the mobile header banner (3.8rem) */
     .chef-scrolly-right {
-        height: 50vh;
-        max-height: 420px;
+        order: 1;
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        top: 3.8rem !important;
+        width: 100% !important;
+        height: 40dvh !important;
+        max-height: 40dvh !important;
+        z-index: 20 !important;
+        overflow: hidden !important;
+        margin-bottom: 0 !important;
+        background: var(--bg-primary);
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8);
+    }
+
+    .chef-photo-stack {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .chef-photo {
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center top !important;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out !important;
+        will-change: opacity;
+    }
+
+    .chef-photo.is-active,
+    .chef-photo.active {
+        opacity: 1 !important;
+    }
+
+    /* Stage Caption Bar at bottom of sticky media */
+    .chef-photo-caption-bar {
+        position: absolute;
+        bottom: 0.65rem;
+        left: 1rem;
+        right: 1rem;
+        z-index: 6;
+        pointer-events: none;
+    }
+
+    .chef-photo-caption {
+        font-family: var(--font-body);
+        font-size: 0.78rem;
+        font-style: italic;
+        color: var(--sandstone-light);
+        text-shadow: 0 1px 6px rgba(0, 0, 0, 0.95);
+        margin: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    /* Left Column: Natural Vertical Scroll runway sliding IN BEHIND the sticky photo (lower z-index) */
+    .chef-scrolly-left {
+        order: 2;
+        padding: 2rem 1.4rem 4rem 1.4rem !important;
+        position: relative;
+        z-index: 5 !important;
+        background: var(--bg-secondary);
+    }
+
+    .chef-scrolly-heading {
+        position: relative !important;
+        top: 0 !important;
+        padding-bottom: 1.25rem !important;
+        margin-bottom: 0 !important;
+        background: transparent !important;
+        -webkit-mask-image: none !important;
+        mask-image: none !important;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .chef-scrolly-heading .section-subtitle {
+        font-family: var(--font-tagline);
+        font-size: 1.15rem;
+        color: var(--gold);
+        letter-spacing: 0.1em;
+        margin-bottom: 0.35rem;
+        display: block;
+    }
+
+    .chef-scrolly-heading h2 {
+        font-family: var(--font-heading);
+        font-size: clamp(1.6rem, 6vw, 2.1rem);
+        line-height: 1.18;
+        color: var(--sandstone-light);
+        letter-spacing: 0.08em;
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    .chef-scrolly-text {
+        padding-top: 1.5rem;
+    }
+
+    .chef-para-block {
+        padding-bottom: 1.5rem;
+    }
+
+    .chef-para-block:last-child {
+        padding-bottom: 1rem;
+    }
+
+    .chef-para-block .lead {
+        font-family: var(--font-body);
+        font-size: 1.05rem;
+        line-height: 1.6;
+        color: var(--sandstone-light);
+        margin-bottom: 1rem;
+        font-style: italic;
+    }
+
+    .chef-para-block p {
+        font-family: var(--font-body);
+        font-size: 0.92rem;
+        line-height: 1.8;
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+    }
+
+    /* Lead Paragraph Quote Box styled with site variables */
+    .chef-quote-box {
+        margin: 1.5rem 0;
+        padding: 1.2rem 1.3rem;
+        background: var(--bg-card);
+        border-left: 2px solid var(--gold);
+        border-top: 1px solid var(--border-color);
+        border-right: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .chef-quote-box .lead {
+        margin-bottom: 0 !important;
+        color: var(--gold);
+        font-size: 0.98rem;
+        line-height: 1.6;
     }
 }
-
 
 
 

@@ -158,17 +158,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // E. Chef Split Section Pinned Photo Transition
+        // E. Chef Split Section Pinned Photo Transition (Desktop / Tablet calculation)
         const chefParaBlocks = document.querySelectorAll('.chef-para-block');
         const chefPhotos = document.querySelectorAll('.chef-photo');
+        const chefCaptionEl = document.getElementById('chefPhotoCaption');
 
-        if (chefParaBlocks.length > 0 && chefPhotos.length > 0) {
+        if (window.innerWidth > 768 && chefParaBlocks.length > 0 && chefPhotos.length > 0) {
             let activePhotoIndex = 0;
+            let activeCaption = '';
             chefParaBlocks.forEach(block => {
                 const rect = block.getBoundingClientRect();
                 // Check if the block has scrolled past the upper half of the screen
                 if (rect.top <= windowHeight * 0.5) {
                     activePhotoIndex = parseInt(block.getAttribute('data-photo'), 10);
+                    activeCaption = block.getAttribute('data-caption') || '';
                 }
             });
 
@@ -179,6 +182,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     photo.classList.remove('is-active');
                 }
             });
+
+            if (chefCaptionEl && activeCaption) {
+                chefCaptionEl.textContent = activeCaption;
+            }
         }
 
         // F. Update active section in navigation bar & mobile drawer
@@ -250,4 +257,49 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     scrollZoomContainers.forEach(container => zoomObserver.observe(container));
+
+    // 6. Mobile Chef Section Scrollytelling via IntersectionObserver
+    // Triggered on data-photo chapter blocks with zero window.onscroll overhead
+    const mobileChefPhotos = document.querySelectorAll('.chef-photo');
+    const mobileChefBlocks = document.querySelectorAll('.chef-para-block');
+    const chefCaptionEl = document.getElementById('chefPhotoCaption');
+
+    if (mobileChefPhotos.length > 0 && mobileChefBlocks.length > 0) {
+        const setChefActivePhoto = (photoIdx, captionText) => {
+            mobileChefPhotos.forEach((photo, idx) => {
+                if (idx === photoIdx) {
+                    photo.classList.add('is-active');
+                    photo.classList.add('active');
+                } else {
+                    photo.classList.remove('is-active');
+                    photo.classList.remove('active');
+                }
+            });
+
+            if (chefCaptionEl && captionText) {
+                chefCaptionEl.textContent = captionText;
+            }
+        };
+
+        const chefObserver = new IntersectionObserver((entries) => {
+            // Only apply on mobile viewport where the sticky header pattern is active
+            if (window.innerWidth > 768) return;
+
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const photoIdx = parseInt(entry.target.getAttribute('data-photo'), 10);
+                    const caption = entry.target.getAttribute('data-caption');
+                    if (!isNaN(photoIdx)) {
+                        setChefActivePhoto(photoIdx, caption);
+                    }
+                }
+            });
+        }, {
+            // Trigger cleanly as the chapter block scrolls past the sticky media frame
+            rootMargin: '-30% 0px -50% 0px',
+            threshold: 0
+        });
+
+        mobileChefBlocks.forEach(block => chefObserver.observe(block));
+    }
 });
