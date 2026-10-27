@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Norman Christmas Feast — Delivered by EPOCHURIAN</title>
+    <meta name="description" content="A rare Norman Banquet Christmas feast for 4 guests (£300 / £75 per head). Fresh, handmade, and delivered ready to serve for Christmas 2026.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Top Reading Progress Indicator -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Editorial Header Navigation -->
+    <header class="site-header scrolled">
+        <div class="nav-container">
+            <a href="index.html" class="logo">EPOCHURIAN</a>
+            <nav class="nav-links">
+                <a href="index.html#overview">Overview</a>
+                <a href="index.html#feasts">Feasts</a>
+                <a href="index.html#chef">The Chef</a>
+                <a href="christmas.html" class="active">Christmas 2026</a>
+                <a href="#order" class="nav-cta">Order</a>
+            </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+        <div class="mobile-nav-drawer" id="mobileNavDrawer">
+            <nav class="mobile-nav-links">
+                <a href="index.html#overview">Overview</a>
+                <a href="index.html#feasts">Feasts</a>
+                <a href="index.html#chef">The Chef</a>
+                <a href="christmas.html" class="active">Christmas 2026</a>
+                <a href="#order" class="mobile-nav-cta">Order</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Christmas Hero Banner -->
+    <section class="xmas-hero">
+        <div class="xmas-hero-bg" style="background-image: url('PXL_20261011_220745113.PORTRAIT.jpg');"></div>
+        <div class="xmas-hero-overlay"></div>
+        <div class="xmas-hero-content">
+            <span class="section-subtitle">Christmas 2026 Limited Release</span>
+            <h1>The Norman Banquet</h1>
+            <span class="tagline">An 11th Century Feast Delivered to Your Home</span>
+            <p class="xmas-lead">
+                A complete festive meal freshly handmade by chef Josh and delivered directly to your door, ready to heat and serve. Researched from early Norman records for deep authenticity, then refined for pure dining pleasure. Sold as a complete feast for four.
+            </p>
+
+            <!-- Refined, Understated Scarcity Widget -->
+            <div class="xmas-scarcity-bar" id="xmasCounterWidget">
+                <div class="scarcity-status">
+                    <span class="scarcity-dot"></span>
+                    <span class="scarcity-text"><strong id="remainingCount">24</strong> of 40 packages remaining</span>
+                </div>
+                <div class="scarcity-track">
+                    <div class="scarcity-fill" id="remainingProgress" style="width: 60%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing & Delivery Summary Strip -->
+    <section class="xmas-pricing-strip">
+        <div class="container">
+            <div class="pricing-box">
+                <div class="pricing-item">
+                    <span class="pricing-tag">Feast Size</span>
+                    <span class="pricing-val">4 Guests</span>
+                    <span class="pricing-sub">Freshly prepared &amp; boxed for four</span>
+                </div>
+                <div class="pricing-divider"></div>
+                <div class="pricing-item">
+                    <span class="pricing-tag">Total Package</span>
+                    <span class="pricing-val">&pound;300</span>
+                    <span class="pricing-sub">&pound;75 per head</span>
+                </div>
+                <div class="pricing-divider"></div>
+                <div class="pricing-item">
+                    <span class="pricing-tag">Delivered Fresh</span>
+                    <span class="pricing-val">Ready to Heat &amp; Serve</span>
+                    <span class="pricing-sub">Delivered directly to your door</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Banquet Menu Breakdown -->
+    <section class="xmas-courses-section">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <span class="section-subtitle">The Menu</span>
+                <h2>Six Historical Courses</h2>
+                <p style="max-width: 680px; margin: 1rem auto 0; color: var(--text-muted); font-size: 1.05rem;">
+                    Every dish is freshly prepared by hand, combining rigorous historical research with generous, comforting flavours.
+                </p>
+            </div>
+
+            <div class="xmas-courses-grid">
+                <!-- Course 1 -->
+                <div class="xmas-course-card reveal">
+                    <span class="xmas-course-number">Canapés</span>
+                    <h3>Smoked Eel &amp; Smoked Sturgeon</h3>
+                    <p class="xmas-course-desc">
+                        A deliberate dual tasting pairing freshwater smoked eel with prized royal sturgeon—one representative of what common folk ate, and one reserved strictly for the Norman nobility.
+                    </p>
+                </div>
+
+                <!-- Course 2 -->
+                <div class="xmas-course-card reveal">
+                    <span class="xmas-course-number">Starter</span>
+                    <h3>Venison &amp; Duck Liver</h3>
+                    <p class="xmas-course-desc">
+                        Rich royal forest venison and delicate duck liver, complemented by hazelnuts, winter cherry, and crushed juniper.
+                    </p>
+                </div>
+
+                <!-- Course 3 -->
+                <div class="xmas-course-card reveal">
+                    <span class="xmas-course-number">Entremet</span>
+                    <h3>The Royal Entremet</h3>
+                    <p class="xmas-course-desc">
+                        A delicious morsel in between courses to refresh the palate.
+                    </p>
+                </div>
+
+                <!-- Course 4 -->
+                <div class="xmas-course-card reveal">
+                    <span class="xmas-course-number">Soup</span>
+                    <h3>Tezelin's White Soup</h3>
+                    <p class="xmas-course-desc">
+                        Inspired by Tezelin, the master cook to King William the Conqueror, this velvety white soup is the early medieval forebear of blancmange.
+                    </p>
+                </div>
+
+                <!-- Course 5 -->
+                <div class="xmas-course-card reveal">
+                    <span class="xmas-course-number">Main</span>
+                    <h3>Spit-Roasted Fowl with Sides</h3>
+                    <p class="xmas-course-desc">
+                        Tender roasted bird with herb drippings, served alongside authentic medieval grain and spiced seasonal accompaniments.
+                    </p>
+                </div>
+
+                <!-- Course 6 -->
+                <div class="xmas-course-card reveal">
+                    <span class="xmas-course-number">Dessert</span>
+                    <h3>Norman Cheese Custard Tart</h3>
+                    <p class="xmas-course-desc">
+                        A rich, gently spiced baked tart made with Norman cheese and eggs, finished with a subtle honey glaze.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Included Extras & Wine Note -->
+    <section class="xmas-extras-section">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <span class="section-subtitle">What's in the Box</span>
+                <h2>Everything for the Table</h2>
+            </div>
+
+            <div class="xmas-included-panel reveal">
+                <div class="xmas-included-item">
+                    <span class="included-tag">Spiced Wine</span>
+                    <h3>A Bottle of Hippocras</h3>
+                    <p>Every order includes a bottle of homemade Hippocras—the traditional medieval spiced wine infused with warming winter spices. Enjoy warm or chilled alongside your feast.</p>
+                </div>
+                <div class="xmas-included-item">
+                    <span class="included-tag">Table Entertainment</span>
+                    <h3>Quiz, Games &amp; History Cards</h3>
+                    <p>Printed cards detailing the fascinating history behind each recipe, alongside a festive Norman banquet table game and a historical feast quiz for you and your guests.</p>
+                </div>
+                <div class="xmas-included-item">
+                    <span class="included-tag">Effortless Hosting</span>
+                    <h3>Simple Heating &amp; Plating Instructions</h3>
+                    <p>All dishes arrive freshly made, packaged with clear, straightforward heating steps so you can serve an effortless banquet without spending Christmas in the kitchen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Dish Gallery -->
+    <section class="xmas-gallery-section">
+        <div class="container">
+            <div class="xmas-gallery-grid">
+                <div class="xmas-gallery-item reveal">
+                    <img src="IMG_7654.jpeg" alt="Norman feast presentation detail" loading="lazy">
+                </div>
+                <div class="xmas-gallery-item reveal">
+                    <img src="IMG_7659.jpeg" alt="Historical banquet culinary plating" loading="lazy">
+                </div>
+                <div class="xmas-gallery-item reveal">
+                    <img src="PXL_20261011_213248305.PORTRAIT.jpg" alt="Chef Josh presenting historical feast" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Direct Ordering Section -->
+    <section id="order" class="xmas-booking-section">
+        <div class="container">
+            <div class="xmas-booking-card reveal">
+                <span class="section-subtitle">Christmas 2026 Deliveries</span>
+                <h2>Order Your Feast</h2>
+                <p>
+                    Each package is freshly cooked to order and delivered directly to your home. To reserve your 4-person feast, message Josh on WhatsApp or send an email with your requested date and guest numbers.
+                </p>
+
+                <div class="xmas-contact-methods">
+                    <a href="https://wa.me/447874898636?text=Hi%2C%20I%27m%20interested%20in%20your%20Norman%20Christmas%20menu.%20I%20would%20like%20it%20for%20%5Bx%5D%20people.%20You%20can%20contact%20me%20on%20%5Bphone%20number%2Femail%20address%5D."
+                       class="btn btn-primary"
+                       target="_blank"
+                       rel="noopener">
+                       WhatsApp Josh Directly
+                    </a>
+                    <a href="mailto:info@epochurian.com?subject=Norman%20Christmas%20Menu%20Enquiry&body=Hi%2C%20I%27m%20interested%20in%20your%20Norman%20Christmas%20menu.%20I%20would%20like%20it%20for%20%5Bx%5D%20people.%20You%20can%20contact%20me%20on%20%5Bphone%20number%2Femail%20address%5D."
+                       class="btn btn-secondary">
+                       Email Josh
+                    </a>
+                </div>
+
+                <p class="booking-preset-notice">
+                    Delivered across London &amp; surrounding areas &bull; Limited availability across the Christmas period.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">EPOCHURIAN</div>
+            <p>&copy; 2026 EPOCHURIAN. All rights reserved. &bull; <a href="index.html" style="color: var(--gold); margin-left: 0.5rem;">Return to Main Site</a></p>
+        </div>
+    </footer>
+
+    <!-- Reading Progress, Reveal Observer, and Scarcity Counter Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Mobile Drawer Navigation Toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileNavDrawer = document.getElementById('mobileNavDrawer');
+
+            if (mobileMenuBtn && mobileNavDrawer) {
+                const toggleMobileMenu = (open) => {
+                    const isOpen = open !== undefined ? open : !mobileMenuBtn.classList.contains('is-active');
+                    mobileMenuBtn.classList.toggle('is-active', isOpen);
+                    mobileNavDrawer.classList.toggle('is-open', isOpen);
+                    mobileMenuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                    document.body.style.overflow = isOpen ? 'hidden' : '';
+                };
+
+                mobileMenuBtn.addEventListener('click', () => toggleMobileMenu());
+
+                const mobileLinks = mobileNavDrawer.querySelectorAll('a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', () => toggleMobileMenu(false));
+                });
+            }
+
+            // 2. Reading Progress Bar
+            const progressBar = document.getElementById('progressBar');
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const totalDocHeight = document.documentElement.scrollHeight - window.innerHeight;
+                if (progressBar && totalDocHeight > 0) {
+                    const pct = Math.min(100, Math.max(0, (scrollY / totalDocHeight) * 100));
+                    progressBar.style.width = pct + '%';
+                }
+            });
+
+            // 3. Scroll Reveal Animations
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -30px 0px'
+            });
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // 4. Subtle scarcity counter
+            const countEl = document.getElementById('remainingCount');
+            const progressEl = document.getElementById('remainingProgress');
+            const STORAGE_KEY = 'epochurian_xmas_packages_2026';
+            const TOTAL = 40;
+            const BASE = 24;
+
+            try {
+                let stored = localStorage.getItem(STORAGE_KEY);
+                let count = BASE;
+                if (stored) {
+                    let d = JSON.parse(stored);
+                    if (typeof d.remaining === 'number') count = d.remaining;
+                } else {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify({ remaining: BASE, updated: Date.now() }));
+                }
+                if (countEl) countEl.textContent = count;
+                if (progressEl) progressEl.style.width = ((count / TOTAL) * 100) + '%';
+            } catch (e) {}
+        });
+    </script>
+</body>
+</html>
