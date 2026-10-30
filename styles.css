@@ -498,6 +498,14 @@ a {
     transform: translateX(3px);
 }
 
+/* Seasonal Offer Strip between Chef and Contact */
+.seasonal-offer-strip {
+    padding: 3.5rem 0;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
 .scroll-indicator {
     position: absolute;
     bottom: 2.5rem;
@@ -1656,18 +1664,28 @@ footer p {
 
 .pricing-box {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 2.5rem;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    gap: 1.5rem;
     text-align: center;
+}
+
+.pricing-item {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
 }
 
 .pricing-item .pricing-tag {
     display: block;
     font-family: var(--font-sans);
-    font-size: 0.7rem;
-    letter-spacing: 0.22em;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--gold);
     margin-bottom: 0.4rem;
@@ -1675,24 +1693,27 @@ footer p {
 
 .pricing-item .pricing-val {
     font-family: var(--font-heading);
-    font-size: 2.2rem;
+    font-size: clamp(1.4rem, 2vw, 1.95rem);
     color: var(--sandstone-light);
-    letter-spacing: 0.06em;
+    letter-spacing: 0.05em;
+    line-height: 1.15;
 }
 
 .pricing-item .pricing-sub {
     display: block;
     font-family: var(--font-body);
-    font-size: 0.88rem;
+    font-size: 0.82rem;
+    line-height: 1.45;
     color: var(--text-muted);
     font-style: italic;
-    margin-top: 0.2rem;
+    margin-top: 0.4rem;
 }
 
 .pricing-divider {
     width: 1px;
-    height: 50px;
     background: var(--border-color);
+    align-self: stretch;
+    flex-shrink: 0;
 }
 
 /* Experience Breakdown / Courses */
@@ -1891,6 +1912,26 @@ footer p {
 
 /* Responsive adjustments for Christmas page */
 @media (max-width: 1024px) {
+    .pricing-box {
+        gap: 0.8rem;
+    }
+
+    .pricing-item {
+        padding: 0.4rem 0.5rem;
+    }
+
+    .pricing-item .pricing-val {
+        font-size: 1.35rem;
+    }
+
+    .pricing-item .pricing-tag {
+        font-size: 0.62rem;
+    }
+
+    .pricing-item .pricing-sub {
+        font-size: 0.76rem;
+    }
+
     .xmas-courses-grid {
         grid-template-columns: 1fr;
         gap: 1.8rem;
@@ -1917,14 +1958,107 @@ footer p {
         border-radius: 4px;
     }
 
+    /* Pricing & Delivery Summary Strip Carousel on Mobile */
+    .xmas-pricing-strip {
+        padding: 2rem 0;
+    }
+
     .pricing-box {
-        gap: 1.5rem;
-        flex-direction: column;
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        scroll-snap-type: none !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 1.2rem;
+        padding-bottom: 0.75rem;
+        text-align: left;
+    }
+
+    .pricing-box::-webkit-scrollbar {
+        display: none;
+    }
+
+    .pricing-box .pricing-item {
+        flex: 0 0 78%;
+        min-width: 250px;
+        max-width: 320px;
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-left: 3px solid var(--gold);
+        padding: 1.5rem 1.4rem;
+        box-sizing: border-box;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .pricing-box .pricing-item .pricing-tag {
+        margin-bottom: 0.5rem;
+    }
+
+    .pricing-box .pricing-item .pricing-val {
+        font-size: 1.4rem;
+        text-align: left;
+    }
+
+    .pricing-box .pricing-item .pricing-sub {
+        text-align: left;
+        margin-top: 0.5rem;
     }
 
     .pricing-divider {
-        width: 60px;
-        height: 1px;
+        display: none !important;
+    }
+
+    /* Six Historical Courses Carousel on Mobile */
+    .xmas-courses-grid {
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        scroll-snap-type: none !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 1.2rem;
+        padding-bottom: 1.25rem;
+        margin-top: 2rem;
+    }
+
+    .xmas-courses-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .xmas-courses-grid .xmas-course-card {
+        flex: 0 0 80%;
+        min-width: 260px;
+        max-width: 340px;
+        margin-bottom: 0;
+        padding: 1.8rem 1.6rem;
+    }
+
+    /* Everything for the Table ("What's in the Box") Carousel on Mobile */
+    .xmas-included-panel {
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        scroll-snap-type: none !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 1.2rem;
+        padding-bottom: 1.25rem;
+        margin-top: 2rem;
+    }
+
+    .xmas-included-panel::-webkit-scrollbar {
+        display: none;
+    }
+
+    .xmas-included-panel .xmas-included-item {
+        flex: 0 0 80%;
+        min-width: 260px;
+        max-width: 340px;
+        margin-bottom: 0;
+        padding: 1.8rem 1.6rem;
+        border-left: 3px solid var(--gold);
     }
 
     .xmas-gallery-grid {
