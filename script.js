@@ -45,8 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Track Active Section on Navigation (Desktop & Mobile)
     const trackedSections = [
         { id: 'overview', el: document.getElementById('overview') },
+        { id: 'overview', el: document.getElementById('experience') },
         { id: 'feasts', el: document.getElementById('feasts') },
         { id: 'chef', el: document.getElementById('chef') },
+        { id: 'gallery', el: document.getElementById('gallery') },
         { id: 'contact', el: document.getElementById('contact') }
     ].filter(s => s.el !== null);
 

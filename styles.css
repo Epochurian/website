@@ -51,6 +51,7 @@
     
     --transition-slow: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
     --transition-mid: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    --header-height: 4.8rem;
 }
 
 /* Reset & Base */
@@ -62,6 +63,23 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-snap-type: y proximity;
+}
+
+/* Soft Scroll Snap Alignments on Viewports */
+.hero,
+.overview-v1-stage,
+.overview-v2-process,
+.chef-scrolly-section,
+.gallery-section,
+.contact-section,
+.xmas-landing-viewport,
+.xmas-editorial-break,
+.xmas-menu-viewport-section,
+.xmas-extras-section,
+.xmas-booking-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
 }
 
 body {
@@ -548,9 +566,21 @@ a {
     border-bottom: 1px solid var(--border-color);
 }
 
+.text-center {
+    text-align: center;
+}
+
+.section-header {
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 2;
+}
+
 .section-header h2 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    margin-bottom: 3rem;
+    font-size: clamp(2.2rem, 4.2vw, 3.6rem);
+    letter-spacing: 0.08em;
+    line-height: 1.15;
+    margin-bottom: 0;
 }
 
 .overview-grid {
@@ -831,7 +861,7 @@ a {
 /* Sticky heading — pins at top of viewport as text scrolls past */
 .chef-scrolly-heading {
     position: sticky;
-    top: 90px;  /* below the fixed site header */
+    top: var(--header-height, 4.8rem);  /* sits cleanly below the fixed site header */
     z-index: 10;
     background: var(--bg-secondary);
     padding-bottom: 2.5rem;
@@ -845,7 +875,7 @@ a {
     font-size: clamp(2.4rem, 4vw, 3.6rem);
     line-height: 1.1;
     margin-top: 0.5rem;
-    margin-bottom: 0;
+    margin-bottom: 1.25rem; /* Balanced breathing room after "Time", matching subtitle-to-heading spacing */
 }
 
 /* Scrolling text lives below the sticky heading */
@@ -882,10 +912,11 @@ a {
 /* ---- RIGHT COLUMN ---- */
 .chef-scrolly-right {
     /* Makes the column itself as tall as the left, 
-       but the inner stack is sticky inside it */
+       sticky below the site header banner */
     position: sticky;
-    top: 0;
-    height: 100vh;
+    top: var(--header-height, 4.8rem);
+    height: calc(100vh - var(--header-height, 4.8rem));
+    height: calc(100dvh - var(--header-height, 4.8rem));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -919,17 +950,25 @@ a {
 
 .chef-photo-caption-bar {
     position: absolute;
-    bottom: 2rem;
-    right: 2rem;
+    top: 1.5rem;
+    right: 1.5rem;
     z-index: 5;
+    background: #141210;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    padding: 0.45rem 0.9rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
 }
 
 .chef-photo-caption {
-    font-family: var(--font-tagline);
-    font-size: 1.05rem;
-    color: var(--gold);
-    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--sandstone-light);
+    letter-spacing: 0.02em;
     margin: 0;
+    line-height: 1.3;
 }
 
 .chef-chapter-label {
@@ -972,9 +1011,23 @@ a {
     text-align: right;
 }
 
-/* Contact Box */
+/* Contact & Combined Footer Viewport */
 .contact-section {
-    padding: 15rem 0;
+    padding: calc(var(--header-height, 4.8rem) + 2rem) 1.5rem 2rem;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    border-top: 1px solid var(--border-color);
+}
+
+.contact-section > .container {
+    margin: auto auto;
+    width: 100%;
 }
 
 .contact-box {
@@ -984,19 +1037,21 @@ a {
 }
 
 .contact-box h2 {
-    font-size: 4rem;
-    margin-bottom: 2.5rem;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.08em;
 }
 
 .contact-methods {
     display: flex;
     justify-content: center;
-    gap: 2rem;
-    margin-top: 4rem;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
 }
 
 .location-sub {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     font-size: 0.95rem;
     color: var(--text-muted);
 }
@@ -1013,30 +1068,36 @@ a {
     transform: translateY(0);
 }
 
+/* Section Subtitle (Gold Tagline) */
 .section-subtitle {
     display: block;
     font-family: var(--font-tagline);
-    font-size: 1.5rem;
-    color: var(--gold);
-    margin-bottom: 1rem;
+    font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+    color: var(--gold) !important;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.6rem;
+    line-height: 1.2;
 }
 
-/* Footer */
+/* Footer: seamlessly sits at bottom of the contact viewport */
 footer {
-    padding: 5rem 0;
+    padding: 1.8rem 0 1.2rem;
     border-top: 1px solid var(--border-color);
     text-align: center;
+    width: 100%;
+    margin-top: auto;
 }
 
 footer .logo {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.25em;
 }
 
 footer p {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
 }
 
 /* ==========================================
@@ -1120,6 +1181,10 @@ footer p {
 
 /* Mobile Specific (<= 768px, phones) */
 @media (max-width: 768px) {
+    :root {
+        --header-height: 3.8rem;
+    }
+
     html {
         scroll-snap-type: y proximity;
     }
@@ -1179,29 +1244,7 @@ footer p {
         line-height: 1.6;
     }
 
-    /* Overview Section: 3 cards in a non-snapped horizontal carousel */
-    .overview-features {
-        display: flex !important;
-        flex-direction: row !important;
-        overflow-x: auto !important;
-        scroll-snap-type: none !important;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        gap: 1.5rem;
-        padding-bottom: 1.25rem;
-        margin-top: 1.5rem;
-    }
 
-    .overview-features::-webkit-scrollbar {
-        display: none;
-    }
-
-    .overview-features .feature-card {
-        flex: 0 0 80%;
-        min-width: 260px;
-        max-width: 340px;
-        margin-bottom: 0;
-    }
 
     /* Mobile Feasts: Stacked Editorial Carousel (Header Aware Viewports) */
     .feasts-desktop-view {
@@ -1213,7 +1256,7 @@ footer p {
         background: var(--bg-primary);
         position: relative;
         scroll-snap-align: start;
-        scroll-snap-stop: always;
+        scroll-snap-stop: normal;
         scroll-margin-top: 3.8rem;
     }
 
@@ -1370,7 +1413,7 @@ footer p {
         min-height: auto;
         background: var(--bg-secondary);
         scroll-snap-align: start;
-        scroll-snap-stop: always;
+        scroll-snap-stop: normal;
         padding-top: 0;
         scroll-margin-top: 3.8rem;
     }
@@ -1423,22 +1466,29 @@ footer p {
         opacity: 1 !important;
     }
 
-    /* Stage Caption Bar at bottom of sticky media */
+    /* Stage Caption Bar at top-right of sticky media with small dark grey background */
     .chef-photo-caption-bar {
         position: absolute;
-        bottom: 0.65rem;
-        left: 1rem;
-        right: 1rem;
-        z-index: 6;
+        top: 0.85rem;
+        right: 0.85rem;
+        left: auto;
+        bottom: auto;
+        z-index: 25;
+        background: #141210;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 3px;
+        padding: 0.35rem 0.75rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
         pointer-events: none;
     }
 
     .chef-photo-caption {
         font-family: var(--font-body);
-        font-size: 0.78rem;
+        font-size: 0.75rem;
         font-style: italic;
         color: var(--sandstone-light);
-        text-shadow: 0 1px 6px rgba(0, 0, 0, 0.95);
+        text-shadow: none;
         margin: 0;
         transition: opacity 0.4s ease;
     }
@@ -1553,15 +1603,15 @@ footer p {
     inset: 0;
     background-size: cover;
     background-position: center center;
-    filter: brightness(0.68) contrast(1.08);
+    filter: brightness(0.82) contrast(1.08);
     transform: scale(1.02);
 }
 
 .xmas-hero-overlay {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, rgba(14, 13, 12, 0.55) 0%, rgba(14, 13, 12, 0.94) 100%),
-                linear-gradient(to bottom, rgba(10, 9, 8, 0.4) 0%, rgba(14, 13, 12, 0.8) 70%, var(--bg-primary) 100%);
+    background: radial-gradient(circle at center, rgba(14, 13, 12, 0.36) 0%, rgba(14, 13, 12, 0.76) 100%),
+                linear-gradient(to bottom, rgba(10, 9, 8, 0.25) 0%, rgba(14, 13, 12, 0.58) 70%, var(--bg-primary) 100%);
     z-index: 2;
 }
 
@@ -1597,19 +1647,21 @@ footer p {
     font-weight: 300;
 }
 
-/* Subtle, Understated Scarcity Bar */
+/* Subtle, Understated Scarcity Bar in Historical Banner Silhouette */
 .xmas-scarcity-bar {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
     gap: 0.6rem;
-    background: rgba(20, 18, 16, 0.7);
+    background: rgba(20, 18, 16, 0.88);
     border: 1px solid var(--border-color);
-    padding: 0.9rem 1.8rem;
-    border-radius: 9999px;
-    max-width: 380px;
+    padding: 0.85rem 2.4rem;
+    clip-path: polygon(14px 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 14px 100%, 0% 50%);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.65);
+    max-width: 400px;
     width: 100%;
     margin-top: 0.5rem;
+    backdrop-filter: blur(10px);
 }
 
 .scarcity-status {
@@ -1954,8 +2006,8 @@ footer p {
     }
 
     .xmas-scarcity-bar {
-        padding: 0.8rem 1.2rem;
-        border-radius: 4px;
+        padding: 0.75rem 1.8rem;
+        clip-path: polygon(10px 0%, calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, 10px 100%, 0% 50%);
     }
 
     /* Pricing & Delivery Summary Strip Carousel on Mobile */
@@ -2083,3 +2135,1561 @@ footer p {
 
 
 
+
+/* ========================================================
+   CHRISTMAS TEST PAGE: CLASSY EDITORIAL PHOTO LAYOUTS
+   ======================================================== */
+
+/* Test Option Switcher Toolbar (Fixed top bar for testing) */
+.test-layout-switcher {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background: rgba(18, 16, 14, 0.94);
+    border: 1px solid var(--gold);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(179, 147, 106, 0.2);
+    padding: 0.5rem 0.75rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.test-layout-btn {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--sandstone);
+    padding: 0.45rem 1rem;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.test-layout-btn:hover {
+    color: var(--sandstone-light);
+    border-color: rgba(179, 147, 106, 0.4);
+}
+
+.test-layout-btn.is-active {
+    background: var(--gold);
+    color: var(--bg-primary);
+    font-weight: 600;
+}
+
+/* --------------------------------------------------------
+   LAYOUT A: Editorial Split (Bayeux Tapestry Artifact + Dish Feature)
+   -------------------------------------------------------- */
+.xmas-editorial-break {
+    padding: 6rem 0;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.xmas-editorial-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.xmas-editorial-media {
+    position: relative;
+}
+
+.xmas-editorial-primary-frame {
+    position: relative;
+    height: 440px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.75);
+    overflow: hidden;
+    background: var(--bg-card);
+}
+
+.xmas-editorial-primary-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    filter: brightness(0.92) contrast(1.04);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.xmas-editorial-primary-frame:hover img {
+    transform: scale(1.03);
+}
+
+.xmas-editorial-secondary-float {
+    position: absolute;
+    bottom: -2.5rem;
+    right: -2rem;
+    width: 200px;
+    height: 250px;
+    border: 2px solid var(--gold);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85);
+    overflow: hidden;
+    background: var(--bg-primary);
+    z-index: 2;
+}
+
+.xmas-editorial-secondary-float img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.xmas-editorial-caption {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--sandstone);
+    margin-top: 1.25rem;
+    letter-spacing: 0.02em;
+}
+
+.xmas-editorial-text {
+    padding-left: 1rem;
+}
+
+.xmas-editorial-text h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: 0.08em;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    color: var(--sandstone-light);
+}
+
+.xmas-editorial-text p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+}
+
+/* --------------------------------------------------------
+   LAYOUT B: Course Cards Paired With Editorial Photography
+   -------------------------------------------------------- */
+.xmas-course-card.has-photo {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.xmas-card-media {
+    position: relative;
+    width: 100%;
+    height: 230px;
+    overflow: hidden;
+    background: var(--bg-primary);
+}
+
+.xmas-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    filter: brightness(0.9) contrast(1.05);
+    transition: transform 0.6s ease;
+}
+
+.xmas-course-card:hover .xmas-card-media img {
+    transform: scale(1.04);
+}
+
+.xmas-card-media-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(24, 22, 20, 0.95) 0%, rgba(24, 22, 20, 0.2) 60%, transparent 100%);
+}
+
+.xmas-card-body {
+    padding: 1.8rem 2rem 2.2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --------------------------------------------------------
+   LAYOUT C: Full-Bleed Panorama Break (Bayeux Feast Banner)
+   -------------------------------------------------------- */
+.xmas-panorama-strip {
+    position: relative;
+    height: 48vh;
+    min-height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.xmas-panorama-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center 38%;
+    filter: brightness(0.65) contrast(1.15) sepia(0.15);
+    transform: scale(1.02);
+}
+
+.xmas-panorama-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(14, 13, 12, 0.5) 0%, rgba(14, 13, 12, 0.92) 100%),
+                linear-gradient(to bottom, var(--bg-primary) 0%, transparent 35%, transparent 65%, var(--bg-primary) 100%);
+    z-index: 2;
+}
+
+.xmas-panorama-content {
+    position: relative;
+    z-index: 3;
+    max-width: 780px;
+    padding: 0 2rem;
+}
+
+.xmas-panorama-content h2 {
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    letter-spacing: 0.12em;
+    color: var(--sandstone-light);
+    margin-bottom: 0.8rem;
+}
+
+.xmas-panorama-content p {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--sandstone);
+    font-style: italic;
+    margin-bottom: 0;
+}
+
+/* --------------------------------------------------------
+   LAYOUT D: The Curator's Box (Triptych Photo Header)
+   -------------------------------------------------------- */
+.xmas-box-visuals {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.xmas-box-frame {
+    position: relative;
+    height: 220px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+.xmas-box-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    filter: brightness(0.9) contrast(1.05);
+    transition: transform 0.6s ease;
+}
+
+.xmas-box-frame:hover img {
+    transform: scale(1.05);
+}
+
+.xmas-box-frame-label {
+    position: absolute;
+    bottom: 0.75rem;
+    left: 0.9rem;
+    right: 0.9rem;
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sandstone-light);
+    background: rgba(14, 13, 12, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 0.35rem 0.65rem;
+    border: 1px solid var(--border-color);
+    border-radius: 2px;
+    z-index: 2;
+}
+
+/* Responsive adjustments for new photo components */
+@media (max-width: 1024px) {
+    .xmas-editorial-grid {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+    }
+
+    .xmas-editorial-text {
+        padding-left: 0;
+    }
+
+    .xmas-editorial-secondary-float {
+        right: 1rem;
+        bottom: -1.5rem;
+        width: 160px;
+        height: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .test-layout-switcher {
+        width: calc(100% - 2rem);
+        max-width: 440px;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 0.4rem;
+        scrollbar-width: none;
+    }
+    .test-layout-switcher::-webkit-scrollbar { display: none; }
+
+    .test-layout-btn {
+        font-size: 0.65rem;
+        padding: 0.35rem 0.75rem;
+    }
+
+    .xmas-editorial-break {
+        padding: 4.5rem 0;
+    }
+
+    .xmas-editorial-primary-frame {
+        height: 280px;
+    }
+
+    .xmas-editorial-secondary-float {
+        display: none; /* Hide floating inset on small screens to maintain clean vertical stack */
+    }
+
+    .xmas-card-media {
+        height: 180px;
+    }
+
+    .xmas-panorama-strip {
+        height: 38vh;
+        min-height: 280px;
+    }
+
+    /* Mobile Carousel for Box Visuals */
+    .xmas-box-visuals {
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        scroll-snap-type: none !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 1.2rem;
+        padding-bottom: 1rem;
+        margin-top: 2rem;
+    }
+
+    .xmas-box-visuals::-webkit-scrollbar {
+        display: none;
+    }
+
+    .xmas-box-visuals .xmas-box-frame {
+        flex: 0 0 75%;
+        min-width: 240px;
+        height: 200px;
+    }
+}
+
+/* ========================================================
+   CHRISTMAS INTERACTIVE MENU SCROLLYTELLING VIEWPORT
+   ======================================================== */
+
+/* Outer scroll runway for widescreen viewport */
+.xmas-menu-viewport-section {
+    position: relative;
+    background: var(--bg-primary);
+}
+
+@media (min-width: 769px) {
+    .xmas-menu-viewport-section {
+        /* Runway height allowing 3 pairs of courses to transition smoothly */
+        height: 300vh;
+    }
+
+    /* Pinned viewport stage taking full available height below fixed header banner */
+    .xmas-menu-stage {
+        position: -webkit-sticky;
+        position: sticky;
+        top: var(--header-height, 4.8rem);
+        height: calc(100vh - var(--header-height, 4.8rem));
+        height: calc(100dvh - var(--header-height, 4.8rem));
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-top: 1.5rem;
+        padding-bottom: 2vh;
+        box-sizing: border-box;
+    }
+
+    /* Pinned Background Photos transitioning on scroll */
+    .xmas-menu-bg-stack {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    .xmas-menu-bg {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center 30%;
+        opacity: 0;
+        transform: scale(1.04);
+        transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+    }
+
+    .xmas-menu-bg.is-active {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* Deep moody vignette to keep all course text legible */
+    .xmas-menu-bg-overlay {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at center, rgba(14, 13, 12, 0.6) 0%, rgba(14, 13, 12, 0.92) 100%),
+                    linear-gradient(to bottom, rgba(14, 13, 12, 0.85) 0%, rgba(14, 13, 12, 0.65) 50%, rgba(14, 13, 12, 0.92) 100%);
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    /* Fixed top header within the sticky viewport */
+    .xmas-menu-header-fixed {
+        position: relative;
+        z-index: 5;
+        text-align: center;
+        padding: 0 2rem;
+        flex-shrink: 0;
+    }
+
+    .xmas-menu-header-fixed .section-subtitle {
+        margin-bottom: 0.35rem;
+    }
+
+    .xmas-menu-header-fixed h2 {
+        font-size: clamp(2rem, 3.8vw, 3.2rem);
+        margin-bottom: 0.5rem;
+        letter-spacing: 0.08em;
+    }
+
+    .xmas-menu-lead-fixed {
+        max-width: 680px;
+        margin: 0 auto;
+        color: var(--sandstone);
+        font-size: 1.05rem;
+        line-height: 1.5;
+        font-style: italic;
+    }
+
+    /* Container for the scrollable 6 courses in the pinned viewport */
+    .xmas-menu-pairs-window {
+        position: relative;
+        z-index: 5;
+        max-width: 1180px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 3rem;
+        height: 56vh;
+        max-height: 580px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Scrollable vertical stream of all 6 courses */
+    .xmas-menu-scrollable-stream {
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 2.2rem;
+        padding-right: 0.8rem;
+        scroll-behavior: smooth;
+        /* Sleek custom scrollbar */
+        scrollbar-width: thin;
+        scrollbar-color: rgba(179, 147, 106, 0.45) rgba(20, 18, 16, 0.6);
+    }
+
+    .xmas-menu-scrollable-stream::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .xmas-menu-scrollable-stream::-webkit-scrollbar-track {
+        background: rgba(20, 18, 16, 0.6);
+        border-radius: 9999px;
+    }
+
+    .xmas-menu-scrollable-stream::-webkit-scrollbar-thumb {
+        background: rgba(179, 147, 106, 0.5);
+        border-radius: 9999px;
+    }
+
+    .xmas-menu-scrollable-stream::-webkit-scrollbar-thumb:hover {
+        background: var(--gold);
+    }
+
+    /* Hide the mobile duplicate flow completely on widescreen */
+    .xmas-courses-mobile-flow {
+        display: none !important;
+    }
+
+    /* Each pair of 2 courses is always present and readable */
+    .xmas-course-pair {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2.2rem;
+        align-items: stretch;
+        width: 100%;
+        flex-shrink: 0;
+        opacity: 0.6;
+        transform: scale(0.985);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .xmas-course-pair.is-active {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* Scroll Runway Buffer: allows Pair 3 to comfortably reach the top of the container */
+    .xmas-menu-scroll-buffer {
+        height: 48vh;
+        max-height: 440px;
+        flex-shrink: 0;
+        pointer-events: none;
+    }
+
+    .xmas-course-pair .xmas-course-card {
+        background: rgba(20, 18, 16, 0.9);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid var(--border-color);
+        border-left: 3px solid var(--gold);
+        padding: 2.2rem 2.2rem;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
+        transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .xmas-course-pair.is-active .xmas-course-card {
+        border-color: rgba(179, 147, 106, 0.55);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+    }
+
+    /* Subtle progress indicator dots for the 3 pairs */
+    .xmas-menu-pair-indicators {
+        position: relative;
+        z-index: 5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.9rem;
+        margin-top: 1rem;
+        flex-shrink: 0;
+    }
+
+    .xmas-pair-dot {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--font-sans);
+        font-size: 0.68rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0.35rem 0.6rem;
+        border-radius: 9999px;
+        transition: color 0.4s ease, background 0.4s ease;
+    }
+
+    .xmas-pair-dot:hover {
+        color: var(--sandstone-light);
+    }
+
+    .xmas-pair-dot-bullet {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.25);
+        transition: transform 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .xmas-pair-dot.is-active {
+        color: var(--gold);
+    }
+
+    .xmas-pair-dot.is-active .xmas-pair-dot-bullet {
+        background: var(--gold);
+        transform: scale(1.4);
+        box-shadow: 0 0 8px rgba(179, 147, 106, 0.8);
+    }
+}
+
+/* On mobile / small screens, keep clean editorial carousel structure */
+@media (max-width: 768px) {
+    .xmas-menu-viewport-section {
+        height: auto !important;
+        padding: 4rem 0 3rem;
+    }
+
+    .xmas-menu-stage {
+        position: relative !important;
+        height: auto !important;
+        padding: 0 !important;
+    }
+
+    .xmas-menu-bg-stack,
+    .xmas-menu-bg-overlay,
+    .xmas-menu-pair-indicators {
+        display: none !important;
+    }
+
+    .xmas-menu-header-fixed {
+        padding: 0 1.5rem;
+    }
+
+    .xmas-menu-pairs-window {
+        display: block !important;
+        height: auto !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+    }
+
+    /* Hide desktop stacked pairs on mobile */
+    .xmas-course-pair {
+        display: none !important;
+    }
+
+    .xmas-courses-mobile-flow {
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        scroll-snap-type: none !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 1.2rem;
+        padding: 1.5rem 1.5rem 1.5rem;
+    }
+
+    .xmas-courses-mobile-flow::-webkit-scrollbar {
+        display: none;
+    }
+
+    .xmas-courses-mobile-flow .xmas-course-card {
+        flex: 0 0 80%;
+        min-width: 260px;
+        max-width: 340px;
+        margin-bottom: 0;
+        padding: 1.8rem 1.6rem;
+    }
+}
+
+/* ========================================================
+   OVERVIEW LAB: EXPLORATION CONCEPTS STYLES
+   ======================================================== */
+
+.overview-lab-body[data-concept="1"] .overview-concept-wrap { display: none; }
+.overview-lab-body[data-concept="1"] .overview-concept-wrap[data-concept-id="1"] { display: block; }
+
+.overview-lab-body[data-concept="2"] .overview-concept-wrap { display: none; }
+.overview-lab-body[data-concept="2"] .overview-concept-wrap[data-concept-id="2"] { display: block; }
+
+.overview-lab-body[data-concept="3"] .overview-concept-wrap { display: none; }
+.overview-lab-body[data-concept="3"] .overview-concept-wrap[data-concept-id="3"] { display: block; }
+
+.overview-lab-body[data-concept="all"] .overview-concept-wrap { display: block; }
+
+/* --------------------------------------------------------
+   CONCEPT 1: Single Viewport 100vh Stage (Atmospheric Split)
+   -------------------------------------------------------- */
+.overview-v1-stage {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6.5rem 3rem 4rem;
+    position: relative;
+    background: var(--bg-primary);
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.overview-v1-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 4rem;
+    max-width: 1360px;
+    width: 100%;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.overview-v1-left h2 {
+    font-size: clamp(2rem, 3.8vw, 3.2rem);
+    margin-bottom: 1.25rem;
+    line-height: 1.15;
+}
+
+.overview-v1-intro {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--sandstone-light);
+    margin-bottom: 1.25rem;
+}
+
+.overview-v1-quote {
+    padding: 1rem 1.25rem;
+    background: rgba(24, 22, 20, 0.7);
+    border-left: 2px solid var(--gold);
+    margin-bottom: 1.5rem;
+}
+
+.overview-v1-quote p {
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--sandstone);
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+.overview-v1-desc {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-bottom: 0;
+}
+
+.overview-v1-steps-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+}
+
+.overview-v1-step {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-top: 2px solid var(--gold);
+    padding: 1.2rem 1.1rem;
+}
+
+.overview-v1-step .step-num {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.35rem;
+}
+
+.overview-v1-step h3 {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    letter-spacing: 0.06em;
+    color: var(--sandstone-light);
+    margin-bottom: 0.5rem;
+}
+
+.overview-v1-step p {
+    font-family: var(--font-body);
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+    margin-bottom: 0;
+}
+
+/* Right Media: Artful Diptych */
+.overview-v1-diptych {
+    position: relative;
+    height: 520px;
+}
+
+.overview-v1-photo-main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 82%;
+    height: 82%;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75);
+    overflow: hidden;
+}
+
+.overview-v1-photo-main img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.92) contrast(1.05);
+    transition: transform 0.8s ease;
+}
+
+.overview-v1-photo-secondary {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 60%;
+    height: 58%;
+    border: 2px solid var(--gold);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+    overflow: hidden;
+    z-index: 2;
+}
+
+.overview-v1-photo-secondary img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    filter: brightness(0.92) contrast(1.05);
+    transition: transform 0.8s ease;
+}
+
+.overview-v1-diptych:hover img {
+    transform: scale(1.04);
+}
+
+/* --------------------------------------------------------
+   CONCEPT 2: Dual 100vh Distinct Viewports (The Vision & The 3-Step Journey)
+   -------------------------------------------------------- */
+.overview-v2-viewport {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7rem 3rem;
+    box-sizing: border-box;
+    position: relative;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Viewport 1: The Philosophy */
+.overview-v2-hero {
+    position: relative;
+    background: var(--bg-secondary);
+    overflow: hidden;
+}
+
+.overview-v2-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center center;
+    filter: brightness(0.4) contrast(1.1);
+    transform: scale(1.02);
+}
+
+.overview-v2-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(14, 13, 12, 0.6) 0%, rgba(14, 13, 12, 0.95) 100%),
+                linear-gradient(to bottom, var(--bg-primary) 0%, transparent 20%, transparent 80%, var(--bg-primary) 100%);
+}
+
+.overview-v2-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 860px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.overview-v2-hero-content h2 {
+    font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+}
+
+.overview-v2-hero-content .lead-main {
+    font-size: 1.35rem;
+    line-height: 1.7;
+    color: var(--sandstone-light);
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+.overview-v2-hero-quote {
+    display: inline-block;
+    padding: 1.2rem 2.2rem;
+    border: 1px solid var(--gold);
+    background: rgba(18, 16, 14, 0.85);
+    backdrop-filter: blur(10px);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--gold);
+    margin-bottom: 1.8rem;
+}
+
+.overview-v2-hero-desc {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+/* Viewport 2: The Three Acts (Cards with Imagery) */
+.overview-v2-process {
+    background: var(--bg-primary);
+}
+
+.overview-v2-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.2rem;
+    max-width: 1320px;
+    width: 100%;
+    margin-top: 3.5rem;
+}
+
+.overview-v2-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
+    transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.overview-v2-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold);
+}
+
+.overview-v2-card-img {
+    height: 220px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.overview-v2-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.88) contrast(1.05);
+    transition: transform 0.8s ease;
+}
+
+.overview-v2-card:hover .overview-v2-card-img img {
+    transform: scale(1.06);
+}
+
+.overview-v2-card-img-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(14, 13, 12, 0.92);
+    padding: 0.38rem 1.4rem 0.38rem 1.1rem;
+    border: 1px solid var(--border-color);
+    border-right: none;
+    clip-path: polygon(0% 0%, calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, 0% 100%);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.overview-v2-card:hover .overview-v2-card-img-badge {
+    background: rgba(22, 19, 16, 0.96);
+    border-color: var(--gold);
+    transform: translateX(3px);
+}
+
+.overview-v2-card-body {
+    padding: 2rem 1.8rem 2.4rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.overview-v2-card-body h3 {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    letter-spacing: 0.08em;
+    color: var(--sandstone-light);
+    margin-bottom: 0.8rem;
+}
+
+.overview-v2-card-body p {
+    font-family: var(--font-body);
+    font-size: 0.98rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: 0;
+}
+
+/* --------------------------------------------------------
+   CONCEPT 3: Horizontal Scrollytelling Viewport (Narrative Flow)
+   -------------------------------------------------------- */
+.overview-v3-scrolly-section {
+    position: relative;
+    height: 350vh;
+    background: var(--bg-primary);
+}
+
+.overview-v3-stage {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100dvh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overview-v3-bg-stack {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.overview-v3-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center center;
+    opacity: 0;
+    transform: scale(1.08);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.overview-v3-bg.is-active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.overview-v3-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(14, 13, 12, 0.6) 0%, rgba(14, 13, 12, 0.94) 100%),
+                linear-gradient(to bottom, rgba(14, 13, 12, 0.8) 0%, rgba(14, 13, 12, 0.65) 50%, rgba(14, 13, 12, 0.92) 100%);
+    z-index: 2;
+}
+
+.overview-v3-card-window {
+    position: relative;
+    z-index: 5;
+    max-width: 840px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.overview-v3-slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: rgba(20, 18, 16, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-top: 3px solid var(--gold);
+    padding: 3rem 3.5rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    transform: translateY(30px);
+    pointer-events: none;
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.overview-v3-slide.is-active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.overview-v3-slide .slide-badge {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+}
+
+.overview-v3-slide h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: 0.08em;
+    margin-bottom: 1.25rem;
+}
+
+.overview-v3-slide p {
+    font-size: 1.12rem;
+    line-height: 1.8;
+    color: var(--sandstone-light);
+    max-width: 660px;
+    margin: 0 auto;
+}
+
+/* Responsive Overrides for Overview & Experience */
+@media (min-width: 1025px) {
+    /* Overview Act 1 (What We Do): Widescreen Single Viewport with larger photo and tighter hero gap */
+    .overview-v1-stage {
+        padding: 4.8rem 3.5rem 2rem;
+        height: 100vh;
+        height: 100dvh;
+        max-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
+    .overview-v1-grid {
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 3.5rem;
+        max-width: 1480px;
+        align-items: center;
+    }
+
+    .overview-v1-diptych {
+        height: 72vh;
+        max-height: 640px;
+        width: 100%;
+    }
+
+    .overview-v1-photo-main {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    /* Overview Act 2 (How It Works): Widescreen Single Viewport with wider cards & narrow padding */
+    .overview-v2-process {
+        padding: calc(var(--header-height, 4.8rem) + 1.5rem) 2.5rem 2rem;
+        height: 100vh;
+        height: 100dvh;
+        max-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
+    .overview-v2-process .container {
+        max-width: 1520px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .overview-v2-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        max-width: 1480px;
+        margin: 2.5rem auto 0;
+        width: 100%;
+    }
+
+    .overview-v2-card-img {
+        height: 24vh;
+        max-height: 230px;
+    }
+
+    .overview-v2-card-body {
+        padding: 1.6rem 1.6rem 1.8rem;
+    }
+
+    .overview-v2-card-body h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .overview-v2-card-body p {
+        font-size: 0.94rem;
+        line-height: 1.6;
+    }
+}
+
+/* Tablet & Mobile Layouts for Overview and Experience */
+@media (max-width: 1024px) {
+    /* What We Do: strict single viewport fit, photo below text */
+    .overview-v1-stage {
+        height: 100vh;
+        height: 100dvh;
+        min-height: 100vh;
+        padding: calc(var(--header-height, 3.8rem) + 0.5rem) 1.5rem 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .overview-v1-grid {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 0.6rem;
+        height: 100%;
+        max-height: 100%;
+    }
+
+    .overview-v1-left {
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .overview-v1-left .section-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .overview-v1-left h2 {
+        font-size: clamp(1.6rem, 5vw, 2.2rem);
+        margin-bottom: 0.5rem;
+        line-height: 1.15;
+    }
+
+    .overview-v1-intro {
+        font-size: clamp(0.85rem, 1.8vw, 1rem);
+        line-height: 1.45;
+        margin-bottom: 0.4rem;
+    }
+
+    .overview-v1-quote {
+        padding: 0.45rem 0.8rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .overview-v1-quote p {
+        font-size: clamp(0.78rem, 1.6vw, 0.9rem);
+        line-height: 1.35;
+    }
+
+    .overview-v1-desc {
+        font-size: clamp(0.8rem, 1.6vw, 0.92rem);
+        line-height: 1.45;
+        margin-bottom: 0.4rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .overview-v1-diptych {
+        flex: 1 1 auto;
+        height: auto;
+        min-height: 180px;
+        max-height: none;
+        width: 100%;
+        position: relative;
+    }
+
+    .overview-v1-photo-main {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* How It Works: Skip any stacked 1-col layout, go directly to horizontal carousel */
+    .overview-v2-viewport.overview-v2-process {
+        padding: calc(var(--header-height, 3.8rem) + 1.5rem) 1.5rem 3rem;
+        min-height: auto;
+        height: auto;
+        display: block !important;
+        text-align: left;
+    }
+
+    .overview-v2-viewport.overview-v2-process .container {
+        padding: 0;
+        max-width: 100%;
+        text-align: left;
+    }
+
+    .overview-v2-viewport.overview-v2-process .section-header {
+        text-align: left;
+        margin-bottom: 1.5rem;
+        padding: 0 0.2rem;
+    }
+
+    .overview-v2-viewport.overview-v2-process .section-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 0.35rem;
+    }
+
+    .overview-v2-viewport.overview-v2-process .section-header h2 {
+        font-size: clamp(1.8rem, 5.5vw, 2.4rem);
+        margin-bottom: 0;
+    }
+
+    .overview-v2-cards-grid {
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        scroll-snap-type: none !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 1.2rem;
+        padding-bottom: 1rem;
+        margin-top: 1.5rem;
+        width: 100%;
+    }
+
+    .overview-v2-cards-grid::-webkit-scrollbar {
+        display: none;
+    }
+
+    .overview-v2-cards-grid .overview-v2-card {
+        flex: 0 0 80%;
+        min-width: 260px;
+        max-width: 340px;
+        margin-bottom: 0;
+    }
+}
+
+/* ========================================================
+   GALLERY SECTION STYLES (Instagram @epochurian Showcase)
+   ======================================================== */
+.gallery-section {
+    padding: 6rem 0 5rem;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    position: relative;
+}
+
+.gallery-handle-intro {
+    font-size: 1.1rem;
+    color: var(--sandstone);
+    margin-top: 0.8rem;
+    font-style: italic;
+}
+
+.gallery-insta-link {
+    color: var(--gold);
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px dashed var(--gold);
+    transition: var(--transition-fast);
+}
+
+.gallery-insta-link:hover {
+    color: var(--gold-hover);
+    border-bottom-style: solid;
+}
+
+/* Behold Live Instagram Widget Container */
+.instagram-feed-container {
+    margin: 3.5rem auto 3rem;
+    max-width: 1200px;
+    width: 100%;
+}
+
+behold-widget {
+    display: block;
+    width: 100%;
+}
+
+.instagram-feed-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 3.5rem 0 3rem;
+}
+
+@media (min-width: 1100px) {
+    .instagram-feed-grid {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 1.2rem;
+    }
+}
+
+.insta-grid-item {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    display: block;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.insta-grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.92) contrast(1.05);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+}
+
+.insta-hover-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(14, 13, 12, 0.82);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    z-index: 2;
+    padding: 1rem;
+    text-align: center;
+}
+
+.insta-icon {
+    font-size: 1.5rem;
+}
+
+.insta-label {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sandstone-light);
+}
+
+.insta-grid-item:hover img {
+    transform: scale(1.08);
+    filter: brightness(0.7);
+}
+
+.insta-grid-item:hover .insta-hover-overlay {
+    opacity: 1;
+}
+
+.gallery-cta {
+    margin-top: 1.5rem;
+}
+
+/* Spacing before Seasonal Offer */
+.seasonal-offer-strip {
+    margin-top: 3rem;
+}
+
+#contact.contact-section {
+    padding-top: calc(var(--header-height, 4.8rem) + 1.5rem);
+}
+
+/* ========================================================
+   CHRISTMAS LANDING & MENU VIEWPORT REFINEMENTS
+   ======================================================== */
+
+/* Christmas Landing Viewport Single Screen Fit */
+.xmas-landing-viewport {
+    height: 100vh;
+    height: 100dvh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 4.8rem 1.5rem 1rem;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.xmas-landing-viewport .xmas-hero-content {
+    margin: auto auto 1rem;
+    max-width: 860px;
+}
+
+.xmas-landing-viewport h1 {
+    font-size: clamp(2rem, 4.5vw, 3.8rem);
+    margin-bottom: 0.4rem;
+}
+
+.xmas-landing-viewport .tagline {
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    margin-bottom: 0.8rem;
+}
+
+.xmas-landing-viewport .xmas-lead {
+    font-size: clamp(0.92rem, 1.8vw, 1.1rem);
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+}
+
+.xmas-landing-pricing-strip {
+    width: 100%;
+    padding: 0.8rem 0;
+    border-top: 1px solid var(--border-color);
+    background: rgba(14, 13, 12, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 5;
+    flex-shrink: 0;
+}
+
+.xmas-landing-pricing-strip .pricing-box {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+/* Christmas Sticky Scrollytelling Viewport: Account for Header Banner */
+@media (min-width: 769px) {
+    .xmas-menu-stage {
+        top: var(--header-height, 4.8rem);
+        height: calc(100vh - var(--header-height, 4.8rem));
+        height: calc(100dvh - var(--header-height, 4.8rem));
+        padding-top: 1.5rem;
+        padding-bottom: 2vh;
+    }
+
+    /* Make background photos ~33% clearer */
+    .xmas-menu-bg-overlay {
+        background: radial-gradient(circle at center, rgba(14, 13, 12, 0.4) 0%, rgba(14, 13, 12, 0.72) 100%),
+                    linear-gradient(to bottom, rgba(14, 13, 12, 0.6) 0%, rgba(14, 13, 12, 0.45) 50%, rgba(14, 13, 12, 0.72) 100%);
+    }
+
+    .xmas-menu-pairs-window {
+        height: 64vh;
+        max-height: 650px;
+    }
+}

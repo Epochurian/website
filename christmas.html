@@ -20,6 +20,7 @@
                 <a href="index.html#overview">Overview</a>
                 <a href="index.html#feasts">Feasts</a>
                 <a href="index.html#chef">The Chef</a>
+                <a href="index.html#gallery">Gallery</a>
                 <a href="christmas.html" class="active">Christmas 2026</a>
                 <a href="#order" class="nav-cta">Order</a>
             </nav>
@@ -34,15 +35,16 @@
                 <a href="index.html#overview">Overview</a>
                 <a href="index.html#feasts">Feasts</a>
                 <a href="index.html#chef">The Chef</a>
+                <a href="index.html#gallery">Gallery</a>
                 <a href="christmas.html" class="active">Christmas 2026</a>
                 <a href="#order" class="mobile-nav-cta">Order</a>
             </nav>
         </div>
     </header>
 
-    <!-- Christmas Hero Banner -->
-    <section class="xmas-hero">
-        <div class="xmas-hero-bg" style="background-image: url('PXL_20261011_213248305.PORTRAIT.jpg');"></div>
+    <!-- Christmas Landing Viewport (Single 100vh Viewport Including Details Boxes on all Screen Sizes) -->
+    <section class="xmas-hero xmas-landing-viewport">
+        <div class="xmas-hero-bg" style="background-image: url('images/bayeux 37.webp');"></div>
         <div class="xmas-hero-overlay"></div>
         <div class="xmas-hero-content">
             <span class="section-subtitle">Christmas 2026 Limited Release</span>
@@ -63,103 +65,179 @@
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Pricing & Delivery Summary Strip -->
-    <section class="xmas-pricing-strip">
-        <div class="container">
-            <div class="pricing-box">
-                <div class="pricing-item">
-                    <span class="pricing-tag">Feast Size</span>
-                    <span class="pricing-val">4 Guests</span>
-                    <span class="pricing-sub">Freshly prepared &amp; boxed for four</span>
-                </div>
-                <div class="pricing-divider"></div>
-                <div class="pricing-item">
-                    <span class="pricing-tag">Price</span>
-                    <span class="pricing-val">&pound;100 per head</span>
-                    <span class="pricing-sub">&pound;400 total</span>
-                </div>
-                <div class="pricing-divider"></div>
-                <div class="pricing-item">
-                    <span class="pricing-tag">Included</span>
-                    <span class="pricing-val">6 courses</span>
-                    <span class="pricing-sub">Bottle of wine, and historically themed table decorations &amp; entertainment</span>
-                </div>
-                <div class="pricing-divider"></div>
-                <div class="pricing-item">
-                    <span class="pricing-tag">Delivered Fresh</span>
-                    <span class="pricing-val">Ready to Heat &amp; Serve</span>
-                    <span class="pricing-sub">Delivered directly to your door</span>
+        <!-- Integrated Pricing & Delivery Summary Strip (Always Visible in Landing Viewport) -->
+        <div class="xmas-landing-pricing-strip">
+            <div class="container">
+                <div class="pricing-box">
+                    <div class="pricing-item">
+                        <span class="pricing-tag">Feast Size</span>
+                        <span class="pricing-val">4 Guests</span>
+                        <span class="pricing-sub">Freshly prepared &amp; boxed for four</span>
+                    </div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-item">
+                        <span class="pricing-tag">Price</span>
+                        <span class="pricing-val">&pound;100 per head</span>
+                        <span class="pricing-sub">&pound;400 total</span>
+                    </div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-item">
+                        <span class="pricing-tag">Included</span>
+                        <span class="pricing-val">6 courses</span>
+                        <span class="pricing-sub">Bottle of wine, cards &amp; games</span>
+                    </div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-item">
+                        <span class="pricing-tag">Delivered Fresh</span>
+                        <span class="pricing-val">Ready to Heat &amp; Serve</span>
+                        <span class="pricing-sub">Delivered to your door</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- The Banquet Menu Breakdown -->
-    <section class="xmas-courses-section">
+    <!-- Historical Setting: The Norman Conquest -->
+    <section class="xmas-editorial-break">
         <div class="container">
-            <div class="section-header text-center reveal">
+            <div class="xmas-editorial-grid">
+                <div class="xmas-editorial-media reveal">
+                    <div class="xmas-editorial-primary-frame">
+                        <img src="images/bayeux-tapestry-eating.webp" alt="11th Century Norman banquet from the Bayeux Tapestry" loading="lazy">
+                    </div>
+                </div>
+
+                <div class="xmas-editorial-text reveal">
+                    <span class="section-subtitle">11th Century England</span>
+                    <h2>The Norman Conquest</h2>
+                    <p class="scrolly-lead" style="font-family: var(--font-body); font-style: italic; color: var(--sandstone); font-size: 1.15rem; line-height: 1.5; margin-bottom: 1.25rem;">
+                        A rich medieval feast in honour of the Bayeux Tapestry's return to England.
+                    </p>
+                    <p>
+                        Norman rule brought a move away from the Anglo-Saxon sustenance diet of ale and plain meats towards something recognisable as cuisine, bringing with it England's first noted chef, and changes to food language that would last a millennium. Focusing entirely on the new continental elite, this menu offers an unapologetically carnivorous feast of forest game, spiced meats, and flowing wines fit for William’s new court.
+                    </p>
+                    <p class="chef-highlight" style="font-size: 1rem !important; color: var(--gold) !important; margin-top: 1.2rem !important; margin-bottom: 0 !important; padding-top: 1rem; border-top: 1px solid rgba(179, 147, 106, 0.25); font-style: italic; letter-spacing: 0.02em;">
+                        Chef's highlight — venison with duck liver
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Banquet Menu: Sticky Scrollytelling Viewport (Widescreen) & Horizontal Carousel (Mobile) -->
+    <section class="xmas-menu-viewport-section" id="menuViewportSection">
+        <div class="xmas-menu-stage">
+            <!-- Pinned Crossfading Background Photo Stack -->
+            <div class="xmas-menu-bg-stack">
+                <div class="xmas-menu-bg is-active" id="xmasMenuBg0" style="background-image: url('images/norman-venison.webp');"></div>
+                <div class="xmas-menu-bg" id="xmasMenuBg1" style="background-image: url('images/norman-soup.webp');"></div>
+                <div class="xmas-menu-bg" id="xmasMenuBg2" style="background-image: url('images/norman-spit-roasted-fowl.webp');"></div>
+            </div>
+            <div class="xmas-menu-bg-overlay"></div>
+
+            <!-- Fixed Header text above the 6 courses -->
+            <div class="xmas-menu-header-fixed reveal">
                 <span class="section-subtitle">The Menu</span>
                 <h2>Six Historical Courses</h2>
-                <p style="max-width: 680px; margin: 1rem auto 0; color: var(--text-muted); font-size: 1.05rem;">
+                <p class="xmas-menu-lead-fixed">
                     Every dish is carefully researched for authenticity and tailored to the modern palate.
                 </p>
             </div>
 
-            <div class="xmas-courses-grid">
-                <!-- Course 1 -->
-                <div class="xmas-course-card reveal">
-                    <span class="xmas-course-number">Canapés</span>
-                    <h3>Smoked Eel &amp; Smoked Sturgeon</h3>
-                    <p class="xmas-course-desc">
-                        A pair of canapés showcasing the social divide. Freshwater eel for the poor, contrasted with sturgeon, a luxury reserved for nobility.
-                    </p>
+            <!-- Widescreen Courses Vertical Window (All 6 courses visible, with smooth scroll tracking for photo transitions) -->
+            <div class="xmas-menu-pairs-window" id="xmasMenuWindow">
+                <div class="xmas-menu-scrollable-stream">
+                    <!-- Pair 1: Canapés & Soup (Photo 1: images/norman-venison-duck-liver.webp) -->
+                    <div class="xmas-course-pair is-active" data-pair="0" id="coursePair0">
+                        <div class="xmas-course-card">
+                            <span class="xmas-course-number">Canapés</span>
+                            <h3>Smoked Eel &amp; Smoked Sturgeon</h3>
+                            <p class="xmas-course-desc">
+                                A pair of canapés showcasing the social divide. Freshwater eel for the poor, contrasted with sturgeon, a luxury reserved for nobility.
+                            </p>
+                        </div>
+                        <div class="xmas-course-card">
+                            <span class="xmas-course-number">Soup</span>
+                            <h3>Tezelin's White Soup</h3>
+                            <p class="xmas-course-desc">
+                                Inspired by Tezelin, the master cook to King William the Conqueror, this velvety white soup is the early medieval forebear of blancmange.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Pair 2: Starter & Entremet (Photo 2: images/norman-spit-roasted-fowl.webp) -->
+                    <div class="xmas-course-pair" data-pair="1" id="coursePair1">
+                        <div class="xmas-course-card">
+                            <span class="xmas-course-number">Starter</span>
+                            <h3>Venison &amp; Duck Liver</h3>
+                            <p class="xmas-course-desc">
+                                William's favourite - venison - and buttery duck liver, complemented by hazelnuts, fruit, and crushed juniper.
+                            </p>
+                        </div>
+                        <div class="xmas-course-card">
+                            <span class="xmas-course-number">Entremet</span>
+                            <h3>The Royal Entremet</h3>
+                            <p class="xmas-course-desc">
+                                A delicious morsel in between courses to refresh the palate.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Pair 3: Main & Dessert (Photo 3: images/norman-spit-roasted-fowl.webp) -->
+                    <div class="xmas-course-pair" data-pair="2" id="coursePair2">
+                        <div class="xmas-course-card">
+                            <span class="xmas-course-number">Main</span>
+                            <h3>Spit-Roasted Fowl</h3>
+                            <p class="xmas-course-desc">
+                                Tender fired duck with frumenty, demi-sec fruits, seasonal vegetables, and a rich sauce.
+                            </p>
+                        </div>
+                        <div class="xmas-course-card">
+                            <span class="xmas-course-number">Dessert</span>
+                            <h3>Norman Cheese Custard Tart</h3>
+                            <p class="xmas-course-desc">
+                                A gently spiced baked tart made with a medieval monastic cheese, served alongside a cider-poached pear.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Spacer Runway so Course Pair 3 can scroll all the way to the top of the viewport -->
+                    <div class="xmas-menu-scroll-buffer" aria-hidden="true"></div>
                 </div>
 
-                <!-- Course 2 -->
-                <div class="xmas-course-card reveal">
-                    <span class="xmas-course-number">Soup</span>
-                    <h3>Tezelin's White Soup</h3>
-                    <p class="xmas-course-desc">
-                        Inspired by Tezelin, the master cook to King William the Conqueror, this velvety white soup is the early medieval forebear of blancmange.
-                    </p>
-                </div>
-
-                <!-- Course 3 -->
-                <div class="xmas-course-card reveal">
-                    <span class="xmas-course-number">Starter</span>
-                    <h3>Venison &amp; Duck Liver</h3>
-                    <p class="xmas-course-desc">
-                        William's favourite - venison - and buttery duck liver, complemented by hazelnuts, fruit, and crushed juniper.
-                    </p>
-                </div>
-
-                <!-- Course 4 -->
-                <div class="xmas-course-card reveal">
-                    <span class="xmas-course-number">Entremet</span>
-                    <h3>The Royal Entremet</h3>
-                    <p class="xmas-course-desc">
-                        A delicious morsel in between courses to refresh the palate.
-                    </p>
-                </div>
-
-                <!-- Course 5 -->
-                <div class="xmas-course-card reveal">
-                    <span class="xmas-course-number">Main</span>
-                    <h3>Spit-Roasted Fowl</h3>
-                    <p class="xmas-course-desc">
-                        Tender fired duck with frumenty, demi-sec fruits, seasonal vegetables, and a rich sauce.
-                    </p>
-                </div>
-
-                <!-- Course 6 -->
-                <div class="xmas-course-card reveal">
-                    <span class="xmas-course-number">Dessert</span>
-                    <h3>Norman Cheese Custard Tart</h3>
-                    <p class="xmas-course-desc">
-                        A gently spiced baked tart made with a medieval monastic cheese, served alongside a cider-poached pear.
-                    </p>
+                <!-- Mobile Flow (Horizontal Carousel <= 768px) -->
+                <div class="xmas-courses-mobile-flow">
+                    <div class="xmas-course-card">
+                        <span class="xmas-course-number">Canapés</span>
+                        <h3>Smoked Eel &amp; Smoked Sturgeon</h3>
+                        <p class="xmas-course-desc">A pair of canapés showcasing the social divide. Freshwater eel for the poor, contrasted with sturgeon, a luxury reserved for nobility.</p>
+                    </div>
+                    <div class="xmas-course-card">
+                        <span class="xmas-course-number">Soup</span>
+                        <h3>Tezelin's White Soup</h3>
+                        <p class="xmas-course-desc">Inspired by Tezelin, the master cook to King William the Conqueror, this velvety white soup is the early medieval forebear of blancmange.</p>
+                    </div>
+                    <div class="xmas-course-card">
+                        <span class="xmas-course-number">Starter</span>
+                        <h3>Venison &amp; Duck Liver</h3>
+                        <p class="xmas-course-desc">William's favourite - venison - and buttery duck liver, complemented by hazelnuts, fruit, and crushed juniper.</p>
+                    </div>
+                    <div class="xmas-course-card">
+                        <span class="xmas-course-number">Entremet</span>
+                        <h3>The Royal Entremet</h3>
+                        <p class="xmas-course-desc">A delicious morsel in between courses to refresh the palate.</p>
+                    </div>
+                    <div class="xmas-course-card">
+                        <span class="xmas-course-number">Main</span>
+                        <h3>Spit-Roasted Fowl</h3>
+                        <p class="xmas-course-desc">Tender fired duck with frumenty, demi-sec fruits, seasonal vegetables, and a rich sauce.</p>
+                    </div>
+                    <div class="xmas-course-card">
+                        <span class="xmas-course-number">Dessert</span>
+                        <h3>Norman Cheese Custard Tart</h3>
+                        <p class="xmas-course-desc">A gently spiced baked tart made with a medieval monastic cheese, served alongside a cider-poached pear.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -177,34 +255,17 @@
                 <div class="xmas-included-item">
                     <span class="included-tag">Spiced Wine</span>
                     <h3>A Bottle of Hippocras</h3>
-                    <p>Every order includes a bottle of Hippocras, the traditional medieval spiced wine infused with historic spices. Enjoy warm or chilled alongside your feast.</p>
+                    <p>Every order includes a bottle of Hippocras - the traditional medieval spiced wine - aromatic with Grains of Paradise. Enjoy warm or chilled alongside your feast.</p>
                 </div>
                 <div class="xmas-included-item">
                     <span class="included-tag">Table Entertainment</span>
                     <h3>Quiz, Games &amp; History Cards</h3>
-                    <p>Printed cards that set the scene, and detail the fascinating history behind each recipe. These come alongside a festive medieval table game, a historical quiz, table decorations, and costumes for you and your guests.</p>
+                    <p>Printed cards that set the scene and detail the fascinating history behind each recipe. These come alongside a festive medieval table game, a historical quiz, and table decorations.</p>
                 </div>
                 <div class="xmas-included-item">
                     <span class="included-tag">Effortless Hosting</span>
                     <h3>Simple Heating &amp; Plating Instructions</h3>
                     <p>All food is personally delivered to allow any additional questions to be answered, so you can serve an effortless banquet without spending Christmas in the kitchen.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Visual Dish Gallery -->
-    <section class="xmas-gallery-section">
-        <div class="container">
-            <div class="xmas-gallery-grid">
-                <div class="xmas-gallery-item reveal">
-                    <img src="IMG_7654.jpeg" alt="Norman feast presentation detail" loading="lazy">
-                </div>
-                <div class="xmas-gallery-item reveal">
-                    <img src="IMG_7659.jpeg" alt="Historical banquet culinary plating" loading="lazy">
-                </div>
-                <div class="xmas-gallery-item reveal">
-                    <img src="PXL_20261011_220745113.PORTRAIT.jpg" alt="Chef Josh presenting historical feast" loading="lazy">
                 </div>
             </div>
         </div>
@@ -234,6 +295,7 @@
                 </div>
 
                 <p class="booking-preset-notice">
+                    <br>
                     Delivered across London &bull; Limited availability across the Christmas period.
                 </p>
             </div>
@@ -317,6 +379,126 @@
                 if (countEl) countEl.textContent = count;
                 if (progressEl) progressEl.style.width = ((count / TOTAL) * 100) + '%';
             } catch (e) {}
+
+            // 5. Widescreen Menu Scrollytelling Viewport (Photo Crossfade & Vertical Stream Tracking)
+            const menuViewportSection = document.getElementById('menuViewportSection');
+            const menuStream = document.querySelector('.xmas-menu-scrollable-stream');
+            const menuBgs = [
+                document.getElementById('xmasMenuBg0'),
+                document.getElementById('xmasMenuBg1'),
+                document.getElementById('xmasMenuBg2')
+            ];
+            const coursePairs = document.querySelectorAll('.xmas-course-pair');
+
+            let activeMenuPairIndex = -1;
+
+            const updateMenuStage = (stageIdx, shouldScrollStream = false) => {
+                if (stageIdx === activeMenuPairIndex) return;
+                activeMenuPairIndex = stageIdx;
+
+                // Update Background Photos
+                menuBgs.forEach((bg, idx) => {
+                    if (bg) {
+                        if (idx === stageIdx) bg.classList.add('is-active');
+                        else bg.classList.remove('is-active');
+                    }
+                });
+
+                // Update Course Pairs Active Styling
+                coursePairs.forEach((pair) => {
+                    const pairIdx = parseInt(pair.getAttribute('data-pair'), 10);
+                    if (pairIdx === stageIdx) pair.classList.add('is-active');
+                    else pair.classList.remove('is-active');
+                });
+
+                // Optional smooth auto-scroll inside container if driven by page scroll
+                if (shouldScrollStream && menuStream && coursePairs[stageIdx]) {
+                    const targetPair = coursePairs[stageIdx];
+                    menuStream.scrollTo({
+                        top: targetPair.offsetTop - 10,
+                        behavior: 'smooth'
+                    });
+                }
+            };
+
+            // Stream internal scroll listener: changes background photo ONLY when each course reaches the top of the container
+            if (menuStream) {
+                let streamTicking = false;
+                menuStream.addEventListener('scroll', () => {
+                    if (!streamTicking) {
+                        window.requestAnimationFrame(() => {
+                            const streamScroll = menuStream.scrollTop;
+                            // Calculate active stage based on which course pair has crossed near the top of the stream
+                            let stage = 0;
+                            const pair1 = document.getElementById('coursePair1');
+                            const pair2 = document.getElementById('coursePair2');
+
+                            // We switch photo when the pair's top enters the upper portion (< 80px from top)
+                            if (pair2 && pair2.offsetTop - streamScroll <= 80) {
+                                stage = 2;
+                            } else if (pair1 && pair1.offsetTop - streamScroll <= 80) {
+                                stage = 1;
+                            } else {
+                                stage = 0;
+                            }
+                            updateMenuStage(stage, false);
+                            streamTicking = false;
+                        });
+                        streamTicking = true;
+                    }
+                }, { passive: true });
+            }
+
+            // Window scroll listener: smoothly steps container scroll & changes photo as each course reaches the top
+            const handleMenuScroll = () => {
+                if (!menuViewportSection || window.innerWidth <= 768) return;
+
+                const rect = menuViewportSection.getBoundingClientRect();
+                const windowH = window.innerHeight;
+                const scrollDistance = rect.height - windowH;
+
+                if (scrollDistance <= 0) return;
+
+                // Check scroll position relative to the section
+                if (rect.top <= 0 && rect.bottom >= windowH) {
+                    const progress = Math.max(0, Math.min(1, -rect.top / scrollDistance));
+                    
+                    // Smoothly map page scroll to the internal stream scroll position
+                    if (menuStream) {
+                        const maxStreamScroll = menuStream.scrollHeight - menuStream.clientHeight;
+                        menuStream.scrollTop = progress * maxStreamScroll;
+                    }
+
+                    // Check which course pair has scrolled to the top of the container
+                    let stage = 0;
+                    const pair1 = document.getElementById('coursePair1');
+                    const pair2 = document.getElementById('coursePair2');
+                    const streamScroll = menuStream ? menuStream.scrollTop : 0;
+
+                    if (pair2 && pair2.offsetTop - streamScroll <= 80) {
+                        stage = 2;
+                    } else if (pair1 && pair1.offsetTop - streamScroll <= 80) {
+                        stage = 1;
+                    } else {
+                        stage = 0;
+                    }
+                    updateMenuStage(stage, false);
+                } else if (rect.top > 0) {
+                    // Above section: stay at first stage
+                    updateMenuStage(0, false);
+                    if (menuStream) menuStream.scrollTop = 0;
+                } else if (rect.bottom < windowH) {
+                    // Past the end: stay pinned at the last stage
+                    updateMenuStage(2, false);
+                    if (menuStream) {
+                        menuStream.scrollTop = menuStream.scrollHeight;
+                    }
+                }
+            };
+
+            window.addEventListener('scroll', handleMenuScroll, { passive: true });
+            window.addEventListener('resize', handleMenuScroll, { passive: true });
+            handleMenuScroll(); // Initial check
         });
     </script>
 </body>

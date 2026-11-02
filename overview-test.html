@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overview / What We Do (Layout Concepts) — EPOCHURIAN</title>
+    <meta name="description" content="Test exploration lab for the Overview / What We Do section, featuring 3 distinct viewport & photography concepts.">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Toolbar styling for overview lab */
+        .overview-lab-switcher {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            background: rgba(18, 16, 14, 0.95);
+            border: 1px solid var(--gold);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.85), 0 0 25px rgba(179, 147, 106, 0.25);
+            padding: 0.55rem 0.85rem;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .overview-lab-btn {
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--sandstone);
+            padding: 0.45rem 1rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .overview-lab-btn:hover {
+            color: var(--sandstone-light);
+            border-color: rgba(179, 147, 106, 0.4);
+        }
+
+        .overview-lab-btn.is-active {
+            background: var(--gold);
+            color: var(--bg-primary);
+            font-weight: 600;
+        }
+
+        .concept-banner-divider {
+            background: #11100e;
+            border-top: 2px solid var(--gold);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem 2rem;
+            text-align: center;
+        }
+
+        .concept-banner-divider span {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .concept-banner-divider p {
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin: 0.35rem 0 0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body class="overview-lab-body" data-concept="all">
+
+    <!-- Top Reading Progress Indicator -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Floating Interactive Concept Switcher -->
+    <aside class="overview-lab-switcher" aria-label="Overview Concept Selector">
+        <button class="overview-lab-btn is-active" data-concept-target="all">Compare All 3</button>
+        <button class="overview-lab-btn" data-concept-target="1">Concept 1: Single Viewport Split</button>
+        <button class="overview-lab-btn" data-concept-target="2">Concept 2: Two Distinct 100vh Acts</button>
+        <button class="overview-lab-btn" data-concept-target="3">Concept 3: Scrollytelling Viewport</button>
+    </aside>
+
+    <!-- Editorial Header Navigation -->
+    <header class="site-header scrolled">
+        <div class="nav-container">
+            <a href="index.html" class="logo">EPOCHURIAN</a>
+            <nav class="nav-links">
+                <a href="index.html#overview">Overview (Live)</a>
+                <a href="index.html#feasts">Feasts</a>
+                <a href="index.html#chef">The Chef</a>
+                <a href="christmas.html">Christmas 2026</a>
+                <a href="index.html#contact" class="nav-cta">Contact</a>
+            </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+        <div class="mobile-nav-drawer" id="mobileNavDrawer">
+            <nav class="mobile-nav-links">
+                <a href="index.html#overview">Overview (Live)</a>
+                <a href="index.html#feasts">Feasts</a>
+                <a href="index.html#chef">The Chef</a>
+                <a href="christmas.html">Christmas 2026</a>
+                <a href="index.html#contact" class="mobile-nav-cta">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Context Landmark -->
+    <section class="hero" id="hero" style="height: 60vh; min-height: 480px;">
+        <div class="hero-bg" style="background-image: url('84.Party ©Matthew Johnson Photographer.jpg');"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-brand-box">
+                <h1 class="hero-logo" style="font-size: clamp(2.5rem, 6vw, 4.5rem);">Overview Lab</h1>
+                <span class="tagline">Exploring 3 Viewport &amp; Photography Layouts</span>
+            </div>
+            <p class="hero-subtitle" style="margin-bottom: 0;">
+                Test how the Overview section can be framed cleanly in single or distinct 100vh viewports with authentic party photography.
+            </p>
+        </div>
+    </section>
+
+
+    <!-- ========================================================
+         CONCEPT 1: Single Viewport (100vh) Balanced Diptych Split
+         ======================================================== -->
+    <div class="overview-concept-wrap" data-concept-id="1">
+        <div class="concept-banner-divider">
+            <span>Concept 1: Single Viewport Split (100vh) with Atmospheric Diptych</span>
+            <p>Fits all philosophy and the 3 concise steps on the left, paired with an artfully layered 2-photo party diptych on the right.</p>
+        </div>
+
+        <section class="overview-v1-stage">
+            <div class="overview-v1-grid">
+                <!-- Left Column: Story + Quote + 3 Compact Steps -->
+                <div class="overview-v1-left">
+                    <span class="section-subtitle">What We Do</span>
+                    <h2>Private Dining, Reimagined</h2>
+                    <p class="overview-v1-intro">
+                        EPOCHURIAN provides deeply researched historical private dining in the comfort of your own home, taking you on an authentic culinary adventure across centuries.
+                    </p>
+                    <div class="overview-v1-quote">
+                        <p>"Everything I ate was new and I enjoyed every bite" — Ming banquet guest, North London</p>
+                    </div>
+
+                    <!-- 3 Horizontal Compact Steps -->
+                    <div class="overview-v1-steps-row">
+                        <div class="overview-v1-step">
+                            <span class="step-num">Step 01</span>
+                            <h3>Any Era in History</h3>
+                            <p>Choose any epoch, civilization, or family heritage, or explore our favourites.</p>
+                        </div>
+                        <div class="overview-v1-step">
+                            <span class="step-num">Step 02</span>
+                            <h3>Tailored Menu</h3>
+                            <p>Pre-event consultation and site visit to adapt to your tastes and dietary needs.</p>
+                        </div>
+                        <div class="overview-v1-step">
+                            <span class="step-num">Step 03</span>
+                            <h3>Party Time</h3>
+                            <p>We cook and present each course in person with history to bring the period to life.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Layered 2-Photo Diptych -->
+                <div class="overview-v1-diptych">
+                    <div class="overview-v1-photo-main">
+                        <img src="2.Party ©Matthew Johnson Photographer.jpg" alt="Atmospheric private banquet table" loading="lazy">
+                    </div>
+                    <div class="overview-v1-photo-secondary">
+                        <img src="30.Party ©Matthew Johnson Photographer.jpg" alt="Historical culinary presentation" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <!-- ========================================================
+         CONCEPT 2: Two Distinct 100vh Viewports (Vision + The 3 Acts)
+         ======================================================== -->
+    <div class="overview-concept-wrap" data-concept-id="2">
+        <div class="concept-banner-divider">
+            <span>Concept 2: Two Distinct Viewports (The Vision &amp; The 3 Acts)</span>
+            <p>Separates What We Do into two clear 100vh stages: first the immersive dining philosophy, followed by three visual photo cards.</p>
+        </div>
+
+        <!-- Viewport 2A: The Philosophy & Experience -->
+        <section class="overview-v2-viewport overview-v2-hero">
+            <div class="overview-v2-hero-bg" style="background-image: url('2.Party ©Matthew Johnson Photographer.jpg');"></div>
+            <div class="overview-v2-hero-overlay"></div>
+            <div class="overview-v2-hero-content">
+                <span class="section-subtitle">What We Do</span>
+                <h2>Private Dining, Reimagined</h2>
+                <p class="lead-main">
+                    EPOCHURIAN provides deeply researched historical private dining in the comfort of your own home.
+                </p>
+                <div class="overview-v2-hero-quote">
+                    "Everything I ate was new and I enjoyed every bite" — Ming banquet guest, North London
+                </div>
+                <p class="overview-v2-hero-desc">
+                    Our aim is to take you on a culinary adventure, exposing you to great food of the past through historical recipes, techniques, and ingredients. Each menu is carefully crafted to evoke the atmosphere of the period while giving the fullest breadth of flavour.
+                </p>
+            </div>
+        </section>
+
+        <!-- Viewport 2B: The Process in 3 Visual Cards with Photography -->
+        <section class="overview-v2-viewport overview-v2-process">
+            <div class="container text-center">
+                <div class="section-header">
+                    <span class="section-subtitle">The Experience</span>
+                    <h2>How It Works</h2>
+                </div>
+
+                <div class="overview-v2-cards-grid">
+                    <!-- Card 1 -->
+                    <div class="overview-v2-card">
+                        <div class="overview-v2-card-img">
+                            <img src="30.Party ©Matthew Johnson Photographer.jpg" alt="Historic feast inspiration" loading="lazy">
+                            <span class="overview-v2-card-img-badge">Phase 01</span>
+                        </div>
+                        <div class="overview-v2-card-body">
+                            <h3>Any Era in History</h3>
+                            <p>Choose any epoch, civilization, or family heritage, or let us offer one of our favourites.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="overview-v2-card">
+                        <div class="overview-v2-card-img">
+                            <img src="22.Party ©Matthew Johnson Photographer.jpg" alt="Consultation and bespoke menu curation" loading="lazy">
+                            <span class="overview-v2-card-img-badge">Phase 02</span>
+                        </div>
+                        <div class="overview-v2-card-body">
+                            <h3>Personalised Experience</h3>
+                            <p>We work to create an event tailored to your tastes and preferences, including dietary restrictions, complete with a site visit.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="overview-v2-card">
+                        <div class="overview-v2-card-img">
+                            <img src="79.Party ©Matthew Johnson Photographer.jpg" alt="The live banquet experience" loading="lazy">
+                            <span class="overview-v2-card-img-badge">Phase 03</span>
+                        </div>
+                        <div class="overview-v2-card-body">
+                            <h3>Party Time</h3>
+                            <p>On the day of your event, we will be there in person, presenting each course with a little history to bring the period to life.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <!-- ========================================================
+         CONCEPT 3: Pinned Scrollytelling Viewport (Sticky Canvas)
+         ======================================================== -->
+    <div class="overview-concept-wrap" data-concept-id="3">
+        <div class="concept-banner-divider">
+            <span>Concept 3: Pinned Scrollytelling Viewport (Sticky Canvas with Crossfading Photos)</span>
+            <p>Similar to the Feasts section: as you scroll, cards glide into the 100vh frame while the backdrop transitions between party photos.</p>
+        </div>
+
+        <section class="overview-v3-scrolly-section" id="overviewV3Section">
+            <div class="overview-v3-stage">
+                <!-- Pinned Crossfading Backgrounds -->
+                <div class="overview-v3-bg-stack">
+                    <div class="overview-v3-bg is-active" id="v3Bg0" style="background-image: url('2.Party ©Matthew Johnson Photographer.jpg');"></div>
+                    <div class="overview-v3-bg" id="v3Bg1" style="background-image: url('30.Party ©Matthew Johnson Photographer.jpg');"></div>
+                    <div class="overview-v3-bg" id="v3Bg2" style="background-image: url('22.Party ©Matthew Johnson Photographer.jpg');"></div>
+                    <div class="overview-v3-bg" id="v3Bg3" style="background-image: url('79.Party ©Matthew Johnson Photographer.jpg');"></div>
+                </div>
+                <div class="overview-v3-overlay"></div>
+
+                <!-- Sliding Cards Window -->
+                <div class="overview-v3-card-window">
+                    <!-- Slide 0: What We Do -->
+                    <div class="overview-v3-slide is-active" data-v3-slide="0">
+                        <span class="slide-badge">What We Do</span>
+                        <h2>Private Dining, Reimagined</h2>
+                        <p>EPOCHURIAN provides deeply researched historical private dining in the comfort of your own home, introducing you to the finest recipes, techniques, and atmospheres of the past.</p>
+                    </div>
+
+                    <!-- Slide 1: Step One -->
+                    <div class="overview-v3-slide" data-v3-slide="1">
+                        <span class="slide-badge">Step One &bull; The Epoch</span>
+                        <h2>Any Era in History</h2>
+                        <p>Choose any epoch, civilization, or family heritage of your choosing—from medieval royal banquets to imperial banquets—or let us guide you with our signature favourites.</p>
+                    </div>
+
+                    <!-- Slide 2: Step Two -->
+                    <div class="overview-v3-slide" data-v3-slide="2">
+                        <span class="slide-badge">Step Two &bull; Bespoke Curation</span>
+                        <h2>Personalised Experience</h2>
+                        <p>Every menu is tailored to your tastes, group size, and dietary restrictions, accompanied by an in-depth pre-event consultation and site visit.</p>
+                    </div>
+
+                    <!-- Slide 3: Step Three -->
+                    <div class="overview-v3-slide" data-v3-slide="3">
+                        <span class="slide-badge">Step Three &bull; The Celebration</span>
+                        <h2>Party Time</h2>
+                        <p>On the day of your event, we arrive in person with our team, presenting each course with vivid stories that bring the period to life for you and your guests.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">EPOCHURIAN</div>
+            <p>&copy; 2026 EPOCHURIAN. All rights reserved. &bull; <a href="index.html" style="color: var(--gold); margin-left: 0.5rem;">Return to Main Site</a></p>
+        </div>
+    </footer>
+
+    <!-- Interactive Concept Switcher & Scrolly Engine -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Concept Switcher
+            const buttons = document.querySelectorAll('.overview-lab-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    buttons.forEach(b => b.classList.remove('is-active'));
+                    btn.classList.add('is-active');
+                    const target = btn.getAttribute('data-concept-target');
+                    document.body.setAttribute('data-concept', target);
+                    window.dispatchEvent(new Event('scroll'));
+                });
+            });
+
+            // Mobile Drawer Toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileNavDrawer = document.getElementById('mobileNavDrawer');
+            if (mobileMenuBtn && mobileNavDrawer) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    const isOpen = !mobileMenuBtn.classList.contains('is-active');
+                    mobileMenuBtn.classList.toggle('is-active', isOpen);
+                    mobileNavDrawer.classList.toggle('is-open', isOpen);
+                });
+            }
+
+            // Scrollytelling Engine for Concept 3
+            const v3Section = document.getElementById('overviewV3Section');
+            const v3Bgs = [
+                document.getElementById('v3Bg0'),
+                document.getElementById('v3Bg1'),
+                document.getElementById('v3Bg2'),
+                document.getElementById('v3Bg3')
+            ];
+            const v3Slides = document.querySelectorAll('.overview-v3-slide');
+            let currentV3Index = -1;
+
+            const updateV3Stage = (index) => {
+                if (index === currentV3Index) return;
+                currentV3Index = index;
+
+                v3Bgs.forEach((bg, idx) => {
+                    if (bg) {
+                        if (idx === index) bg.classList.add('is-active');
+                        else bg.classList.remove('is-active');
+                    }
+                });
+
+                v3Slides.forEach(slide => {
+                    const sIdx = parseInt(slide.getAttribute('data-v3-slide'), 10);
+                    if (sIdx === index) slide.classList.add('is-active');
+                    else slide.classList.remove('is-active');
+                });
+            };
+
+            const handleV3Scroll = () => {
+                if (!v3Section || window.innerWidth <= 768) return;
+
+                const rect = v3Section.getBoundingClientRect();
+                const windowH = window.innerHeight;
+                const scrollDist = rect.height - windowH;
+
+                if (scrollDist <= 0) return;
+
+                if (rect.top <= 0 && rect.bottom >= windowH) {
+                    const progress = Math.max(0, Math.min(1, -rect.top / scrollDist));
+                    let stage = Math.floor(progress * 4);
+                    if (stage >= 4) stage = 3;
+                    updateV3Stage(stage);
+                } else if (rect.top > 0) {
+                    updateV3Stage(0);
+                } else if (rect.bottom < windowH) {
+                    updateV3Stage(3);
+                }
+            };
+
+            window.addEventListener('scroll', handleV3Scroll, { passive: true });
+            window.addEventListener('resize', handleV3Scroll, { passive: true });
+            handleV3Scroll();
+        });
+    </script>
+</body>
+</html>
