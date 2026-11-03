@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPOCHURIAN — Seasonal Offer & Header Test Lab</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Test Lab Switcher Bar */
+        .tester-control-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 99999;
+            background: rgba(14, 13, 12, 0.96);
+            border-bottom: 2px solid var(--gold);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 0.8rem 1.5rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
+            font-family: var(--font-sans);
+        }
+
+        .tester-controls-row {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tester-title {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .tester-title h1 {
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin: 0;
+        }
+
+        .tester-selectors {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .tester-group {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .tester-label {
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--sandstone);
+        }
+
+        .tester-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(179, 147, 106, 0.4);
+            color: var(--sandstone-light);
+            font-family: var(--font-sans);
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            padding: 0.4rem 0.85rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .tester-btn:hover {
+            border-color: var(--gold);
+            color: #ffffff;
+            background: rgba(179, 147, 106, 0.15);
+        }
+
+        .tester-btn.active {
+            background: var(--gold);
+            color: #0e0d0c;
+            border-color: var(--gold);
+            font-weight: 700;
+            box-shadow: 0 0 12px rgba(179, 147, 106, 0.5);
+        }
+
+        .tester-info-drawer {
+            margin-top: 0.6rem;
+            padding-top: 0.6rem;
+            border-top: 1px solid rgba(179, 147, 106, 0.2);
+            font-size: 0.78rem;
+            color: var(--sandstone-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Adjust hero for the fixed control panel */
+        body {
+            padding-top: 5rem;
+        }
+
+        /* ========================================================
+           6 HEADER STYLES FOR "CHRISTMAS 2026"
+           ======================================================== */
+
+        /* Header Style 1: Subtle Glowing Amber Dot (Breathing / Pulse) */
+        .hdr-opt-1 .nav-links a.nav-xmas {
+            color: var(--gold);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+        .hdr-opt-1 .nav-links a.nav-xmas::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: 0 0 8px rgba(179, 147, 106, 0.8);
+            animation: xmasDotBreathe 2s infinite ease-in-out;
+        }
+        @keyframes xmasDotBreathe {
+            0%, 100% { transform: scale(1); opacity: 0.6; box-shadow: 0 0 4px var(--gold); }
+            50% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 12px var(--gold); }
+        }
+
+        /* Header Style 2: Illuminated Shimmering Gold Ribbon (Text Gradient Sweep) */
+        .hdr-opt-2 .nav-links a.nav-xmas {
+            background: linear-gradient(90deg, #b3936a 0%, #ffffff 50%, #b3936a 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            animation: xmasTextShimmer 3s linear infinite;
+        }
+        @keyframes xmasTextShimmer {
+            0% { background-position: 200% center; }
+            100% { background-position: -200% center; }
+        }
+
+        /* Header Style 3: Pointed Historical Pennant Ribbon (Banner silhouette outline) */
+        .hdr-opt-3 .nav-links a.nav-xmas {
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 0.35rem 1.1rem 0.35rem 0.9rem;
+            clip-path: polygon(0% 0%, calc(100% - 8px) 0%, 100% 50%, calc(100% - 8px) 100%, 0% 100%);
+            background: rgba(179, 147, 106, 0.12);
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            transition: all 0.3s ease;
+        }
+        .hdr-opt-3 .nav-links a.nav-xmas::after { display: none; }
+        .hdr-opt-3 .nav-links a.nav-xmas:hover {
+            background: rgba(179, 147, 106, 0.28);
+            color: #ffffff;
+            box-shadow: 0 0 10px rgba(179, 147, 106, 0.4);
+        }
+
+        /* Header Style 4: Wax Seal Ruby-Crimson Festive Pill with Gold Trim */
+        .hdr-opt-4 .nav-links a.nav-xmas {
+            color: #ffffff;
+            background: linear-gradient(135deg, rgba(120, 28, 28, 0.9) 0%, rgba(70, 16, 16, 0.95) 100%);
+            border: 1px solid var(--gold);
+            padding: 0.4rem 1.1rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5), inset 0 0 6px rgba(179, 147, 106, 0.3);
+            transition: all 0.3s ease;
+        }
+        .hdr-opt-4 .nav-links a.nav-xmas::after { display: none; }
+        .hdr-opt-4 .nav-links a.nav-xmas:hover {
+            box-shadow: 0 0 14px rgba(179, 147, 106, 0.6);
+            transform: translateY(-1px);
+        }
+
+        /* Header Style 5: Elegant Gold Underline Flash / Beacon */
+        .hdr-opt-5 .nav-links a.nav-xmas {
+            color: #ffffff;
+            font-weight: 600;
+            letter-spacing: 0.22em;
+        }
+        .hdr-opt-5 .nav-links a.nav-xmas::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gold);
+            box-shadow: 0 0 8px var(--gold);
+            animation: xmasBeaconLine 2.2s infinite ease-in-out;
+            transform: none;
+        }
+        @keyframes xmasBeaconLine {
+            0%, 100% { opacity: 0.3; transform: scaleX(0.4); }
+            50% { opacity: 1; transform: scaleX(1); box-shadow: 0 0 12px var(--gold); }
+        }
+
+        /* Header Style 6: High-Contrast Gold Inverted Button (Bold Eyecatcher) */
+        .hdr-opt-6 .nav-links a.nav-xmas {
+            background: var(--gold);
+            color: #141210;
+            padding: 0.45rem 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            border-radius: 2px;
+            box-shadow: 0 4px 15px rgba(179, 147, 106, 0.35);
+            transition: all 0.3s ease;
+        }
+        .hdr-opt-6 .nav-links a.nav-xmas::after { display: none; }
+        .hdr-opt-6 .nav-links a.nav-xmas:hover {
+            background: #ffffff;
+            color: #0e0d0c;
+            box-shadow: 0 0 16px rgba(255, 255, 255, 0.6);
+        }
+
+
+        /* ========================================================
+           6 HERO TEXT STYLES FOR "SEASONAL OFFER"
+           ======================================================== */
+
+        /* Hero Style 1: Rhythmic Glowing Beacon Tag (Subtle breathing gold glow) */
+        .hero-opt-1 .hero-offer-tag {
+            animation: tagPulseGlow 2s infinite ease-in-out;
+        }
+        @keyframes tagPulseGlow {
+            0%, 100% {
+                background: rgba(179, 147, 106, 0.12);
+                border-color: var(--gold);
+                box-shadow: 0 0 4px rgba(179, 147, 106, 0.2);
+            }
+            50% {
+                background: rgba(179, 147, 106, 0.35);
+                border-color: #ffffff;
+                color: #ffffff;
+                box-shadow: 0 0 14px rgba(179, 147, 106, 0.7);
+            }
+        }
+
+        /* Hero Style 2: Blinking / Flashing Live Indicator ("SEASONAL RELEASE • LIVE") */
+        .hero-opt-2 .hero-offer-tag {
+            position: relative;
+            padding-left: 1.6rem;
+            background: rgba(179, 147, 106, 0.15);
+            border-color: var(--gold);
+        }
+        .hero-opt-2 .hero-offer-tag::before {
+            content: '';
+            position: absolute;
+            left: 0.65rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #e63946;
+            box-shadow: 0 0 8px #e63946;
+            animation: liveRadarBlink 1.4s infinite cubic-bezier(0.4, 0, 0.6, 1);
+        }
+        @keyframes liveRadarBlink {
+            0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+            50% { opacity: 0.2; transform: translateY(-50%) scale(0.7); }
+        }
+
+        /* Hero Style 3: Shimmering Gold Foil Banner (Metallic Sweeping Light) */
+        .hero-opt-3 .hero-offer-note {
+            background: linear-gradient(135deg, rgba(28, 25, 22, 0.85) 0%, rgba(18, 16, 14, 0.95) 100%);
+            border: 1px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-opt-3 .hero-offer-note::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 80%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), rgba(179, 147, 106, 0.3), transparent);
+            transform: skewX(-25deg);
+            animation: foilSweep 4s infinite ease-in-out;
+        }
+        @keyframes foilSweep {
+            0% { left: -150%; }
+            35%, 100% { left: 200%; }
+        }
+
+        /* Hero Style 4: Medieval Cut-Corner Pennant Banner Silhouette */
+        .hero-opt-4 .hero-offer-note {
+            clip-path: polygon(14px 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 14px 100%, 0% 50%);
+            background: rgba(18, 16, 14, 0.92);
+            border: 1px solid var(--gold);
+            padding: 0.85rem 2.4rem;
+        }
+        .hero-opt-4 .hero-offer-tag {
+            background: transparent;
+            border: none;
+            color: var(--gold);
+            font-size: 0.72rem;
+            letter-spacing: 0.25em;
+            padding: 0;
+            margin-right: 0.8rem;
+        }
+
+        /* Hero Style 5: Festive Wax Seal Crimson Badge */
+        .hero-opt-5 .hero-offer-tag {
+            background: linear-gradient(135deg, #8a1f1f 0%, #520f0f 100%);
+            color: #ffffff;
+            border: 1px solid var(--gold);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+            letter-spacing: 0.2em;
+            font-weight: 700;
+        }
+        .hero-opt-5 .hero-offer-link {
+            background: var(--gold);
+            color: #0e0d0c;
+            padding: 0.2rem 0.7rem;
+            border-radius: 2px;
+            font-weight: 700;
+            border: none;
+        }
+        .hero-opt-5 .hero-offer-link:hover {
+            background: #ffffff;
+            color: #000;
+        }
+
+        /* Hero Style 6: High-Contrast Gold Floating Card with Pulsing Arrow */
+        .hero-opt-6 .hero-offer-note {
+            background: rgba(14, 13, 12, 0.88);
+            border: 1px solid var(--gold);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.7), 0 0 15px rgba(179, 147, 106, 0.25);
+            padding: 0.95rem 1.6rem;
+        }
+        .hero-opt-6 .hero-offer-tag {
+            background: var(--gold);
+            color: #0e0d0c;
+            border: 1px solid var(--gold);
+            font-weight: 700;
+        }
+        .hero-opt-6 .hero-offer-link {
+            color: var(--gold);
+            animation: arrowHop 1.5s infinite ease-in-out;
+            font-weight: 600;
+        }
+        @keyframes arrowHop {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(6px); color: #ffffff; }
+        }
+    </style>
+</head>
+<body class="hdr-opt-1 hero-opt-1">
+
+    <!-- Top Tester Control Panel -->
+    <div class="tester-control-panel">
+        <div class="tester-controls-row">
+            <div class="tester-title">
+                <h1>Interactive Lab</h1>
+                <span style="color: var(--sandstone); font-size: 0.75rem;">| Test 6 Header Banner & 6 Hero Offer Alternatives</span>
+            </div>
+
+            <div class="tester-selectors">
+                <!-- Header Selector -->
+                <div class="tester-group">
+                    <span class="tester-label">Top Banner:</span>
+                    <button class="tester-btn active" onclick="setHeader(1)">1. Amber Breathe</button>
+                    <button class="tester-btn" onclick="setHeader(2)">2. Gold Shimmer</button>
+                    <button class="tester-btn" onclick="setHeader(3)">3. Pennant Ribbon</button>
+                    <button class="tester-btn" onclick="setHeader(4)">4. Crimson Seal</button>
+                    <button class="tester-btn" onclick="setHeader(5)">5. Beacon Line</button>
+                    <button class="tester-btn" onclick="setHeader(6)">6. Gold Button</button>
+                </div>
+
+                <!-- Hero Offer Selector -->
+                <div class="tester-group">
+                    <span class="tester-label">Hero Offer:</span>
+                    <button class="tester-btn active" onclick="setHero(1)">1. Pulse Glow</button>
+                    <button class="tester-btn" onclick="setHero(2)">2. Blinking Live</button>
+                    <button class="tester-btn" onclick="setHero(3)">3. Shimmer Foil</button>
+                    <button class="tester-btn" onclick="setHero(4)">4. Pennant Shape</button>
+                    <button class="tester-btn" onclick="setHero(5)">5. Crimson Seal</button>
+                    <button class="tester-btn" onclick="setHero(6)">6. Gold Card</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tester-info-drawer">
+            <span id="activeDescription">Currently showing: <strong>Header #1 (Amber Breathe Dot)</strong> + <strong>Hero #1 (Pulse Glow Tag)</strong></span>
+            <span><a href="/" style="color: var(--gold); text-decoration: none;">&larr; Back to Live Site</a></span>
+        </div>
+    </div>
+
+    <!-- Editorial Header Navigation -->
+    <header class="site-header scrolled">
+        <div class="nav-container">
+            <a href="/" class="logo">EPOCHURIAN</a>
+            <nav class="nav-links">
+                <a href="/#overview">Overview</a>
+                <a href="/#feasts">Feasts</a>
+                <a href="/#chef">The Chef</a>
+                <a href="/#gallery">Gallery</a>
+                <a href="/christmas/" class="nav-xmas">Christmas 2026</a>
+                <a href="/#contact" class="nav-cta">Contact</a>
+            </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+        <div class="mobile-nav-drawer" id="mobileNavDrawer">
+            <nav class="mobile-nav-links">
+                <a href="/#overview">Overview</a>
+                <a href="/#feasts">Feasts</a>
+                <a href="/#chef">The Chef</a>
+                <a href="/#gallery">Gallery</a>
+                <a href="/christmas/" class="nav-xmas">Christmas 2026</a>
+                <a href="/#contact" class="mobile-nav-cta">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section (Testing landing photo and seasonal offer) -->
+    <section class="hero" id="hero">
+        <div class="hero-bg" style="background-image: url('images/banquet-guests-laughing.webp');"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-brand-box">
+                <h1 class="hero-logo">EPOCHURIAN</h1>
+                <span class="tagline">Taste History</span>
+            </div>
+            <p class="hero-subtitle">Transport your dining table across centuries. Handcrafted historical feasts in your own home.</p>
+            <div class="hero-actions">
+                <a href="/#contact" class="btn btn-primary">Get in Touch</a>
+            </div>
+            <p class="hero-offer-note" id="heroOfferNote">
+                <span class="hero-offer-tag">Seasonal Offer</span>
+                Limited packages available for our handmade Norman Conquest Christmas feast delivered to your door. <a href="/christmas/" class="hero-offer-link">Discover the details &rarr;</a>
+            </p>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll to Explore</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Overview Preview Section to check bottom photo blend -->
+    <section id="overview" class="overview-v1-stage" style="border-top: 1px solid var(--border-color);">
+        <div class="overview-v1-grid">
+            <div class="overview-v1-left">
+                <span class="section-subtitle">What We Do</span>
+                <h2>Private Dining, Reimagined</h2>
+                <p class="overview-v1-intro">
+                    EPOCHURIAN provides deeply researched historical private dining in the comfort of your own home.
+                </p>
+                <div class="overview-v1-quote">
+                    <p>&ldquo;Not a costumed reenactment, but an elegant culinary journey through forgotten flavors.&rdquo;</p>
+                </div>
+                <p class="overview-v1-desc">
+                    Each course revives original recipes, authentic spices, and the convivial breadth of foods of the time.
+                </p>
+            </div>
+            <div class="overview-v1-diptych">
+                <div class="overview-v1-photo-main">
+                    <img src="images/historic-feast-inspiration.webp" alt="Historical Feast Details" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const headerDescs = {
+            1: "Header #1: Amber Breathe Dot (Organic pulsating gold orb)",
+            2: "Header #2: Gold Shimmer (Continuous metallic liquid sweep)",
+            3: "Header #3: Pennant Ribbon (Historical banner cut-corner badge)",
+            4: "Header #4: Crimson Seal (Festive burgundy wax-seal pill)",
+            5: "Header #5: Beacon Line (High-visibility pulsating gold baseline)",
+            6: "Header #6: Gold Button (Bold inverted high-contrast gold badge)"
+        };
+
+        const heroDescs = {
+            1: "Hero #1: Pulse Glow Tag (Breathing illuminated gold aura)",
+            2: "Hero #2: Blinking Live Tag (Red radar blip: active release)",
+            3: "Hero #3: Shimmer Foil Card (Sweeping light glare across banner)",
+            4: "Hero #4: Pennant Shape (Historical medieval swallowtail silhouette)",
+            5: "Hero #5: Crimson Seal (Festive royal crimson pill with gold button)",
+            6: "Hero #6: Gold Card & Hop Arrow (Bold border glow with bouncing directional arrow)"
+        };
+
+        let currentHdr = 1;
+        let currentHero = 1;
+
+        function updateInfo() {
+            document.getElementById('activeDescription').innerHTML = 
+                `Currently showing: <strong>${headerDescs[currentHdr]}</strong> + <strong>${heroDescs[currentHero]}</strong>`;
+        }
+
+        function setHeader(num) {
+            currentHdr = num;
+            document.body.className = document.body.className.replace(/hdr-opt-\d/g, '') + ` hdr-opt-${num}`;
+            const btns = document.querySelectorAll('.tester-group:nth-child(1) .tester-btn');
+            btns.forEach((b, i) => {
+                if (i + 1 === num) b.classList.add('active');
+                else b.classList.remove('active');
+            });
+            updateInfo();
+        }
+
+        function setHero(num) {
+            currentHero = num;
+            document.body.className = document.body.className.replace(/hero-opt-\d/g, '') + ` hero-opt-${num}`;
+            const btns = document.querySelectorAll('.tester-group:nth-child(2) .tester-btn');
+            btns.forEach((b, i) => {
+                if (i + 1 === num) b.classList.add('active');
+                else b.classList.remove('active');
+            });
+            updateInfo();
+        }
+    </script>
+</body>
+</html>
