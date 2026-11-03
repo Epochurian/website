@@ -462,17 +462,16 @@ a {
     justify-content: space-between;
     text-align: center;
     position: relative;
-    overflow-x: hidden;
+    overflow: hidden;
     padding: calc(var(--header-height, 4.8rem) + 1.5rem) 1.5rem 2rem;
     box-sizing: border-box;
 }
 
 .hero-bg {
     position: absolute;
-    inset: -5%;
-    bottom: -30%;
+    inset: 0;
     background-size: cover;
-    background-position: center top;
+    background-position: center;
     background-repeat: no-repeat;
     transform: scale(1);
     transition: transform 0.1s ease-out;
@@ -482,9 +481,8 @@ a {
 .hero-overlay {
     position: absolute;
     inset: 0;
-    bottom: -2px;
     background: radial-gradient(circle at center, rgba(14, 13, 12, 0.35) 0%, rgba(14, 13, 12, 0.88) 100%),
-                linear-gradient(to bottom, rgba(14, 13, 12, 0.1) 0%, rgba(14, 13, 12, 0.4) 50%, rgba(14, 13, 12, 0.85) 75%, var(--bg-primary) 98%, var(--bg-primary) 100%);
+                linear-gradient(to bottom, rgba(14, 13, 12, 0.1) 0%, rgba(14, 13, 12, 0.35) 50%, rgba(14, 13, 12, 0.8) 75%, var(--bg-primary) 96%, var(--bg-primary) 100%);
     z-index: 2;
 }
 
