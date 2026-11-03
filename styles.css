@@ -470,6 +470,7 @@ a {
 .hero-bg {
     position: absolute;
     inset: -5%;
+    bottom: -15%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -481,7 +482,8 @@ a {
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, rgba(14, 13, 12, 0.35) 0%, rgba(14, 13, 12, 0.88) 100%);
+    background: radial-gradient(circle at center, rgba(14, 13, 12, 0.35) 0%, rgba(14, 13, 12, 0.88) 100%),
+                linear-gradient(to bottom, rgba(14, 13, 12, 0.2) 0%, rgba(14, 13, 12, 0.6) 70%, var(--bg-primary) 100%);
     z-index: 2;
 }
 
@@ -1239,9 +1241,10 @@ footer p {
     }
 
     .hero {
-        height: 100vh;
-        height: 100dvh;
-        padding: 3rem 1.5rem 4rem;
+        min-height: 100vh;
+        min-height: 100dvh;
+        height: auto;
+        padding: calc(var(--header-height, 4.8rem) + 1rem) 1.5rem 3rem;
     }
 
     .hero-logo {
