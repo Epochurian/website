@@ -571,6 +571,18 @@ a {
     clip-path: polygon(10px 0%, calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, 10px 100%, 0% 50%);
     box-sizing: border-box;
     transition: all 0.3s ease;
+    animation: tagPulseGlow 2.4s infinite ease-in-out;
+}
+
+@keyframes tagPulseGlow {
+    0%, 100% {
+        background: var(--gold);
+        box-shadow: 0 0 4px rgba(179, 147, 106, 0.3);
+    }
+    50% {
+        background: #ffffff;
+        box-shadow: 0 0 16px rgba(179, 147, 106, 0.85);
+    }
 }
 
 .hero-offer-tag::before {
