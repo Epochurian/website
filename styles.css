@@ -294,6 +294,47 @@ a {
     background: var(--gold);
 }
 
+/* Seasonal Nav Link (Easter 2027 - Subtle Pastel Shimmer) */
+.nav-links a.nav-easter,
+.mobile-nav-links a.nav-easter {
+    background: linear-gradient(
+        90deg, 
+        var(--gold) 0%, 
+        var(--gold) 15%, 
+        #d8b4e2 32%, /* soft pastel lavender/lilac */
+        #fff9e6 50%, /* gentle warm spring light */
+        #a8d5ba 68%, /* soft spring sage */
+        #f7c5cc 82%, /* delicate pastel blush */
+        var(--gold) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    animation: easterPastelSlowDrift 9s linear infinite;
+    display: inline-block;
+}
+
+@keyframes easterPastelSlowDrift {
+    0% { background-position: 200% center; }
+    100% { background-position: -200% center; }
+}
+
+.nav-links a.nav-easter::before,
+.mobile-nav-links a.nav-easter::before {
+    display: none !important;
+}
+
+.nav-links a.nav-easter:hover,
+.mobile-nav-links a.nav-easter:hover {
+    filter: brightness(1.2);
+}
+
+.nav-links a.nav-easter::after {
+    background: var(--gold);
+}
+
 /* Specific styling for CTA button in nav */
 .nav-links a.nav-cta {
     padding: 0.55rem 1.4rem;

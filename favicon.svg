@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <style>
+    :root {
+      --gold: #be9e74;
+      --blade: #f8f5ee;
+      --fuller: #917855;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --gold: #201a14;
+        --blade: #302820;
+        --fuller: #af9b87;
+      }
+    }
+    .gold-element { fill: var(--gold); }
+    .blade-element { fill: var(--blade); }
+    .fuller-element { stroke: var(--fuller); }
+  </style>
+
+  <!-- TRIDENT (FORK) - Left (Full-bleed 0 to 100 vertical, 2 to 48 horizontal) -->
+  <g class="gold-element">
+    <!-- Center Tine Spear -->
+    <polygon points="25,0 33,15 30,44 20,44 17,15" />
+    <!-- Outer Tines -->
+    <polygon points="3,14 11,14 11,32 3,32" />
+    <polygon points="7,0 12,15 2,15" />
+    <polygon points="39,14 47,14 47,32 39,32" />
+    <polygon points="43,0 48,15 38,15" />
+    <!-- Base Basket -->
+    <polygon points="3,30 11,30 18,44 32,44 39,30 47,30 43,46 33,49 17,49 7,46" />
+    <!-- Sturdy Shaft -->
+    <rect x="20.5" y="42" width="9" height="51" rx="3" />
+    <!-- Butt Pommel -->
+    <circle cx="25" cy="93.5" r="6.5" />
+  </g>
+
+  <!-- MEDIEVAL SWORD (KNIFE) - Right (Full-bleed 0 to 100 vertical, 52 to 98 horizontal) -->
+  <g>
+    <!-- Double-edged Blade -->
+    <polygon class="blade-element" points="75,0 84,16 82,72 68,72 66,16" />
+    <!-- Fuller Line -->
+    <line class="fuller-element" x1="75" y1="14" x2="75" y2="66" stroke-width="2.5" stroke-linecap="round" />
+    <!-- Crossguard Quillons -->
+    <polygon class="gold-element" points="52,75.5 52,71.5 75,70 98,71.5 98,75.5 75,73.5" />
+    <!-- Grip -->
+    <rect class="gold-element" x="71" y="73" width="8" height="15" rx="2" />
+    <!-- Wheel Pommel -->
+    <circle class="gold-element" cx="75" cy="92.5" r="7.5" />
+  </g>
+</svg>

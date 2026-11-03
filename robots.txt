@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Disallow testing lab and staging templates
+Disallow: /test-lab.html
+Disallow: /last-supper.html
+Disallow: /last-supper/
+
+Sitemap: https://epochurian.com/sitemap.xml
