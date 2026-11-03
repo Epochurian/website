@@ -407,13 +407,17 @@ a {
 
 /* Hero Section */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     text-align: center;
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
+    padding: calc(var(--header-height, 4.8rem) + 1.5rem) 1.5rem 2rem;
+    box-sizing: border-box;
 }
 
 .hero-bg {
@@ -438,6 +442,8 @@ a {
     position: relative;
     z-index: 3;
     max-width: 900px;
+    width: 100%;
+    margin: auto 0;
 }
 
 .hero-brand-box {
@@ -525,16 +531,21 @@ a {
 }
 
 .scroll-indicator {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
     z-index: 3;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.8rem;
     opacity: 0.7;
+    margin-top: 1.5rem;
+    flex-shrink: 0;
+}
+
+@media (max-height: 640px) {
+    .scroll-indicator {
+        display: none !important;
+    }
 }
 
 .scroll-indicator span {
@@ -1223,7 +1234,9 @@ footer p {
     }
 
     .hero {
-        padding: 3rem 1.2rem 4rem;
+        padding: calc(var(--header-height, 3.8rem) + 1rem) 1.2rem 2rem;
+        min-height: 100vh;
+        min-height: 100dvh;
     }
 
     .hero-logo {
@@ -3274,9 +3287,9 @@ footer p {
     /* Overview Act 1 (What We Do): Widescreen Single Viewport with larger photo and tighter hero gap */
     .overview-v1-stage {
         padding: 4.8rem 3.5rem 2rem;
-        height: 100vh;
-        height: 100dvh;
-        max-height: 100vh;
+        min-height: 100vh;
+        min-height: 100dvh;
+        height: auto;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -3293,6 +3306,7 @@ footer p {
     .overview-v1-diptych {
         height: 72vh;
         max-height: 640px;
+        min-height: 380px;
         width: 100%;
     }
 
@@ -3305,9 +3319,9 @@ footer p {
     /* Overview Act 2 (How It Works): Widescreen Single Viewport with wider cards & narrow padding */
     .overview-v2-process {
         padding: calc(var(--header-height, 4.8rem) + 1.5rem) 2.5rem 2rem;
-        height: 100vh;
-        height: 100dvh;
-        max-height: 100vh;
+        min-height: 100vh;
+        min-height: 100dvh;
+        height: auto;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -3356,17 +3370,17 @@ footer p {
 
 /* Tablet & Mobile Layouts for Overview and Experience */
 @media (max-width: 1024px) {
-    /* What We Do: strict single viewport fit, photo below text */
+    /* What We Do: natural single viewport fit, photo below text */
     .overview-v1-stage {
-        height: 100vh;
-        height: 100dvh;
+        height: auto;
         min-height: 100vh;
+        min-height: 100dvh;
         padding: calc(var(--header-height, 3.8rem) + 0.5rem) 1.5rem 1rem;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         box-sizing: border-box;
-        overflow: hidden;
+        overflow-x: hidden;
     }
 
     .overview-v1-grid {
@@ -3624,15 +3638,16 @@ behold-widget {
 
 /* Christmas Landing Viewport Single Screen Fit */
 .xmas-landing-viewport {
-    height: 100vh;
-    height: 100dvh;
+    height: auto;
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 4.8rem 1.5rem 1rem;
+    padding: calc(var(--header-height, 4.8rem) + 1rem) 1.5rem 1rem;
     box-sizing: border-box;
-    overflow: hidden;
+    overflow-x: hidden;
+    position: relative;
 }
 
 .xmas-landing-viewport .xmas-hero-content {
