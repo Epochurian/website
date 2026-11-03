@@ -470,9 +470,9 @@ a {
 .hero-bg {
     position: absolute;
     inset: -5%;
-    bottom: -15%;
+    bottom: -30%;
     background-size: cover;
-    background-position: center;
+    background-position: center top;
     background-repeat: no-repeat;
     transform: scale(1);
     transition: transform 0.1s ease-out;
@@ -482,8 +482,9 @@ a {
 .hero-overlay {
     position: absolute;
     inset: 0;
+    bottom: -2px;
     background: radial-gradient(circle at center, rgba(14, 13, 12, 0.35) 0%, rgba(14, 13, 12, 0.88) 100%),
-                linear-gradient(to bottom, rgba(14, 13, 12, 0.2) 0%, rgba(14, 13, 12, 0.6) 70%, var(--bg-primary) 100%);
+                linear-gradient(to bottom, rgba(14, 13, 12, 0.1) 0%, rgba(14, 13, 12, 0.4) 50%, rgba(14, 13, 12, 0.85) 75%, var(--bg-primary) 98%, var(--bg-primary) 100%);
     z-index: 2;
 }
 
@@ -533,46 +534,67 @@ a {
     color: var(--sandstone-light);
     font-style: italic;
     letter-spacing: 0.02em;
-    background: rgba(20, 18, 16, 0.65);
-    border: 1px solid rgba(179, 147, 106, 0.35);
+    background: rgba(20, 18, 16, 0.75);
+    border: 1px solid rgba(179, 147, 106, 0.4);
     border-radius: 4px;
-    padding: 0.75rem 1.4rem;
-    max-width: 640px;
+    padding: 1.1rem 1.6rem;
+    max-width: 620px;
     margin-left: auto;
     margin-right: auto;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.55);
     line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
+    text-align: center;
+}
+
+.hero-offer-text {
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--sandstone-light);
 }
 
 .hero-offer-tag {
+    position: relative;
     display: inline-block;
     font-family: var(--font-sans);
     font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
+    font-weight: 700;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
     font-style: normal;
     color: var(--gold);
-    border: 1px solid var(--gold);
-    background: rgba(179, 147, 106, 0.12);
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    margin-right: 0.65rem;
-    vertical-align: middle;
+    padding: 0.35rem 1.3rem;
+    background: var(--gold);
+    clip-path: polygon(10px 0%, calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, 10px 100%, 0% 50%);
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.hero-offer-tag::before {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    background: #141210;
+    clip-path: polygon(10px 0%, calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, 10px 100%, 0% 50%);
+    z-index: -1;
+    transition: background 0.3s ease;
 }
 
 .hero-offer-link {
     color: var(--gold);
     border-bottom: 1px solid var(--gold);
-    padding-bottom: 2px;
+    padding-bottom: 3px;
     font-style: normal;
     font-family: var(--font-sans);
-    font-size: 0.8rem;
-    letter-spacing: 0.14em;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    margin-left: 0.5rem;
     transition: var(--transition-mid);
     display: inline-block;
     white-space: nowrap;
@@ -1108,11 +1130,11 @@ a {
 
 .contact-seasonal-card {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 0.8rem 1.2rem;
-    padding: 0.85rem 1.6rem;
+    gap: 0.75rem;
+    padding: 1.1rem 1.6rem;
     background: rgba(20, 18, 16, 0.7);
     border: 1px solid rgba(179, 147, 106, 0.35);
     border-radius: 4px;
@@ -1763,12 +1785,12 @@ footer p {
 
 /* Subtle, Understated Scarcity Bar in Historical Banner Silhouette */
 .xmas-scarcity-bar {
+    position: relative;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
     gap: 0.6rem;
-    background: rgba(20, 18, 16, 0.88);
-    border: 1px solid var(--border-color);
+    background: var(--border-color);
     padding: 0.85rem 2.4rem;
     clip-path: polygon(14px 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 14px 100%, 0% 50%);
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.65);
@@ -1776,6 +1798,16 @@ footer p {
     width: 100%;
     margin-top: 0.5rem;
     backdrop-filter: blur(10px);
+    box-sizing: border-box;
+}
+
+.xmas-scarcity-bar::before {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    background: rgba(20, 18, 16, 0.92);
+    clip-path: polygon(14px 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 14px 100%, 0% 50%);
+    z-index: -1;
 }
 
 .scarcity-status {
@@ -2121,6 +2153,10 @@ footer p {
 
     .xmas-scarcity-bar {
         padding: 0.75rem 1.8rem;
+        clip-path: polygon(10px 0%, calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, 10px 100%, 0% 50%);
+    }
+
+    .xmas-scarcity-bar::before {
         clip-path: polygon(10px 0%, calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, 10px 100%, 0% 50%);
     }
 
@@ -3226,23 +3262,36 @@ footer p {
     left: 1rem;
     font-family: var(--font-sans);
     font-size: 0.65rem;
+    font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--gold);
-    background: rgba(14, 13, 12, 0.92);
     padding: 0.38rem 1.4rem 0.38rem 1.1rem;
-    border: 1px solid var(--border-color);
-    border-right: none;
+    background: var(--border-color);
     clip-path: polygon(0% 0%, calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, 0% 100%);
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(8px);
     transition: transform 0.3s ease, background 0.3s ease;
+    box-sizing: border-box;
+}
+
+.overview-v2-card-img-badge::before {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    background: rgba(14, 13, 12, 0.94);
+    clip-path: polygon(0% 0%, calc(100% - 10px) 0%, 100% 50%, calc(100% - 10px) 100%, 0% 100%);
+    z-index: -1;
+    transition: background 0.3s ease;
 }
 
 .overview-v2-card:hover .overview-v2-card-img-badge {
-    background: rgba(22, 19, 16, 0.96);
-    border-color: var(--gold);
+    background: var(--gold);
     transform: translateX(3px);
+}
+
+.overview-v2-card:hover .overview-v2-card-img-badge::before {
+    background: rgba(22, 19, 16, 0.96);
 }
 
 .overview-v2-card-body {

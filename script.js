@@ -121,12 +121,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // C. Hero Parallax & Ken Burns Zoom
+        // C. Hero Subtle Scale
         if (heroBg && scrollY <= windowHeight) {
             const progress = scrollY / windowHeight;
-            const scale = 1 + progress * 0.12;
-            const translateY = progress * 40;
-            heroBg.style.transform = `scale(${scale}) translateY(${translateY}px)`;
+            const scale = 1 + progress * 0.08;
+            heroBg.style.transform = `scale(${scale})`;
         }
 
         // D. Sticky Scrollytelling Section Engine (Feasts on Desktop & Tablet)
