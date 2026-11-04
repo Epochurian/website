@@ -64,10 +64,15 @@
 html {
     scroll-behavior: smooth;
     scroll-snap-type: y proximity;
+    scroll-padding-top: 0;
 }
 
 /* Soft Scroll Snap Alignments on Viewports */
-.hero,
+.hero {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+}
+
 .overview-v1-stage,
 .overview-v2-process,
 .chef-scrolly-section,
@@ -552,14 +557,30 @@ a {
     text-shadow: 0 2px 10px rgba(0,0,0,0.6);
 }
 
+/* ========================================================
+   READABLE MEASURE & TYPOGRAPHY SYSTEM (Gold Standard)
+   - Mobile: 35-45 characters per line
+   - Tablet: 55-65 characters per line
+   - Desktop: 60-75 characters per line
+   ======================================================== */
+.measure-reading {
+    max-width: 68ch;
+}
+
+/* Base Body & Paragraph Bounds across Desktop */
 .hero-subtitle {
     font-family: var(--font-body);
-    font-size: 1.25rem;
+    font-size: clamp(1.1rem, 1.8vw, 1.3rem);
     color: var(--sandstone-light);
     margin-bottom: 2.5rem;
-    max-width: 650px;
+    max-width: 68ch;
     margin-left: auto;
     margin-right: auto;
+    line-height: 1.6;
+}
+
+.hero-subtitle-line {
+    display: block;
 }
 
 .hero-offer-note {
@@ -805,6 +826,7 @@ a {
 .chapter-text p {
     font-size: 1.15rem;
     color: var(--text-muted);
+    max-width: 68ch;
 }
 
 .venue-note {
@@ -1042,6 +1064,7 @@ a {
     color: var(--text-muted);
     line-height: 1.85;
     margin-bottom: 1rem;
+    max-width: 68ch;
 }
 
 .chef-para-block p:last-child {
@@ -1321,6 +1344,17 @@ footer p {
         letter-spacing: 0.18em;
     }
 
+    /* Target 55-65 characters per line on tablets */
+    .hero-subtitle {
+        max-width: 60ch;
+        font-size: 1.15rem;
+    }
+
+    .chapter-text p,
+    .chef-para-block p {
+        max-width: 60ch;
+    }
+
     /* Force feast titles onto a single line on tablets and mobiles */
     .scrolly-card h2 {
         white-space: nowrap !important;
@@ -1404,7 +1438,7 @@ footer p {
     }
 
     .hero {
-        padding: calc(var(--header-height, 3.8rem) + 1rem) 1.2rem 2rem;
+        padding: calc(var(--header-height, 3.8rem) + 1.2rem) 1.2rem 2rem;
         min-height: 100vh;
         min-height: 100dvh;
     }
@@ -1421,10 +1455,33 @@ footer p {
     }
 
     .hero-subtitle {
-        font-size: 0.98rem;
+        font-size: 1.05rem;
         margin-bottom: 2rem;
         padding: 0 0.5rem;
         line-height: 1.6;
+        max-width: 40ch;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Target 35-45 characters per line on mobile */
+    .overview-v1-grid {
+        max-width: 42ch !important;
+    }
+
+    .overview-v1-intro,
+    .overview-v1-quote,
+    .overview-v1-desc {
+        max-width: 42ch !important;
+        font-size: 1.02rem !important;
+        line-height: 1.65 !important;
+    }
+
+    .chapter-text p,
+    .chef-para-block p {
+        max-width: 42ch !important;
+        font-size: 1rem !important;
+        line-height: 1.7 !important;
     }
 
 
@@ -3057,10 +3114,11 @@ footer p {
 }
 
 .overview-v1-intro {
-    font-size: 1.15rem;
+    font-size: 1.18rem;
     line-height: 1.7;
     color: var(--sandstone-light);
     margin-bottom: 1.25rem;
+    max-width: 65ch;
 }
 
 .overview-v1-quote {
@@ -3068,6 +3126,7 @@ footer p {
     background: rgba(24, 22, 20, 0.7);
     border-left: 2px solid var(--gold);
     margin-bottom: 1.5rem;
+    max-width: 65ch;
 }
 
 .overview-v1-quote p {
@@ -3079,10 +3138,11 @@ footer p {
 }
 
 .overview-v1-desc {
-    font-size: 1.05rem;
+    font-size: 1.08rem;
     line-height: 1.8;
     color: var(--text-muted);
     margin-bottom: 0;
+    max-width: 65ch;
 }
 
 .overview-v1-steps-row {
@@ -3567,15 +3627,12 @@ footer p {
 
 /* Tablet & Mobile Layouts for Overview and Experience */
 @media (max-width: 1024px) {
-    /* What We Do: natural single viewport fit, photo below text */
+    /* What We Do: natural fluid flow, full-length photo, no truncated ellipsis */
     .overview-v1-stage {
         height: auto;
-        min-height: 100vh;
-        min-height: 100dvh;
-        padding: calc(var(--header-height, 3.8rem) + 0.5rem) 1.5rem 1rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
+        min-height: auto;
+        padding: calc(var(--header-height, 3.8rem) + 1.8rem) 1.5rem 3rem;
+        display: block;
         box-sizing: border-box;
         overflow-x: hidden;
     }
@@ -3584,9 +3641,11 @@ footer p {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        gap: 0.6rem;
-        height: 100%;
-        max-height: 100%;
+        gap: 2rem;
+        height: auto;
+        max-height: none;
+        max-width: 60ch;
+        margin: 0 auto;
     }
 
     .overview-v1-left {
@@ -3597,56 +3656,73 @@ footer p {
     }
 
     .overview-v1-left .section-subtitle {
-        font-size: 1.1rem;
-        margin-bottom: 0.25rem;
+        font-size: 1.15rem;
+        margin-bottom: 0.35rem;
     }
 
     .overview-v1-left h2 {
-        font-size: clamp(1.6rem, 5vw, 2.2rem);
-        margin-bottom: 0.5rem;
+        font-size: clamp(2rem, 5vw, 2.6rem);
+        margin-bottom: 0.85rem;
         line-height: 1.15;
     }
 
     .overview-v1-intro {
-        font-size: clamp(0.85rem, 1.8vw, 1rem);
-        line-height: 1.45;
-        margin-bottom: 0.4rem;
+        font-size: clamp(1.05rem, 2.2vw, 1.15rem);
+        line-height: 1.6;
+        margin-bottom: 1rem;
+        max-width: 58ch;
     }
 
     .overview-v1-quote {
-        padding: 0.45rem 0.8rem;
-        margin-bottom: 0.4rem;
+        padding: 0.85rem 1.1rem;
+        margin-bottom: 1rem;
+        max-width: 58ch;
     }
 
     .overview-v1-quote p {
-        font-size: clamp(0.78rem, 1.6vw, 0.9rem);
-        line-height: 1.35;
+        font-size: clamp(0.95rem, 2vw, 1.02rem);
+        line-height: 1.5;
     }
 
     .overview-v1-desc {
-        font-size: clamp(0.8rem, 1.6vw, 0.92rem);
-        line-height: 1.45;
-        margin-bottom: 0.4rem;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
+        font-size: clamp(1rem, 2.1vw, 1.08rem);
+        line-height: 1.7;
+        margin-bottom: 0.5rem;
+        display: block;
+        -webkit-line-clamp: unset;
+        -webkit-box-orient: unset;
+        overflow: visible;
+        max-width: 58ch;
     }
 
     .overview-v1-diptych {
-        flex: 1 1 auto;
+        flex: 0 0 auto;
         height: auto;
-        min-height: 180px;
+        min-height: 0;
         max-height: none;
         width: 100%;
         position: relative;
+        margin-top: 0.5rem;
     }
 
     .overview-v1-photo-main {
-        position: absolute;
-        inset: 0;
+        position: relative;
+        inset: auto;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 2;
+        border-radius: 4px;
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.65);
+    }
+
+    .overview-v1-photo-main img {
         width: 100%;
         height: 100%;
+        object-fit: cover;
+        display: block;
+    }
     }
 
     /* How It Works: Skip any stacked 1-col layout, go directly to horizontal carousel */
