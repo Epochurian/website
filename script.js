@@ -159,12 +159,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // E. Chef Split Section Pinned Photo Transition (Desktop / Tablet calculation)
+        // E. Chef Split Section Pinned Photo Transition (Widescreen 2-column calculation)
         const chefParaBlocks = document.querySelectorAll('.chef-para-block');
         const chefPhotos = document.querySelectorAll('.chef-photo');
         const chefCaptionEl = document.getElementById('chefPhotoCaption');
 
-        if (window.innerWidth > 768 && chefParaBlocks.length > 0 && chefPhotos.length > 0) {
+        if (window.innerWidth > 1024 && chefParaBlocks.length > 0 && chefPhotos.length > 0) {
             let activePhotoIndex = 0;
             let activeCaption = '';
             chefParaBlocks.forEach(block => {
@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     scrollZoomContainers.forEach(container => zoomObserver.observe(container));
 
-    // 6. Mobile Chef Section Scrollytelling via IntersectionObserver
+    // 6. Mobile & Tablet Chef Section Scrollytelling via IntersectionObserver
     // Triggered on data-photo chapter blocks with zero window.onscroll overhead
     const mobileChefPhotos = document.querySelectorAll('.chef-photo');
     const mobileChefBlocks = document.querySelectorAll('.chef-para-block');
@@ -283,8 +283,8 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const chefObserver = new IntersectionObserver((entries) => {
-            // Only apply on mobile viewport where the sticky header pattern is active
-            if (window.innerWidth > 768) return;
+            // Only apply on viewports <= 1024px where the sticky top media pattern is active
+            if (window.innerWidth > 1024) return;
 
             entries.forEach(entry => {
                 if (entry.isIntersecting) {

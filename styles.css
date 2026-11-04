@@ -1367,30 +1367,145 @@ footer p {
         display: none !important;
     }
 
-    /* Chef scrolly section stacks vertically on smaller screens */
-    .chef-scrolly-inner {
-        grid-template-columns: 1fr;
-        padding: 0 2rem;
-    }
-
-    .chef-scrolly-left {
-        padding: 5rem 0 3rem 0;
-    }
-
-    .chef-scrolly-heading {
+    /* Chef scrolly section on mid-width / tablets: Sticky photo on top, matching mobile pattern */
+    .chef-scrolly-section {
         position: relative;
-        top: 0;
-        padding-bottom: 1.5rem;
-        -webkit-mask-image: none;
-        mask-image: none;
+        min-height: auto;
+        background: var(--bg-secondary);
+        scroll-snap-align: start;
+        scroll-snap-stop: normal;
+        padding-top: 0;
+        scroll-margin-top: var(--header-height, 4.8rem);
+        overflow: clip; /* Clean boundary separation between Chef and Visual Chronicles Gallery */
+    }
+
+    .chef-scrolly-inner {
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 0 !important;
+        position: relative;
+        max-width: 100% !important;
     }
 
     .chef-scrolly-right {
+        order: 1;
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        top: var(--header-height, 4.8rem) !important;
+        width: 100% !important;
+        height: 42dvh !important;
+        max-height: 440px !important;
+        z-index: 20 !important;
+        overflow: hidden !important;
+        margin-bottom: 0 !important;
+        background: var(--bg-primary);
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8);
+    }
+
+    .chef-photo-stack {
         position: relative;
-        top: 0;
-        height: 60vh;
-        max-height: 520px;
-        margin-bottom: 5rem;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .chef-photo {
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center top !important;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out !important;
+        will-change: opacity;
+    }
+
+    .chef-photo.is-active,
+    .chef-photo.active {
+        opacity: 1 !important;
+    }
+
+    .chef-photo-caption-bar {
+        position: absolute;
+        top: 1rem;
+        right: 1.5rem;
+        left: auto;
+        bottom: auto;
+        z-index: 25;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 3px;
+        padding: 0.4rem 0.85rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+        pointer-events: none;
+    }
+
+    .chef-photo-caption {
+        font-family: var(--font-body);
+        font-size: 0.85rem;
+        font-style: italic;
+        color: var(--sandstone-light);
+        margin: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .chef-scrolly-left {
+        order: 2;
+        padding: 3rem 2rem 6rem 2rem !important;
+        position: relative;
+        z-index: 5 !important;
+        background: var(--bg-secondary);
+        max-width: 60ch !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .chef-scrolly-heading {
+        position: relative !important;
+        top: 0 !important;
+        padding-top: 1.8rem !important; /* Persistent comfortable breathing gap between photo bottom and text */
+        padding-bottom: 1.5rem !important;
+        margin-bottom: 0 !important;
+        background: transparent !important;
+        -webkit-mask-image: none !important;
+        mask-image: none !important;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .chef-scrolly-heading .section-subtitle {
+        font-size: 1.15rem;
+        margin-bottom: 0.35rem;
+        display: block;
+    }
+
+    .chef-scrolly-heading h2 {
+        font-size: clamp(2rem, 5vw, 2.6rem);
+        line-height: 1.2;
+        margin: 0;
+    }
+
+    .chef-scrolly-text {
+        padding-top: 2rem;
+    }
+
+    .chef-para-block {
+        padding-bottom: 2rem;
+    }
+
+    .chef-para-block .lead {
+        font-size: 1.18rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    .chef-para-block p {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        margin-bottom: 1rem;
     }
 }
 
@@ -1647,7 +1762,7 @@ footer p {
         margin-bottom: 0.65rem;
     }
 
-    /* Mobile Chef Section: Sticky Media Frame + Text scrolls beneath/behind photo */
+    /* Mobile & Mid-Width Chef Section: Sticky Media Frame on Top + Text scrolls beneath/behind photo */
     .chef-scrolly-section {
         position: relative;
         min-height: auto;
@@ -1656,6 +1771,7 @@ footer p {
         scroll-snap-stop: normal;
         padding-top: 0;
         scroll-margin-top: 3.8rem;
+        overflow: clip; /* Ensures sticky elements stay strictly contained within section bounds and do not bleed into Visual Chronicles */
     }
 
     .chef-scrolly-inner {
@@ -1663,9 +1779,10 @@ footer p {
         flex-direction: column !important;
         padding: 0 !important;
         position: relative;
+        max-width: 100% !important;
     }
 
-    /* Pinned Sticky Media Frame at the bottom of the mobile header banner (3.8rem) */
+    /* Pinned Sticky Media Frame at the bottom of the mobile/tablet header banner (3.8rem) */
     .chef-scrolly-right {
         order: 1;
         position: -webkit-sticky !important;
@@ -1736,15 +1853,21 @@ footer p {
     /* Left Column: Natural Vertical Scroll runway sliding IN BEHIND the sticky photo (lower z-index) */
     .chef-scrolly-left {
         order: 2;
-        padding: 2rem 1.4rem 4rem 1.4rem !important;
+        padding: 2.5rem 1.5rem 5rem 1.5rem !important;
         position: relative;
         z-index: 5 !important;
         background: var(--bg-secondary);
+        max-width: 68ch !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     .chef-scrolly-heading {
         position: relative !important;
         top: 0 !important;
+        padding-top: 1.5rem !important; /* Persistent comfortable breathing gap between photo bottom and text */
         padding-bottom: 1.25rem !important;
         margin-bottom: 0 !important;
         background: transparent !important;
@@ -1773,15 +1896,15 @@ footer p {
     }
 
     .chef-scrolly-text {
-        padding-top: 1.5rem;
+        padding-top: 1.8rem;
     }
 
     .chef-para-block {
-        padding-bottom: 1.5rem;
+        padding-bottom: 1.8rem;
     }
 
     .chef-para-block:last-child {
-        padding-bottom: 1rem;
+        padding-bottom: 1.5rem;
     }
 
     .chef-para-block .lead {
@@ -1795,7 +1918,7 @@ footer p {
 
     .chef-para-block p {
         font-family: var(--font-body);
-        font-size: 0.92rem;
+        font-size: 0.95rem;
         line-height: 1.8;
         color: var(--text-muted);
         margin-bottom: 1rem;
@@ -3781,14 +3904,14 @@ footer p {
     }
 }
 
-/* ========================================================
-   GALLERY SECTION STYLES (Instagram @epochurian Showcase)
-   ======================================================== */
+/* Gallery Section Styles (Instagram @epochurian Showcase) */
 .gallery-section {
     padding: 5rem 0 3.5rem;
     background: var(--bg-secondary);
     border-top: 1px solid var(--border-color);
     position: relative;
+    z-index: 25;
+    box-shadow: 0 -15px 40px rgba(10, 9, 8, 0.95);
 }
 
 .gallery-handle-intro {
