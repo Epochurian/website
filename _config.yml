@@ -1,0 +1,5 @@
+exclude:
+  - originals
+  - staging-labs
+  - plans
+  - "*.xcf"
