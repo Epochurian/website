@@ -5,12 +5,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Mobile Menu Drawer Toggle
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mobileNavDrawer = document.getElementById('mobileNavDrawer');
+    const mobileMenuLabel = document.getElementById('mobileMenuLabel');
 
     const toggleMobileMenu = (open) => {
+        if (!mobileMenuBtn || !mobileNavDrawer) return;
         const isOpen = open !== undefined ? open : !mobileMenuBtn.classList.contains('is-active');
         mobileMenuBtn.classList.toggle('is-active', isOpen);
         mobileNavDrawer.classList.toggle('is-open', isOpen);
         mobileMenuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        if (mobileMenuLabel) {
+            mobileMenuLabel.textContent = isOpen ? 'CLOSE' : 'MENU';
+        }
         document.body.style.overflow = isOpen ? 'hidden' : '';
     };
 
