@@ -4104,3 +4104,245 @@ behold-widget {
         max-height: 650px;
     }
 }
+
+
+/* ========================================================
+   DEV LAB: POINTY HEXAGONAL SINGLE-LINE SEASONAL TAG
+   ======================================================== */
+.hero-offer-singleline-tag {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.9rem;
+    padding: 0.65rem 2.4rem;
+    background: var(--gold);
+    clip-path: polygon(14px 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 14px 100%, 0% 50%);
+    box-sizing: border-box;
+    transition: all 0.35s ease;
+    animation: tagPulseGlow 2.4s infinite ease-in-out;
+    text-decoration: none;
+    margin-top: 2rem;
+    max-width: 90vw;
+}
+
+.hero-offer-singleline-tag::before {
+    content: '';
+    position: absolute;
+    inset: 1.5px;
+    background: #141210;
+    clip-path: polygon(14px 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 14px 100%, 0% 50%);
+    z-index: 1;
+    transition: background 0.3s ease;
+}
+
+.hero-offer-singleline-tag:hover::before {
+    background: #1c1916;
+}
+
+.hero-offer-singleline-tag > * {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-offer-singleline-badge {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    white-space: nowrap;
+}
+
+.hero-offer-singleline-sep {
+    color: rgba(179, 147, 106, 0.5);
+    font-size: 0.8rem;
+}
+
+.hero-offer-singleline-text {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--sandstone-light);
+    white-space: nowrap;
+}
+
+.hero-offer-singleline-arrow {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #ffffff;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 1px;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .hero-offer-singleline-tag {
+        padding: 0.6rem 1.8rem;
+        flex-direction: column;
+        gap: 0.35rem;
+        text-align: center;
+        border-radius: 4px;
+        clip-path: none;
+        border: 1px solid var(--gold);
+    }
+    .hero-offer-singleline-tag::before {
+        display: none;
+    }
+    .hero-offer-singleline-sep {
+        display: none;
+    }
+    .hero-offer-singleline-text {
+        white-space: normal;
+        font-size: 0.88rem;
+    }
+}
+
+
+/* ========================================================
+   SINGLE-LINE POINTY HEXAGONAL SEASONAL TAG (SHIMMER)
+   ======================================================== */
+.hero-offer-singleline-tag {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.9rem;
+    padding: 0.65rem 2.4rem;
+    background: var(--gold);
+    clip-path: polygon(14px 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 14px 100%, 0% 50%);
+    box-sizing: border-box;
+    transition: all 0.35s ease;
+    animation: tagPulseGlow 2.4s infinite ease-in-out;
+    text-decoration: none;
+    margin-top: 2rem;
+    max-width: 90vw;
+}
+
+.hero-offer-singleline-tag::before {
+    content: '';
+    position: absolute;
+    inset: 1.5px;
+    background: #141210;
+    clip-path: polygon(14px 0%, calc(100% - 14px) 0%, 100% 50%, calc(100% - 14px) 100%, 14px 100%, 0% 50%);
+    z-index: 1;
+    transition: background 0.3s ease;
+}
+
+.hero-offer-singleline-tag:hover::before {
+    background: #1c1916;
+}
+
+.hero-offer-singleline-tag > * {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-offer-singleline-badge {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    white-space: nowrap;
+}
+
+.hero-offer-singleline-sep {
+    color: rgba(179, 147, 106, 0.5);
+    font-size: 0.8rem;
+}
+
+.hero-offer-singleline-text {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--sandstone-light);
+    white-space: nowrap;
+}
+
+.hero-offer-singleline-arrow {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #ffffff;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 1px;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .hero-offer-singleline-tag {
+        padding: 0.6rem 1.8rem;
+        flex-direction: column;
+        gap: 0.35rem;
+        text-align: center;
+        border-radius: 4px;
+        clip-path: none;
+        border: 1px solid var(--gold);
+    }
+    .hero-offer-singleline-tag::before {
+        display: none;
+    }
+    .hero-offer-singleline-sep {
+        display: none;
+    }
+    .hero-offer-singleline-text {
+        white-space: normal;
+        font-size: 0.88rem;
+    }
+}
+
+/* ========================================================
+   CHEF HIGHLIGHT: CENTERED EDITORIAL ASTERISM (OPTION 4)
+   ======================================================== */
+.hl-v4 {
+    margin-top: 1.8rem !important;
+    margin-bottom: 0 !important;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(179, 147, 106, 0.2);
+    text-align: center;
+    font-family: var(--font-body);
+}
+
+.hl-v4-ornament {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--gold);
+    letter-spacing: 0.4em;
+    margin-bottom: 0.45rem;
+    opacity: 0.85;
+}
+
+.hl-v4-dish {
+    font-size: 1.15rem;
+    font-style: italic;
+    color: #ffffff;
+    letter-spacing: 0.03em;
+    line-height: 1.4;
+}
+
+.hl-v4-sub {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 0.35rem;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .hl-v4 {
+        margin-top: 1rem !important;
+        padding-top: 0.85rem !important;
+    }
+    .hl-v4-dish {
+        font-size: 1.05rem;
+    }
+}
