@@ -202,6 +202,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // Helper: Update Active Stage for Pinned Photos & Floating Cards
+    const feastsScrollIndicator = document.getElementById('feastsScrollIndicator');
+
     function updateScrollyStage(stageIndex) {
         scrollyBgs.forEach((bg, index) => {
             if (index === stageIndex) {
@@ -218,6 +220,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 card.classList.remove('active');
             }
         });
+
+        if (feastsScrollIndicator) {
+            // Fade out the indicator on the last feast card (Norman Conquest)
+            if (stageIndex >= totalScrollyStages - 1) {
+                feastsScrollIndicator.style.opacity = '0';
+            } else {
+                feastsScrollIndicator.style.opacity = '0.75';
+            }
+        }
     }
 
     window.addEventListener('scroll', () => {
@@ -307,5 +318,57 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         mobileChefBlocks.forEach(block => chefObserver.observe(block));
+    }
+
+    // 7. Mobile Feasts Carousel Arrow Navigation & Edge State
+    const feastsMobileCarousel = document.getElementById('feastsMobileCarousel');
+    const feastArrowPrev = document.getElementById('feastArrowPrev');
+    const feastArrowNext = document.getElementById('feastArrowNext');
+
+    if (feastsMobileCarousel && (feastArrowPrev || feastArrowNext)) {
+        const updateFeastArrows = () => {
+            const scrollLeft = feastsMobileCarousel.scrollLeft;
+            const maxScroll = feastsMobileCarousel.scrollWidth - feastsMobileCarousel.clientWidth;
+            if (feastArrowPrev) {
+                feastArrowPrev.classList.toggle('is-disabled', scrollLeft <= 15);
+            }
+            if (feastArrowNext) {
+                feastArrowNext.classList.toggle('is-disabled', scrollLeft >= maxScroll - 15);
+            }
+        };
+
+        if (feastArrowPrev) {
+            feastArrowPrev.addEventListener('click', (e) => {
+                e.preventDefault();
+                feastsMobileCarousel.scrollBy({
+                    left: -feastsMobileCarousel.clientWidth,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        if (feastArrowNext) {
+            feastArrowNext.addEventListener('click', (e) => {
+                e.preventDefault();
+                feastsMobileCarousel.scrollBy({
+                    left: feastsMobileCarousel.clientWidth,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        feastsMobileCarousel.addEventListener('scroll', updateFeastArrows, { passive: true });
+        updateFeastArrows();
+    }
+
+    // 8. "How It Works" Swipe Hint Auto-Dim on Interaction
+    const experienceGrid = document.querySelector('.overview-v2-cards-grid');
+    const experienceSwipeHint = document.querySelector('.experience-swipe-hint');
+    if (experienceGrid && experienceSwipeHint) {
+        experienceGrid.addEventListener('scroll', () => {
+            if (experienceGrid.scrollLeft > 25) {
+                experienceSwipeHint.style.opacity = '0.3';
+            }
+        }, { passive: true, once: true });
     }
 });

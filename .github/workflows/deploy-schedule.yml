@@ -1,0 +1,51 @@
+name: Scheduled 4:30 AM Production Deployment
+
+on:
+  schedule:
+    # 04:30 UTC every morning (4:30 AM UK Winter / GMT)
+    - cron: '30 4 * * *'
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for manual on-demand deploy'
+        required: false
+        default: 'Manual deploy triggered via GitHub Actions'
+
+jobs:
+  scheduled-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git Author Identity
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Check for signed-off staging changes
+        run: |
+          # Fetch origin branches
+          git fetch origin staging:staging || {
+            echo "Staging branch does not exist on origin yet. Nothing to deploy."
+            exit 0
+          }
+          git checkout main
+
+          # Count commits that staging is ahead of main
+          AHEAD_COUNT=$(git rev-list --count main..staging)
+          echo "Commits on staging waiting for deployment: $AHEAD_COUNT"
+
+          if [ "$AHEAD_COUNT" -gt 0 ]; then
+            echo "Deploying $AHEAD_COUNT signed-off commit(s) from staging to main..."
+            git merge --ff-only staging
+            git push origin main
+            echo "Deployment successful at $(date -u)!"
+          else
+            echo "Staging has no pending commits ahead of main. Live site remains up-to-date."
+          fi

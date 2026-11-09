@@ -224,6 +224,10 @@
             <div class="section-header reveal">
                 <span class="section-subtitle">The Experience</span>
                 <h2>How It Works</h2>
+                <div class="experience-swipe-hint" aria-hidden="true">
+                    <span>Swipe to explore steps &rarr;</span>
+                    <div class="experience-swipe-line"></div>
+                </div>
             </div>
 
             <div class="overview-v2-cards-grid">
@@ -342,14 +346,31 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Vertical Scroll Indicator for Feasts (Desktop / Tablet) -->
+            <div class="scrolly-feast-indicator" id="feastsScrollIndicator" aria-hidden="true">
+                <span class="scrolly-feast-indicator-text">Next Feast</span>
+                <div class="scroll-line"></div>
+            </div>
+        </div>
+
+        <!-- Mobile Carousel Navigation Arrows (Edge Tap Icons) -->
+        <div class="feasts-mobile-nav-arrows" id="feastsMobileNavArrows">
+            <button class="feast-arrow-btn feast-arrow-prev is-disabled" id="feastArrowPrev" aria-label="Previous Feast">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button class="feast-arrow-btn feast-arrow-next" id="feastArrowNext" aria-label="Next Feast">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
         </div>
 
         <!-- Mobile Scroll Snap Carousel View (Stacked 40/60 Split Editorial) -->
-        <div class="feasts-mobile-carousel">
+        <div class="feasts-mobile-carousel" id="feastsMobileCarousel">
             <!-- Slide 1 -->
             <article class="feast-snap-slide" data-index="0">
                 <div class="feast-snap-media">
                     <img src="images/court-of-saladin.webp" alt="12th Century Holy Land - The Court of Saladin" class="feast-snap-img" loading="lazy">
+                    <span class="feast-mobile-swipe-badge">Swipe Feasts &harr;</span>
                     <div class="feast-snap-img-overlay"></div>
                 </div>
                 <div class="feast-snap-content">
