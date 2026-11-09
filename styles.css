@@ -64,7 +64,7 @@
 html {
     scroll-behavior: smooth;
     scroll-snap-type: y proximity;
-    scroll-padding-top: 0;
+    scroll-padding-top: var(--header-height, 3.8rem);
 }
 
 /* Soft Scroll Snap Alignments on Viewports */
@@ -1052,7 +1052,7 @@ a {
 /* ---- LEFT COLUMN ---- */
 .chef-scrolly-left {
     /* Padding keeps content away from the viewport edges */
-    padding: 10rem 4rem 10rem 0;
+    padding: 10rem 4rem 18rem 0;
 }
 
 /* Sticky heading — pins at top of viewport as text scrolls past */
@@ -3927,7 +3927,14 @@ footer p {
 
 /* Gallery Section Styles (Instagram @epochurian Showcase) */
 .gallery-section {
-    padding: 5rem 0 3.5rem;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: calc(var(--header-height, 4.8rem) + 2rem) 0 3.5rem;
+    scroll-margin-top: var(--header-height, 4.8rem);
     background: var(--bg-secondary);
     border-top: 1px solid var(--border-color);
     position: relative;
@@ -3935,8 +3942,15 @@ footer p {
     box-shadow: 0 -15px 40px rgba(10, 9, 8, 0.95);
 }
 
+.gallery-section .container {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
 .gallery-handle-intro {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: var(--sandstone);
     margin-top: 0.8rem;
     font-style: italic;
@@ -3957,9 +3971,17 @@ footer p {
 
 /* Behold Live Instagram Widget Container */
 .instagram-feed-container {
-    margin: 3.5rem auto 3rem;
-    max-width: 1200px;
+    margin: 2rem auto 2.2rem;
+    max-width: 1140px;
     width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.instagram-feed-container::-webkit-scrollbar {
+    display: none;
 }
 
 behold-widget {
@@ -4254,14 +4276,14 @@ behold-widget {
 /* 1. Desktop Feasts Vertical Scroll Indicator */
 .scrolly-feast-indicator {
     position: absolute;
-    bottom: 2.2rem;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.7rem;
+    gap: 0.6rem;
     opacity: 0.85;
     transition: opacity 0.4s ease;
     pointer-events: none;

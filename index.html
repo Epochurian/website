@@ -575,9 +575,40 @@
     </footer>
 
     <script src="script.js"></script>
-    <!-- Behold Instagram Widget Script -->
+    <!-- Behold Instagram Widget Script (Single Line Enforcement) -->
     <script>
       (() => {
+        // Intercept Behold feed response to force a clean single row across devices
+        const origFetch = window.fetch;
+        window.fetch = async function(...args) {
+          const res = await origFetch.apply(this, args);
+          const url = typeof args[0] === 'string' ? args[0] : args[0]?.url || '';
+          if (url.includes('feeds.behold.so')) {
+            try {
+              const clone = res.clone();
+              const data = await clone.json();
+              if (data && data.widgetSettings) {
+                // Present exactly 4 posts across in 1 single clean line
+                if (data.posts && data.posts.length > 4) {
+                  data.posts = data.posts.slice(0, 4);
+                }
+                if (data.widgetSettings.breakpoints && data.widgetSettings.breakpoints.default) {
+                  data.widgetSettings.breakpoints.default.numPosts = data.posts.length;
+                  data.widgetSettings.breakpoints.default.numColumns = data.posts.length;
+                }
+                return new Response(JSON.stringify(data), {
+                  status: res.status,
+                  statusText: res.statusText,
+                  headers: res.headers
+                });
+              }
+            } catch (e) {
+              console.warn('Behold feed transform error:', e);
+            }
+          }
+          return res;
+        };
+
         if(window.__bhldScript)return;window.__bhldScript=true;
         const d=document,s=d.createElement("script");s.type="module";
         s.src="https://w.behold.so/widget.js";setTimeout(()=>{d.head.append(s);},0);
